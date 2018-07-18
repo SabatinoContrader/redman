@@ -1,30 +1,59 @@
 package main.view;
 
+import java.util.Scanner;
+
+import main.MainDispatcher;
 import main.controller.Request;
 
-public class AdminView implements View{
+public class AdminView implements View {
+
+	private int choice;
 
 	@Override
 	public void showResults(Request request) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void showOptions() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Benvenuto in ContraderFramework");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("--------MENU--------");
+		System.out.println("---AMMINISTRATORE---\n");
+		System.out.println("1) Aggiungi profilo");
+		System.out.println("2) Cancella profilo");
+		System.out.println("3) Modifica profilo personale");
+		System.out.println("4) Crea nodi");
+		System.out.println("5) Assegna nodi");
+		System.out.println("6) Cancella nodi");
+		System.out.println("7) Visualizza lista nodi");
+		System.out.println("8) Visualizza lista utenti");
+		System.out.println("9) Logout");
+		System.out.println("");
+		this.choice = Integer.parseInt(getInput());
 	}
 
 	@Override
 	public String getInput() {
-		// TODO Auto-generated method stub
-		return null;
+		Scanner scanner = new Scanner(System.in);
+		return scanner.nextLine();
 	}
 
 	@Override
 	public void submit() {
-		// TODO Auto-generated method stub
+		
+			if (choice < 1 || choice > 9)
+				System.out.println("Scelta errata!!");
+			else if (choice == 9)
+				MainDispatcher.getInstance().callAction("Login", "doControl", null);
+			else {
+				Request request = new Request();
+				request.put("choice", choice);
+				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
+				// TODO Auto-generated method stub
+			}
 		
 	}
 

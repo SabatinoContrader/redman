@@ -24,6 +24,7 @@ public class NetworkManagerView implements View{
 	        System.out.println("");
 	        System.out.println("");
 	        System.out.println("-------MENU-------");
+	        System.out.println("---RESPONSABILE---");
 	        System.out.println("");
 	        System.out.println("1) Visualizza il tuo blocco di nodi");
 	        System.out.println("2) Visualuzza il tuo profilo");
