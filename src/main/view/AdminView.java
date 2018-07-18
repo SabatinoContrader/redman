@@ -11,17 +11,13 @@ public class AdminView implements View {
 
 	@Override
 	public void showResults(Request request) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void showOptions() {
-		System.out.println("Benvenuto in ContraderFramework");
-		System.out.println("");
-		System.out.println("");
-		System.out.println("--------MENU--------");
-		System.out.println("---AMMINISTRATORE---\n");
+		System.out.println("---------MENU---------");
+		System.out.println("****AMMINISTRATORE****\n");
 		System.out.println("1) Aggiungi profilo");
 		System.out.println("2) Cancella profilo");
 		System.out.println("3) Modifica profilo personale");
@@ -31,7 +27,6 @@ public class AdminView implements View {
 		System.out.println("7) Visualizza lista nodi");
 		System.out.println("8) Visualizza lista utenti");
 		System.out.println("9) Logout");
-		System.out.println("");
 		this.choice = Integer.parseInt(getInput());
 	}
 
@@ -43,19 +38,19 @@ public class AdminView implements View {
 
 	@Override
 	public void submit() {
-		
-			if (choice < 1 || choice > 9)
-				//System.out.println("Scelta errata!!");
-				MainDispatcher.getInstance().callAction("Login", "doControl", null);
-			else if (choice == 9)
-				MainDispatcher.getInstance().callAction("Login", "doControl", null);
-			else {
-				Request request = new Request();
-				request.put("choice", choice);
-				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
-				// TODO Auto-generated method stub
-			}
-		
+		if (choice < 1 || choice > 9) {
+			Request request = new Request();
+			request.put("ruolo", "amministratore");
+			System.out.println("Scelta errata!!");
+			MainDispatcher.getInstance().callAction("Users", "doControl", request);
+		} else if (choice == 9)
+			MainDispatcher.getInstance().callAction("Login", "doControl", null);
+		else {
+			Request request = new Request();
+			request.put("choice", choice);
+			MainDispatcher.getInstance().callAction("Admin", "doControl", request);
+		}
+
 	}
 
 }
