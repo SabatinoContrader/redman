@@ -1,4 +1,3 @@
-drop database contrader2;
 create database contrader2;
 create table contrader2.users (username varchar(50), password varchar(50));
 insert into contrader2.users (username, password) values ('pippo', 'paperino');

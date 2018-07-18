@@ -44,6 +44,8 @@ public class GommaDAO {
             preparedStatement.setString(2, gomma.getManufacturer());
             preparedStatement.setDouble(3, gomma.getPrice());
             return preparedStatement.execute();
+            
+          
         }
         catch (SQLException e) {
             GestoreEccezioni.getInstance().gestisciEccezione(e);
