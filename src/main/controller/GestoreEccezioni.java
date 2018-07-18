@@ -1,16 +1,16 @@
 package main.controller;
 
 public class GestoreEccezioni {
-    private static GestoreEccezioni ourInstance = new GestoreEccezioni();
+	private static GestoreEccezioni ourInstance = new GestoreEccezioni();
 
-    public static GestoreEccezioni getInstance() {
-        return ourInstance;
-    }
+	public static GestoreEccezioni getInstance() {
+		return ourInstance;
+	}
 
-    private GestoreEccezioni() {
-    }
+	private GestoreEccezioni() {
+	}
 
-    public void gestisciEccezione(Throwable e){
-        e.printStackTrace();
-    }
+	public void gestisciEccezione(Throwable e) {
+		e.printStackTrace();
+	}
 }
