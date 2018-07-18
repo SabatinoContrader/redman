@@ -18,8 +18,9 @@ public class UserView implements View {
 		System.out.println("Benvenuto in ContraderFramework");
 		System.out.println("");
 		System.out.println("");
-		System.out.println("--------Menu--------");
-		System.out.println("-------Utente-------");
+		System.out.println("--------MENU--------");
+		System.out.println("-------UTENTE-------");
+		System.out.println("");
 		System.out.println("1) Visualizza stato nodi");
 		System.out.println("2) Visualizza segnalazioni");
 		System.out.println("3) Logout");
@@ -29,7 +30,7 @@ public class UserView implements View {
 
 	public void submit() {
 		if (choice < 1 || choice > 3)
-			MainDispatcher.getInstance().callAction("User", "doControl", null);
+			MainDispatcher.getInstance().callAction("Login", "doControl", null);
 		else if (choice == 3)
 			MainDispatcher.getInstance().callAction("Login", "doControl", null);
 		else {

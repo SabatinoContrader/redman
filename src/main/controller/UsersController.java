@@ -22,7 +22,7 @@ public class UsersController implements Controller {
 				break;
 				case"responsabile di rete":MainDispatcher.getInstance().callView("NetworkManager", request);
 					break;
-				case"operatore semplice":MainDispatcher.getInstance().callView("User", request);
+				case"utente semplice":MainDispatcher.getInstance().callView("User", request);
 				
 				default:
 //					MainDispatcher.getInstance().callView("Admin", null);

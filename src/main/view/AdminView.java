@@ -45,7 +45,8 @@ public class AdminView implements View {
 	public void submit() {
 		
 			if (choice < 1 || choice > 9)
-				System.out.println("Scelta errata!!");
+				//System.out.println("Scelta errata!!");
+				MainDispatcher.getInstance().callAction("Login", "doControl", null);
 			else if (choice == 9)
 				MainDispatcher.getInstance().callAction("Login", "doControl", null);
 			else {
