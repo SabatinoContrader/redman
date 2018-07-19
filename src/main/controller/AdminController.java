@@ -2,15 +2,19 @@ package main.controller;
 
 import java.util.List;
 import main.MainDispatcher;
+import main.model.Nodo;
 import main.model.Utente;
+import main.service.NodoService;
 import main.service.UtenteService;
 
 public class AdminController implements Controller {
 	private UtenteService utenteService;
+	private NodoService nodoService;
 	
 	@Override
 	public void doControl(Request request) {
 		this.utenteService = new UtenteService();
+		this.nodoService = new NodoService();
 		String mode = request.get("mode").toString();
 		
 		switch (mode) {
@@ -23,6 +27,12 @@ public class AdminController implements Controller {
 			}
 			MainDispatcher.getInstance().callView("Admin", null);
 			break;
+		case "VisualizzaListaNodi":
+			List<Nodo> nodi = nodoService.getAllnodi();
+			request.put("listaNodi", nodi);
+			MainDispatcher.getInstance().callView("Admin", request);
+			//request.put("mode", "all");
+			break;	
 		case "VisualizzaListaUtenti":
 			List<Utente> UtentiList = utenteService.getAllUtenti();
 			request.put("listaUtenti", UtentiList);

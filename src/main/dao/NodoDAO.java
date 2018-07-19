@@ -8,7 +8,7 @@ import main.model.Nodo;
 
 public class NodoDAO {
 	
-	 private final String QUERY_ALL = "select * from nodi";
+	 private final String QUERY_SHOW = "Select * from nodi";
 	 private final String QUERY_INSERT = "insert into nodi (idnodo, infonodo, statonodo, gruppi_idgruppo) values (?,?,?,?)";
 
 	    public NodoDAO() {
@@ -19,7 +19,7 @@ public class NodoDAO {
 	        Connection connection = ConnectionSingleton.getInstance();
 	        try {
 	           Statement statement = connection.createStatement();
-	           ResultSet resultSet = statement.executeQuery(QUERY_ALL);
+	           ResultSet resultSet = statement.executeQuery(QUERY_SHOW);
 	           while (resultSet.next()) {
 	               int idnodo = resultSet.getInt("idnodo");
 	               String infonodo = resultSet.getString("infonodo");
@@ -29,7 +29,7 @@ public class NodoDAO {
 	           }
 	        }
 	        catch (SQLException e) {
-	            GestoreEccezioni.getInstance().gestisciEccezione(e);
+	        	e.printStackTrace();
 	        }
 	        return nodi;
 	    }
@@ -41,7 +41,7 @@ public class NodoDAO {
 	            preparedStatement.setInt(1, nodi.getIdnodo());
 	            preparedStatement.setString(2, nodi.getInfonodo());
 	            preparedStatement.setString(3, nodi.getStatonodo());
-	            preparedStatement.setInt(3, nodi.getGruppi_idgruppo());
+	            preparedStatement.setInt(4, nodi.getGruppi_idgruppo());
 	            return preparedStatement.execute();
 	            
 	          
