@@ -42,7 +42,8 @@ public class NodoDAO {
 	            preparedStatement.setString(2, nodi.getInfonodo());
 	            preparedStatement.setString(3, nodi.getStatonodo());
 	            preparedStatement.setInt(4, nodi.getGruppi_idgruppo());
-	            return preparedStatement.execute();
+	            preparedStatement.execute();
+	            return true;
 	            
 	          
 	        }

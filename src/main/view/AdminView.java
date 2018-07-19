@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import main.MainDispatcher;
 import main.controller.Request;
+import main.model.Nodo;
 import main.model.Utente;
 
 public class AdminView implements View {
@@ -21,7 +22,16 @@ public class AdminView implements View {
 					System.out.println(utente);
 				}
 			}
+			
+			if(request.get("mode")=="VisualizzaListaNodi") {
+				List<Nodo> listaNodi=(List<Nodo>) request.get("listaNodi");
+				for(Nodo nodo:listaNodi) {
+					System.out.println(nodo);
+				}
+			}
 		}
+		
+			
 	}
 
 	@Override
@@ -72,6 +82,27 @@ public class AdminView implements View {
 				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
 			}
 				break;
+			case 4: {
+				request.put("mode", "insertnodo");
+				System.out.println("Id nodo:");
+				int idnodo = Integer.parseInt(getInput());
+				System.out.println("Info nodo:");
+				String infonodo = getInput();
+				System.out.println("Stato nodo:");
+				String statonodo = getInput();
+				System.out.println("Gruppi id gruppo:");
+				int gruppi_idgruppo = Integer.parseInt(getInput());
+				Nodo nodo = new Nodo(idnodo, infonodo, statonodo, gruppi_idgruppo);
+				request.put("NuovoNodo", nodo);
+				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
+			}
+			break;	
+			case 7: {
+				request.put("mode", "VisualizzaListaNodi");
+				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
+
+			}
+			break;	
 			case 8: {
 				request.put("mode", "VisualizzaListaUtenti");
 				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
