@@ -23,6 +23,7 @@ public class NetworkManagerController implements Controller {
 		case 3:
 			if (request.getString("PasswordModificaUtente") != null) {
 				Modificaprofilo(request);
+				MainDispatcher.getInstance().callView("NetworkManager", new Request());
 			} else {
 				System.out.println(choice);
 				MainDispatcher.getInstance().callView("NetworkManager", request);
