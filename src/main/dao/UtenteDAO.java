@@ -21,6 +21,7 @@ public class UtenteDAO
             preparedStatement.setString(1, utente.getUsername());
             preparedStatement.setString(2, utente.getPassword());
             preparedStatement.setString(3, utente.getRuolo());
+            
             preparedStatement.execute();
                         return true;
         }
@@ -31,14 +32,14 @@ public class UtenteDAO
 
     }
     
-    public boolean setUtente(Utente utente) {
+    public boolean setUtente(Utente utente,String VecchioUsername) {
         Connection connection = ConnectionSingleton.getInstance();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_SET_UTENTI);
             preparedStatement.setString(1, utente.getUsername());
             preparedStatement.setString(2, utente.getPassword());
             preparedStatement.setString(3, utente.getRuolo());
-           // preparedStatement.setInt(3, utente.getIdutente());
+            preparedStatement.setString(4, VecchioUsername);
             preparedStatement.execute();
             return true;
         }

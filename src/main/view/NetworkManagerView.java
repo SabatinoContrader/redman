@@ -27,15 +27,13 @@ public class NetworkManagerView implements View {
 				case 3:
 					System.out.println("Inserisci vecchio username: ");
 					String vecchioUsername = getInput();
-					// System.out.println("Inserisci vecchia password: ");
-					// String vecchiaPassword = getInput();
 					System.out.println("Inserisci nuovo username: ");
 					String nuovoUsername = getInput();
 					System.out.println("Inserisci nuova password: ");
 					String nuovaPassword = getInput();
 					System.out.println("Inserisci nuovo ruolo: ");
 					String nuovoRuolo = getInput();
-					this.request.put("PasswordModificaUtente", vecchioUsername);
+					this.request.put("UsernameModificaUtente", vecchioUsername);
 					Utente utenteModificato = new Utente(nuovoRuolo, nuovoUsername, nuovaPassword);
 					this.request.put("UtenteModificato", utenteModificato);
 					// MainDispatcher.getInstance().callAction("NetworkManager", "doControl",
@@ -64,10 +62,10 @@ public class NetworkManagerView implements View {
 	@Override
 	public void showOptions() {
 		if (request != null) {
-			if (request.getString("PasswordModificaUtente") != null) {
+			if (request.getString("UsernameModificaUtente") != null) {
 				choice = (int) request.get("choice");
 			} else {
-				System.out.println("--------MENU--------");
+				System.out.println("\n--------MENU--------");
 				System.out.println("****RESPONSABILE****");
 				System.out.println("");
 				System.out.println("1) Visualizza il tuo blocco di nodi");
@@ -97,7 +95,7 @@ public class NetworkManagerView implements View {
 			MainDispatcher.getInstance().callView("NetworkManager", null);
 		} else if (choice == 9) {
 			MainDispatcher.getInstance().callAction("Login", "doControl", null);
-		} else if (request.getString("PasswordModificaUtente") != null) {
+		} else if (request.getString("UsernameModificaUtente") != null) {
 			MainDispatcher.getInstance().callAction("NetworkManager", "doControl", request);
 		} else {
 			Request request = new Request();

@@ -17,8 +17,8 @@ public class UtenteService {
         return this.utenteDAO.insertUtente(utente);
     }
     
-    public boolean setUtente (Utente utente) {
-        return this.utenteDAO.setUtente(utente);
+    public boolean setUtente (Utente utente,String VecchioUsername) {
+        return this.utenteDAO.setUtente(utente, VecchioUsername);
     }
     
     public boolean deleteUtente (Utente utente) {
