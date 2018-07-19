@@ -33,24 +33,21 @@ public class NetworkManagerView implements View {
 		this.choice = Integer.parseInt(getInput());
 	}
 
-	public void submit() {
-		if (choice < 1 || choice > 9) {
-			Request request = new Request();
-			request.put("ruolo", "responsabile di rete");
-			System.out.println("Scelta errata!!");
-			MainDispatcher.getInstance().callAction("Users", "doControl", request);
-		} else if (choice == 9)
-			MainDispatcher.getInstance().callAction("Login", "doControl", null);
-		else {
-			Request request = new Request();
-			request.put("choice", choice);
-			MainDispatcher.getInstance().callAction("NetworkManager", "doControl", request);
-		}
-	}
-
 	public String getInput() {
 		Scanner scanner = new Scanner(System.in);
 		return scanner.nextLine();
 	}
-
+	
+	public void submit() {
+		if (choice < 1 || choice > 9) {
+			showOptions();
+			submit();
+		} else if (choice == 9) {
+            MainDispatcher.getInstance().callAction("Login", "doControl", null);
+		} else {
+            Request request = new Request();
+            request.put("choice", choice);
+            MainDispatcher.getInstance().callAction("Gomma", "doControl", request);
+        }
+	}
 }
