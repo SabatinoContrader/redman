@@ -14,10 +14,12 @@ public class AdminView implements View {
 	@Override
 	public void showResults(Request request) {
 
-		if(request.get("mode")=="VisualizzaListaUtenti") {
-			List<Utente> listaUtenti=(List<Utente>) request.get("listaUtenti");
-			for(Utente utente:listaUtenti) {
-				System.out.println(utente);
+		if (request != null) {
+			if (request.get("mode") == "VisualizzaListaUtenti") {
+				List<Utente> listaUtenti = (List<Utente>) request.get("listaUtenti");
+				for (Utente utente : listaUtenti) {
+					System.out.println(utente);
+				}
 			}
 		}
 	}

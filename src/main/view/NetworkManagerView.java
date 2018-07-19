@@ -12,8 +12,43 @@ public class NetworkManagerView implements View {
 
 	@Override
 	public void showResults(Request request) {
-		// TODO Auto-generated method stub
+		// int option=(int)request.get("option");
+		if (request != null) {
+			if (request.get("choice") != null) {
+				switch ((int) request.get("choice")) {
+				case 1:
+					break;
+				case 2:
 
+					break;
+				case 3:
+					System.out.println("Inserisci vecchio username: ");
+					String vecchioUsername = getInput();
+					System.out.println("Inserisci vecchia password: ");
+					String vecchiaPassword = getInput();
+					System.out.println("Inserisci nuovo username: ");
+					String nuovoUsername = getInput();
+					System.out.println("Inserisci nuova password: ");
+					String nuovaPassword = getInput();
+					break;
+				case 4:
+
+					break;
+				case 5:
+
+					break;
+				case 6:
+
+					break;
+				case 7:
+
+					break;
+				case 8:
+
+					break;
+				}
+			}
+		}
 	}
 
 	@Override
@@ -37,17 +72,17 @@ public class NetworkManagerView implements View {
 		Scanner scanner = new Scanner(System.in);
 		return scanner.nextLine();
 	}
-	
+
 	public void submit() {
 		if (choice < 1 || choice > 9) {
 			showOptions();
 			submit();
 		} else if (choice == 9) {
-            MainDispatcher.getInstance().callAction("Login", "doControl", null);
+			MainDispatcher.getInstance().callAction("Login", "doControl", null);
 		} else {
-            Request request = new Request();
-            request.put("choice", choice);
-            MainDispatcher.getInstance().callAction("Gomma", "doControl", request);
-        }
+			Request request = new Request();
+			request.put("choice", choice);
+			MainDispatcher.getInstance().callAction("NetworkManager", "doControl", request);
+		}
 	}
 }
