@@ -72,7 +72,7 @@ public class UtenteDAO
                    String username = resultSet.getString("username");
                    String password = resultSet.getString("password");
                    String ruolo = resultSet.getString("ruolo");
-                   UtentiList.add(new Utente(id_utente, username,password,ruolo));
+                   UtentiList.add(new Utente(id_utente,ruolo, username,password));
                }
             }
             catch (SQLException e) {

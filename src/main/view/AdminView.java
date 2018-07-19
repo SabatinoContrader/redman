@@ -1,5 +1,6 @@
 package main.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 import main.MainDispatcher;
@@ -13,6 +14,12 @@ public class AdminView implements View {
 	@Override
 	public void showResults(Request request) {
 
+		if(request.get("mode")=="VisualizzaListaUtenti") {
+			List<Utente> listaUtenti=(List<Utente>) request.get("listaUtenti");
+			for(Utente utente:listaUtenti) {
+				System.out.println(utente);
+			}
+		}
 	}
 
 	@Override
@@ -63,7 +70,9 @@ public class AdminView implements View {
 				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
 			}
 				break;
-			case 2: {
+			case 8: {
+				request.put("mode", "VisualizzaListaUtenti");
+				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
 
 			}
 			}

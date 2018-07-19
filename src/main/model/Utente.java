@@ -15,6 +15,11 @@ public class Utente {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return "Utente [ruolo=" + ruolo + ", username=" + username + "]";
+	}
+
 	public Utente(String ruolo, String username, String password) {
 		super();
 		this.ruolo = ruolo;

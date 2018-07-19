@@ -23,10 +23,11 @@ public class AdminController implements Controller {
 			}
 			MainDispatcher.getInstance().callView("Admin", null);
 			break;
-		case" 8":
+		case "VisualizzaListaUtenti":
 			List<Utente> UtentiList = utenteService.getAllUtenti();
 			request.put("listaUtenti", UtentiList);
-			request.put("mode", "all");
+			MainDispatcher.getInstance().callView("Admin", request);
+			//request.put("mode", "all");
 			break;
 //		case 9:
 //			Utente newUtente = new Utente();
