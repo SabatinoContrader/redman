@@ -15,6 +15,13 @@ public class Utente {
 		this.password = password;
 	}
 
+	public Utente(String ruolo, String username, String password) {
+		super();
+		this.ruolo = ruolo;
+		this.username = username;
+		this.password = password;
+	}
+
 	public int getIdutente() {
 		return idutente;
 	}

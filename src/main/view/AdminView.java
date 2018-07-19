@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import main.MainDispatcher;
 import main.controller.Request;
+import main.model.Utente;
 
 public class AdminView implements View {
 
@@ -38,15 +39,35 @@ public class AdminView implements View {
 
 	@Override
 	public void submit() {
+		Request request = new Request();
+		// request.put("choice", choice);
+		// MainDispatcher.getInstance().callAction("", "doControl", request);
+
 		if (choice < 1 || choice > 9) {
 			showOptions();
 			submit();
 		} else if (choice == 9) {
-            MainDispatcher.getInstance().callAction("Login", "doControl", null);
+			MainDispatcher.getInstance().callAction("Login", "doControl", null);
 		} else {
-            Request request = new Request();
-            request.put("choice", choice);
-            MainDispatcher.getInstance().callAction("Gomma", "doControl", request);
-        }
+			switch (choice) {
+			case 1: {
+				request.put("mode", "insert");
+				System.out.println("Nome utente:");
+				String nomeUtente = getInput();
+				System.out.println("Password:");
+				String password = getInput();
+				System.out.println("Ruolo:");
+				String ruolo = getInput();
+				Utente utente = new Utente(ruolo, nomeUtente, password);
+				request.put("NuovoUtente", utente);
+				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
+			}
+				break;
+			case 2: {
+
+			}
+			}
+
+		}
 	}
 }
