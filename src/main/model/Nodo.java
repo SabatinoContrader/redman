@@ -46,5 +46,12 @@ public class Nodo {
 	    public void setGruppi_idgruppo(int gruppi_idgruppo) {
 	        this.gruppi_idgruppo = gruppi_idgruppo;
 	    }
+
+		@Override
+		public String toString() {
+			return "Nodo [idnodo=" + idnodo + ", infonodo=" + infonodo + ", statonodo=" + statonodo
+					+ ", gruppi_idgruppo=" + gruppi_idgruppo + "]";
+		}
 	
+	    
 }
