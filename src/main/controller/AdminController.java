@@ -27,6 +27,15 @@ public class AdminController implements Controller {
 			}
 			MainDispatcher.getInstance().callView("Admin", null);
 			break;
+		case "insertnodo":
+			Nodo nodo =(Nodo) request.get("NuovoNodo");
+			if(nodoService.insertNodo(nodo)){
+				System.out.println("Nuovo nodo Aggiunto con successo\n");
+			}else {
+				System.out.println("Nodo già presente nel sistema");
+			}
+			MainDispatcher.getInstance().callView("Admin", null);
+			break;	
 		case "VisualizzaListaNodi":
 			List<Nodo> nodi = nodoService.getAllnodi();
 			request.put("listaNodi", nodi);

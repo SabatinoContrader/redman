@@ -82,6 +82,21 @@ public class AdminView implements View {
 				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
 			}
 				break;
+			case 4: {
+				request.put("mode", "insertnodo");
+				System.out.println("Id nodo:");
+				int idnodo = Integer.parseInt(getInput());
+				System.out.println("Info nodo:");
+				String infonodo = getInput();
+				System.out.println("Stato nodo:");
+				String statonodo = getInput();
+				System.out.println("Gruppi id gruppo:");
+				int gruppi_idgruppo = Integer.parseInt(getInput());
+				Nodo nodo = new Nodo(idnodo, infonodo, statonodo, gruppi_idgruppo);
+				request.put("NuovoNodo", nodo);
+				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
+			}
+			break;	
 			case 7: {
 				request.put("mode", "VisualizzaListaNodi");
 				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
