@@ -39,18 +39,14 @@ public class AdminView implements View {
 	@Override
 	public void submit() {
 		if (choice < 1 || choice > 9) {
-			Request request = new Request();
-			request.put("ruolo", "amministratore");
-			System.out.println("Scelta errata!!");
-			MainDispatcher.getInstance().callAction("Users", "doControl", request);
-		} else if (choice == 9)
-			MainDispatcher.getInstance().callAction("Login", "doControl", null);
-		else {
-			Request request = new Request();
-			request.put("choice", choice);
-			MainDispatcher.getInstance().callAction("Admin", "doControl", request);
-		}
-
+			showOptions();
+			submit();
+		} else if (choice == 9) {
+            MainDispatcher.getInstance().callAction("Login", "doControl", null);
+		} else {
+            Request request = new Request();
+            request.put("choice", choice);
+            MainDispatcher.getInstance().callAction("Gomma", "doControl", request);
+        }
 	}
-
 }
