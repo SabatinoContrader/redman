@@ -21,7 +21,13 @@ public class NetworkManagerController implements Controller {
 			Visualizzaprofilo();
 			break;
 		case 3:
-			Modificaprofilo(request);
+			if (request.getString("PasswordModificaUtente") != null) {
+				Modificaprofilo(request);
+			} else {
+				System.out.println(choice);
+				MainDispatcher.getInstance().callView("NetworkManager", request);
+			}
+			//Modificaprofilo(request);
 			break;
 		case 4:
 			Visualizzastatonodi();
@@ -54,8 +60,8 @@ public class NetworkManagerController implements Controller {
 	private void Modificaprofilo(Request request) {
 //		Request request= new Request();
 //		request.put("option", "3");
-		MainDispatcher.getInstance().callView("NetworkManager", request);
-		
+		// MainDispatcher.getInstance().callView("NetworkManager", request);
+
 		System.out.println("ci sono");
 	}
 

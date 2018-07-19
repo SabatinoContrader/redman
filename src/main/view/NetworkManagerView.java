@@ -2,6 +2,7 @@ package main.view;
 
 import main.MainDispatcher;
 import main.controller.Request;
+import main.model.Utente;
 
 import java.util.List;
 import java.util.Scanner;
@@ -9,9 +10,11 @@ import java.util.Scanner;
 public class NetworkManagerView implements View {
 
 	private int choice;
+	private Request request;
 
 	@Override
 	public void showResults(Request request) {
+		this.request = request;
 		// int option=(int)request.get("option");
 		if (request != null) {
 			if (request.get("choice") != null) {
@@ -24,12 +27,19 @@ public class NetworkManagerView implements View {
 				case 3:
 					System.out.println("Inserisci vecchio username: ");
 					String vecchioUsername = getInput();
-					System.out.println("Inserisci vecchia password: ");
-					String vecchiaPassword = getInput();
+//					System.out.println("Inserisci vecchia password: ");
+//					String vecchiaPassword = getInput();
 					System.out.println("Inserisci nuovo username: ");
 					String nuovoUsername = getInput();
 					System.out.println("Inserisci nuova password: ");
 					String nuovaPassword = getInput();
+					System.out.println("Inserisci nuovo ruolo: ");
+					String nuovoRuolo = getInput();
+					this.request.put("PasswordModificaUtente", vecchioUsername);
+					Utente utenteModificato = new Utente(nuovoRuolo, nuovoUsername, nuovaPassword);
+					this.request.put("UtenteModificato", utenteModificato);
+					// MainDispatcher.getInstance().callAction("NetworkManager", "doControl",
+					// request);
 					break;
 				case 4:
 
@@ -53,19 +63,24 @@ public class NetworkManagerView implements View {
 
 	@Override
 	public void showOptions() {
-		System.out.println("--------MENU--------");
-		System.out.println("****RESPONSABILE****");
-		System.out.println("");
-		System.out.println("1) Visualizza il tuo blocco di nodi");
-		System.out.println("2) Visualuzza il tuo profilo");
-		System.out.println("3) Modifica il tuo profilo");
-		System.out.println("4) Visualizza lo stato dei tuoi nodi");
-		System.out.println("5) visualizza le informazioni dei tuoi nodi");
-		System.out.println("6) Visualizza le task associate ai tuoi nodi");
-		System.out.println("7) Visualizza lo stato dei tuoi task");
-		System.out.println("8) Visualizza utenti associati ai tuoi nodi");
-		System.out.println("9) logout");
-		this.choice = Integer.parseInt(getInput());
+		if (request.getString("PasswordModificaUtente") != null) {
+
+		} else {
+			System.out.println("--------MENU--------");
+			System.out.println("****RESPONSABILE****");
+			System.out.println("");
+			System.out.println("1) Visualizza il tuo blocco di nodi");
+			System.out.println("2) Visualuzza il tuo profilo");
+			System.out.println("3) Modifica il tuo profilo");
+			System.out.println("4) Visualizza lo stato dei tuoi nodi");
+			System.out.println("5) visualizza le informazioni dei tuoi nodi");
+			System.out.println("6) Visualizza le task associate ai tuoi nodi");
+			System.out.println("7) Visualizza lo stato dei tuoi task");
+			System.out.println("8) Visualizza utenti associati ai tuoi nodi");
+			System.out.println("9) logout");
+			this.choice = Integer.parseInt(getInput());
+		}
+		
 	}
 
 	public String getInput() {
@@ -77,9 +92,12 @@ public class NetworkManagerView implements View {
 		if (choice < 1 || choice > 9) {
 			showOptions();
 			submit();
+			System.out.println("passato da qui");
 		} else if (choice == 9) {
 			MainDispatcher.getInstance().callAction("Login", "doControl", null);
-		} else {
+		}else if(request.getString("PasswordModificaUtente") != null) {
+			MainDispatcher.getInstance().callAction("NetworkManager", "doControl",request);
+		}else {
 			Request request = new Request();
 			request.put("choice", choice);
 			MainDispatcher.getInstance().callAction("NetworkManager", "doControl", request);
