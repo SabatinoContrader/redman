@@ -1,19 +1,17 @@
 package main.dao;
-
-import main.ConnectionSingleton;
-import main.controller.GestoreEccezioni;
-import main.model.Gomma;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import main.ConnectionSingleton;
+import main.controller.GestoreEccezioni;
+import main.model.Nodo;
 
-public class NodiDAO {
+public class NodoDAO {
 	
 	 private final String QUERY_ALL = "select * from nodi";
-	 private final String QUERY_INSERT = "insert into nodi (idnodo, infonodo, statonodo) values (?,?,?)";
+	 private final String QUERY_INSERT = "insert into nodi (idnodo, infonodo, statonodo, gruppi_idgruppo) values (?,?,?,?)";
 
-	    public NodiDAO() {
+	    public NodoDAO() {
 
 	    }
 	    public List<Nodo> getAllNodi () {
@@ -23,14 +21,15 @@ public class NodiDAO {
 	           Statement statement = connection.createStatement();
 	           ResultSet resultSet = statement.executeQuery(QUERY_ALL);
 	           while (resultSet.next()) {
-	               int idnodo = resultSet.getint("idnodo");
+	               int idnodo = resultSet.getInt("idnodo");
 	               String infonodo = resultSet.getString("infonodo");
 	               String statonodo = resultSet.getString("statonodo");
-	               nodi.add(new Nodo(idnodo, infonodo, statonodo));
+	               int gruppi_idgruppo = resultSet.getInt("gruppi_idgruppo");
+	               nodi.add(new Nodo(idnodo, infonodo, statonodo, gruppi_idgruppo));
 	           }
 	        }
 	        catch (SQLException e) {
-	            e.printStackTrace();
+	            GestoreEccezioni.getInstance().gestisciEccezione(e);
 	        }
 	        return nodi;
 	    }
@@ -39,9 +38,10 @@ public class NodiDAO {
 	        Connection connection = ConnectionSingleton.getInstance();
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT);
-	            preparedStatement.setString(1, nodi.getidnodo());
-	            preparedStatement.setString(2, nodi.getinfonodo());
-	            preparedStatement.setDouble(3, nodi.getstatonodo());
+	            preparedStatement.setInt(1, nodi.getIdnodo());
+	            preparedStatement.setString(2, nodi.getInfonodo());
+	            preparedStatement.setString(3, nodi.getStatonodo());
+	            preparedStatement.setInt(3, nodi.getGruppi_idgruppo());
 	            return preparedStatement.execute();
 	            
 	          
@@ -52,4 +52,5 @@ public class NodiDAO {
 	        }
 
 	    }
-	}
+	    
+}	    
