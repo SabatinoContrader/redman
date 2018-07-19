@@ -21,7 +21,8 @@ public class UtenteDAO
             preparedStatement.setString(1, utente.getUsername());
             preparedStatement.setString(2, utente.getPassword());
             preparedStatement.setString(3, utente.getRuolo());
-                        return preparedStatement.execute();
+            preparedStatement.execute();
+                        return true;
         }
         catch (SQLException e) {
             GestoreEccezioni.getInstance().gestisciEccezione(e);
