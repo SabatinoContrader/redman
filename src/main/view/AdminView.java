@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import main.MainDispatcher;
 import main.controller.Request;
+import main.model.Nodo;
 import main.model.Utente;
 
 public class AdminView implements View {
@@ -21,7 +22,16 @@ public class AdminView implements View {
 					System.out.println(utente);
 				}
 			}
+			
+			if(request.get("mode")=="VisualizzaListaNodi") {
+				List<Nodo> listaNodi=(List<Nodo>) request.get("listaNodi");
+				for(Nodo nodo:listaNodi) {
+					System.out.println(nodo);
+				}
+			}
 		}
+		
+			
 	}
 
 	@Override
@@ -72,6 +82,12 @@ public class AdminView implements View {
 				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
 			}
 				break;
+			case 7: {
+				request.put("mode", "VisualizzaListaNodi");
+				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
+
+			}
+			break;	
 			case 8: {
 				request.put("mode", "VisualizzaListaUtenti");
 				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
