@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import main.ConnectionSingleton;
 import main.controller.GestoreEccezioni;
+import main.model.Gomma;
 import main.model.Utente;
 
 public class UtenteDAO 
@@ -57,7 +58,26 @@ public class UtenteDAO
             GestoreEccezioni.getInstance().gestisciEccezione(e);
             return false;
         }
+    }
         
+    public List<Utente> getAllUtente () {
+            List<Utente> UtentiList = new ArrayList<>();
+            Connection connection = ConnectionSingleton.getInstance();
+            try {
+               Statement statement = connection.createStatement();
+               ResultSet resultSet = statement.executeQuery(QUERY_SHOW);
+               while (resultSet.next()) {
+            	   int id_utente= Integer.parseInt(resultSet.getString("idutente"));
+                   String username = resultSet.getString("username");
+                   String password = resultSet.getString("password");
+                   String ruolo = resultSet.getString("ruolo");
+                   UtentiList.add(new Utente(id_utente, username,password,ruolo));
+               }
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return UtentiList;
       
     }
 }

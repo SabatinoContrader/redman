@@ -17,16 +17,16 @@ public class AdminController implements Controller {
 		case 1:
 			request.put("mode", "insert");
 			break;
-//		case 2:
-//			List<Gomma> gomme = gommaService.getAllGomme();
-//			request.put("listaGomma", gomme);
-//			request.put("mode", "all");
-//			break;
+		case 8:
+			List<Utente> UtentiList = utenteService.getAllUtenti();
+			request.put("listaUtenti", UtentiList);
+			request.put("mode", "all");
+			break;
 		case 9:
-			Gomma newGomma = new Gomma();
-			newGomma = (Gomma) request.get("newGomma");
-			gommaService.insertGomma(newGomma);
-			MainDispatcher.getInstance().callView("Home", null);
+//			Utente newUtente = new Utente();
+//			newUtente = (Utente) request.get("newUtente");
+//			UtenteService.insertUtente(newUtente);
+//			MainDispatcher.getInstance().callView("Home", null);
 			break;
 		}
 		MainDispatcher.getInstance().callView("Admin", request);
