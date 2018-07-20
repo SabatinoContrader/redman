@@ -43,15 +43,15 @@ public class NodoDAO {
 	            preparedStatement.setString(3, nodi.getStatonodo());
 	            preparedStatement.setInt(4, nodi.getGruppi_idgruppo());
 	            preparedStatement.execute();
-	            return true;
-	            
-	          
+	            return true;	          
 	        }
 	        catch (SQLException e) {
-	            GestoreEccezioni.getInstance().gestisciEccezione(e);
-	            return false;
+	        	if (e instanceof SQLIntegrityConstraintViolationException) {
+	        		return false;
+	        	} else {
+	        		GestoreEccezioni.getInstance().gestisciEccezione(e);
+	        		return false;
+	        	}
 	        }
-
-	    }
-	    
+	    }	    
 }	    

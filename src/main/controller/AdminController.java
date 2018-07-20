@@ -42,7 +42,7 @@ public class AdminController implements Controller {
 			}
 				break;
 			case 6: {
-				canecellaNodi(this.request);
+				cancellaNodi(this.request);
 			}
 				break;
 			case 7: {
@@ -58,16 +58,22 @@ public class AdminController implements Controller {
 
 	private void aggiungiProfilo(Request request) {
 		Utente utente = (Utente) request.get("NuovoUtente");
-		if (utenteService.insertUtente(utente)) {
+		if (this.utenteService.insertUtente(utente)) {
 			System.out.println("Nuovo utente Aggiunto correttamente\n");
 		} else {
 			System.out.println("Utente già esistente");
 		}
-		MainDispatcher.getInstance().callView("Admin", null);
+		MainDispatcher.getInstance().callView("Admin", request);
 	}
 
 	private void canecellaProfilo(Request request) {
-
+		String nomeUtente = (String) request.get("CancellaUtente");
+		if(this.utenteService.deleteUtente(nomeUtente)) {
+			System.out.println("Utente \"" + nomeUtente + "\" Cancellato correttamente\n");
+		} else {
+			System.out.println("Utente \"" + nomeUtente + "\" non presente");
+		}
+		MainDispatcher.getInstance().callView("Admin", request);
 	}
 
 	private void modificaProfiloPersonale(Request request) {
@@ -76,19 +82,19 @@ public class AdminController implements Controller {
 
 	private void creaNodi(Request request) {
 		Nodo nodo = (Nodo) request.get("NuovoNodo");
-		if (nodoService.insertNodo(nodo)) {
+		if (this.nodoService.insertNodo(nodo)) {
 			System.out.println("Nuovo nodo Aggiunto con successo\n");
 		} else {
 			System.out.println("Nodo già presente nel sistema");
 		}
-		MainDispatcher.getInstance().callView("Admin", null);
+		MainDispatcher.getInstance().callView("Admin", request);
 	}
 
 	private void assegnaNodi(Request request) {
 
 	}
 
-	private void canecellaNodi(Request request) {
+	private void cancellaNodi(Request request) {
 
 	}
 

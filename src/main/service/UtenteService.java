@@ -21,8 +21,8 @@ public class UtenteService {
         return this.utenteDAO.setUtente(utente, VecchioUsername);
     }
     
-    public boolean deleteUtente (Utente utente) {
-        return this.utenteDAO.deleteUtente(utente);
+    public boolean deleteUtente (String nomeUtente) {
+        return this.utenteDAO.deleteUtente(nomeUtente);
     }
     
     public List<Utente> getAllUtenti () {

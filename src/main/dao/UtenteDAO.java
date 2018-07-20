@@ -21,15 +21,17 @@ public class UtenteDAO
             preparedStatement.setString(1, utente.getUsername());
             preparedStatement.setString(2, utente.getPassword());
             preparedStatement.setString(3, utente.getRuolo());
-            
             preparedStatement.execute();
-                        return true;
+            return true;
         }
         catch (SQLException e) {
-            GestoreEccezioni.getInstance().gestisciEccezione(e);
-            return false;
+        	if (e instanceof SQLIntegrityConstraintViolationException) {
+        		return false;
+        	} else {
+        		GestoreEccezioni.getInstance().gestisciEccezione(e);
+        		return false;
+        	}
         }
-
     }
     
     public boolean setUtente(Utente utente,String VecchioUsername) {
@@ -49,12 +51,22 @@ public class UtenteDAO
 
     }
     
-    public boolean deleteUtente(Utente utente) {
+    public boolean deleteUtente(String nomeUtente) {
         Connection connection = ConnectionSingleton.getInstance();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DELETE);
-            preparedStatement.setInt(1, utente.getIdutente());
-            return preparedStatement.execute();
+        	PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DELETE);
+            preparedStatement.setString(1, nomeUtente);
+            ResultSet rs = preparedStatement.executeQuery("select * from utenti");
+            boolean status = false;
+            while (rs.next()) {
+            	String username = rs.getString("username");
+            	if (username.equalsIgnoreCase(nomeUtente)) {
+            		preparedStatement.execute();
+                	status = true;
+                	break;
+                }
+            }   
+            return status;
         }
         catch (SQLException e) {
             GestoreEccezioni.getInstance().gestisciEccezione(e);

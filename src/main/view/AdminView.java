@@ -11,13 +11,12 @@ import main.model.Utente;
 public class AdminView implements View {
 
 	private int choice;
+	private boolean b = true;
 	Request request = new Request();
 
 	@Override
 	public void showResults(Request request) {
 		this.request = request;
-
-		
 		
 		if (this.request .get("mode")!=null) {
 			if (this.request.get("mode") == "visualizzaListaUtenti") {
@@ -34,7 +33,6 @@ public class AdminView implements View {
 				}
 			}
 		}
-
 	}
 
 	@Override
@@ -50,7 +48,12 @@ public class AdminView implements View {
 		System.out.println("7) Visualizza lista nodi");
 		System.out.println("8) Visualizza lista utenti");
 		System.out.println("9) Logout");
-		this.choice = Integer.parseInt(getInput());
+		try {
+			this.choice = Integer.parseInt(getInput());
+		}
+		catch (NumberFormatException n) {
+			b = false;
+		}
 	}
 
 	@Override
@@ -62,7 +65,8 @@ public class AdminView implements View {
 	@Override
 	public void submit() {
 
-		if (choice < 1 || choice > 9) {
+		if (choice < 1 || choice > 9 || b == false) {
+			System.out.println("Inserimento sbagliato");
 			MainDispatcher.getInstance().callView("Admin", this.request);
 		} else if (choice == 9) {
 			MainDispatcher.getInstance().callAction("Login", "doControl", null);
@@ -81,7 +85,10 @@ public class AdminView implements View {
 					MainDispatcher.getInstance().callAction("Admin", "doControl", this.request);
 				}
 				case 2: {
-	
+					System.out.println("Nome utente:");
+					String nomeUtente = getInput();
+					this.request.put("CancellaUtente", nomeUtente);
+					MainDispatcher.getInstance().callAction("Admin", "doControl", this.request);
 				}
 					break;
 				case 3: {
