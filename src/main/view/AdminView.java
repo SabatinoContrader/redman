@@ -11,32 +11,35 @@ import main.model.Utente;
 public class AdminView implements View {
 
 	private int choice;
+	Request request = new Request();
 
 	@Override
 	public void showResults(Request request) {
+		this.request = request;
 
-		if (request != null) {
-			if (request.get("mode") == "VisualizzaListaUtenti") {
+		
+		
+		if (this.request .get("mode")!=null) {
+			if (this.request.get("mode") == "visualizzaListaUtenti") {
 				List<Utente> listaUtenti = (List<Utente>) request.get("listaUtenti");
 				for (Utente utente : listaUtenti) {
 					System.out.println(utente);
 				}
 			}
-			
-			if(request.get("mode")=="VisualizzaListaNodi") {
-				List<Nodo> listaNodi=(List<Nodo>) request.get("listaNodi");
-				for(Nodo nodo:listaNodi) {
+
+			if (this.request.get("mode") == "visualizzaListaNodi") {
+				List<Nodo> listaNodi = (List<Nodo>) this.request.get("listaNodi");
+				for (Nodo nodo : listaNodi) {
 					System.out.println(nodo);
 				}
 			}
 		}
-		
-			
+
 	}
 
 	@Override
 	public void showOptions() {
-		System.out.println("---------MENU---------");
+		System.out.println("\n---------MENU---------");
 		System.out.println("****AMMINISTRATORE****\n");
 		System.out.println("1) Aggiungi profilo");
 		System.out.println("2) Cancella profilo");
@@ -58,56 +61,65 @@ public class AdminView implements View {
 
 	@Override
 	public void submit() {
-		Request request = new Request();
-		// request.put("choice", choice);
-		// MainDispatcher.getInstance().callAction("", "doControl", request);
 
 		if (choice < 1 || choice > 9) {
-			showOptions();
-			submit();
+			MainDispatcher.getInstance().callView("Admin", this.request);
 		} else if (choice == 9) {
 			MainDispatcher.getInstance().callAction("Login", "doControl", null);
 		} else {
+			this.request.put("choice", choice);
 			switch (choice) {
-			case 1: {
-				request.put("mode", "insert");
-				System.out.println("Nome utente:");
-				String nomeUtente = getInput();
-				System.out.println("Password:");
-				String password = getInput();
-				System.out.println("Ruolo:");
-				String ruolo = getInput();
-				Utente utente = new Utente(ruolo, nomeUtente, password);
-				request.put("NuovoUtente", utente);
-				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
-			}
-				break;
-			case 4: {
-				request.put("mode", "insertnodo");
-				System.out.println("Id nodo:");
-				int idnodo = Integer.parseInt(getInput());
-				System.out.println("Info nodo:");
-				String infonodo = getInput();
-				System.out.println("Stato nodo:");
-				String statonodo = getInput();
-				System.out.println("Gruppi id gruppo:");
-				int gruppi_idgruppo = Integer.parseInt(getInput());
-				Nodo nodo = new Nodo(idnodo, infonodo, statonodo, gruppi_idgruppo);
-				request.put("NuovoNodo", nodo);
-				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
-			}
-			break;	
-			case 7: {
-				request.put("mode", "VisualizzaListaNodi");
-				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
-
-			}
-			break;	
-			case 8: {
-				request.put("mode", "VisualizzaListaUtenti");
-				MainDispatcher.getInstance().callAction("Admin", "doControl", request);
-
-			}
+				case 1: {
+					System.out.println("Nome utente:");
+					String nomeUtente = getInput();
+					System.out.println("Password:");
+					String password = getInput();
+					System.out.println("Ruolo:");
+					String ruolo = getInput();
+					Utente utente = new Utente(ruolo, nomeUtente, password);
+					this.request.put("NuovoUtente", utente);
+					MainDispatcher.getInstance().callAction("Admin", "doControl", this.request);
+				}
+				case 2: {
+	
+				}
+					break;
+				case 3: {
+	
+				}
+					break;
+				case 4: {
+					// request.put("mode", "insertnodo");
+					System.out.println("Id nodo:");
+					int idnodo = Integer.parseInt(getInput());
+					System.out.println("Info nodo:");
+					String infonodo = getInput();
+					System.out.println("Stato nodo:");
+					String statonodo = getInput();
+					System.out.println("Gruppi id gruppo:");
+					int gruppi_idgruppo = Integer.parseInt(getInput());
+					Nodo nodo = new Nodo(idnodo, infonodo, statonodo, gruppi_idgruppo);
+					request.put("NuovoNodo", nodo);
+					MainDispatcher.getInstance().callAction("Admin", "doControl", request);
+				}
+					break;
+				case 5: {
+	
+				}
+					break;
+				case 6: {
+	
+				}
+					break;
+				case 7: {
+					MainDispatcher.getInstance().callAction("Admin", "doControl", request);
+	
+				}
+					break;
+				case 8: {
+					MainDispatcher.getInstance().callAction("Admin", "doControl", request);
+	
+				}
 			}
 
 		}
