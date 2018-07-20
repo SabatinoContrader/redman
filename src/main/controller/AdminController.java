@@ -13,99 +13,112 @@ public class AdminController implements Controller {
 	Request request = new Request();
 
 	@Override
-	public void doControl(Request request) {		
+	public void doControl(Request request) {
 		this.utenteService = new UtenteService();
 		this.nodoService = new NodoService();
-		this.request=request;
+		this.request = request;
 		
-		int choice = (int) this.request.get("choice");
-
-		switch (choice) {
-			case 1: {
-				aggiungiProfilo(this.request);
+		if(this.request==null) {
+			MainDispatcher.getInstance().callView("Admin", null);
+		}else {		
+			int choice = (int) this.request.get("choice");
+			
+			switch (choice) {
+				case 1: {
+					aggiungiProfilo();
+				}
+					break;
+				case 2: {
+					canecellaProfilo();
+				}
+					break;
+				case 3: {
+					modificaProfiloPersonale();
+				}
+					break;
+				case 4: {
+					creaNodi();
+				}
+					break;
+				case 5: {
+					assegnaNodi();
+				}
+					break;
+				case 6: {
+					cancellaNodi();
+				}
+					break;
+				case 7: {
+					visualizzaListaNodi();
+				}
+					break;
+				case 8: {
+					visualizzaListaUtenti();
+				}
+					break;
 			}
-				break;
-			case 2: {
-				canecellaProfilo(this.request);
-			}
-				break;
-			case 3: {
-				modificaProfiloPersonale(this.request);
-			}
-				break;
-			case 4: {
-				creaNodi(this.request);
-			}
-				break;
-			case 5: {
-				assegnaNodi(this.request);
-			}
-				break;
-			case 6: {
-				cancellaNodi(this.request);
-			}
-				break;
-			case 7: {
-				visualizzaListaNodi(this.request);
-			}
-				break;
-			case 8: {
-				visualizzaListaUtenti(this.request);
-			}
-				break;
 		}
 	}
 
-	private void aggiungiProfilo(Request request) {
+	private void aggiungiProfilo() {
 		Utente utente = (Utente) request.get("NuovoUtente");
 		if (this.utenteService.insertUtente(utente)) {
 			System.out.println("Nuovo utente Aggiunto correttamente\n");
 		} else {
 			System.out.println("Utente già esistente");
 		}
-		MainDispatcher.getInstance().callView("Admin", request);
+		MainDispatcher.getInstance().callView("Admin", null);
 	}
 
-	private void canecellaProfilo(Request request) {
+	private void canecellaProfilo() {
 		String nomeUtente = (String) request.get("CancellaUtente");
-		if(this.utenteService.deleteUtente(nomeUtente)) {
+		if (this.utenteService.deleteUtente(nomeUtente)) {
 			System.out.println("Utente \"" + nomeUtente + "\" Cancellato correttamente\n");
 		} else {
 			System.out.println("Utente \"" + nomeUtente + "\" non presente");
 		}
-		MainDispatcher.getInstance().callView("Admin", request);
+		MainDispatcher.getInstance().callView("Admin", null);
 	}
 
-	private void modificaProfiloPersonale(Request request) {
+	private void modificaProfiloPersonale() {
+		Utente nuoviDati = (Utente) request.get("UtenteModificato");
+		String VecchiaUsername = request.get("UsernameAccesso").toString();
 
+		if (utenteService.setUtente(nuoviDati, VecchiaUsername)) {
+			System.out.println("\nProfilo modificato Correttamente!");
+		} else {
+			System.out.println("\nErrore nella modifica del profilo!");
+		}
+		utenteService.setUtente(nuoviDati, VecchiaUsername);
+		MainDispatcher.getInstance().callView("Admin", null);
 	}
 
-	private void creaNodi(Request request) {
+	private void creaNodi() {
 		Nodo nodo = (Nodo) request.get("NuovoNodo");
 		if (this.nodoService.insertNodo(nodo)) {
 			System.out.println("Nuovo nodo Aggiunto con successo\n");
 		} else {
 			System.out.println("Nodo già presente nel sistema");
 		}
-		MainDispatcher.getInstance().callView("Admin", request);
+		MainDispatcher.getInstance().callView("Admin", null);
 	}
 
-	private void assegnaNodi(Request request) {
-
-	}
-
-	private void cancellaNodi(Request request) {
+	private void assegnaNodi() {
 
 	}
 
-	private void visualizzaListaNodi(Request request) {
+	private void cancellaNodi() {
+
+	}
+
+	private void visualizzaListaNodi() {
 		List<Nodo> nodi = nodoService.getAllnodi();
 		request.put("mode", "visualizzaListaNodi");
 		request.put("listaNodi", nodi);
 		MainDispatcher.getInstance().callView("Admin", request);
 	}
 
-	private void visualizzaListaUtenti(Request request) {
+	private void visualizzaListaUtenti() {
 		List<Utente> UtentiList = utenteService.getAllUtenti();
 		request.put("mode", "visualizzaListaUtenti");
 		request.put("listaUtenti", UtentiList);

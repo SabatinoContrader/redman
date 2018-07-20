@@ -56,7 +56,7 @@ public class NetworkManagerView implements View {
 	public void submit() {
 
 		if (choice < 1 || choice > 9) {
-			MainDispatcher.getInstance().callView("NetworkManager", null);
+			MainDispatcher.getInstance().callAction("NetworkManager", "doControl", null);
 		} else if (choice == 9) {
 			MainDispatcher.getInstance().callAction("Login", "doControl", null);
 		} else if (choice == 3) {

@@ -33,7 +33,6 @@ public class ConnectionSingleton {
 				System.out.println("Ho caricato: " + c.getName());
 				String myUrl = "jdbc:" + vendor + "://" + host + ":" + port + "/" + dbName
 						+ "?autoReconnect=true&useSSL=false";
-				System.out.println(myUrl);
 				DriverManagerDataSource dataSource = new DriverManagerDataSource(myUrl, username, password);
 				dataSource.setDriverClassName(driver);
 				connection = dataSource.getConnection();

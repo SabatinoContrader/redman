@@ -7,39 +7,45 @@ import main.service.UtenteService;
 
 public class NetworkManagerController implements Controller {
 	private UtenteService utenteService;
+	private Request request = new Request();
 
 	@Override
 	public void doControl(Request request) {
 		this.utenteService = new UtenteService();
-		int choice = (int) request.get("choice");
+		this.request = request;
 
-		switch (choice) {
-		case 1:
-			Visualizzanodi();
-			break;
-		case 2:
-			Visualizzaprofilo();
-			break;
-		case 3:
-			Modificaprofilo(request);
+		if (this.request == null) {
 			MainDispatcher.getInstance().callView("NetworkManager", null);
-			break;
-		case 4:
-			Visualizzastatonodi();
-			break;
-		case 5:
-			Visualizzainfonodi();
-			break;
-		case 6:
-			Visualizzatask();
-			break;
-		case 7:
-			Visualizzastatotask();
-			break;
-		case 8:
-			Visualizzautentinodi();
-			break;
+		} else {
+			int choice = (int) this.request.get("choice");
+			switch (choice) {
+			case 1:
+				Visualizzanodi();
+				break;
+			case 2:
+				Visualizzaprofilo();
+				break;
+			case 3:
+				Modificaprofilo();
+				break;
+			case 4:
+				Visualizzastatonodi();
+				break;
+			case 5:
+				Visualizzainfonodi();
+				break;
+			case 6:
+				Visualizzatask();
+				break;
+			case 7:
+				Visualizzastatotask();
+				break;
+			case 8:
+				Visualizzautentinodi();
+				break;
 
+			}
+			MainDispatcher.getInstance().callView("NetworkManager", null);
 		}
 
 	}
@@ -52,17 +58,17 @@ public class NetworkManagerController implements Controller {
 
 	}
 
-	private void Modificaprofilo(Request request) {
+	private void Modificaprofilo() {
 
-		Utente nuoviDati= (Utente)request.get("UtenteModificato");
-		String VecchiaUsername=request.get("UsernameAccesso").toString();
-		
-		if(utenteService.setUtente(nuoviDati,VecchiaUsername)) {
+		Utente nuoviDati = (Utente) this.request.get("UtenteModificato");
+		String VecchiaUsername = this.request.get("UsernameAccesso").toString();
+
+		if (utenteService.setUtente(nuoviDati, VecchiaUsername)) {
 			System.out.println("\nProfilo modificato Correttamente!");
-		}else {
+		} else {
 			System.out.println("\nErrore nella modifica del profilo!");
 		}
-		utenteService.setUtente(nuoviDati,VecchiaUsername);
+		utenteService.setUtente(nuoviDati, VecchiaUsername);
 
 	}
 
