@@ -21,14 +21,8 @@ public class NetworkManagerController implements Controller {
 			Visualizzaprofilo();
 			break;
 		case 3:
-			if (request.getString("UsernameModificaUtente") != null) {
-				Modificaprofilo(request);
-				MainDispatcher.getInstance().callView("NetworkManager", new Request());
-			} else {
-				System.out.println(choice);
-				MainDispatcher.getInstance().callView("NetworkManager", request);
-			}
-			//Modificaprofilo(request);
+			Modificaprofilo(request);
+			MainDispatcher.getInstance().callView("NetworkManager", null);
 			break;
 		case 4:
 			Visualizzastatonodi();
@@ -59,18 +53,16 @@ public class NetworkManagerController implements Controller {
 	}
 
 	private void Modificaprofilo(Request request) {
-//		Request request= new Request();
-//		request.put("option", "3");
-		// MainDispatcher.getInstance().callView("NetworkManager", request);
+
 		Utente nuoviDati= (Utente)request.get("UtenteModificato");
-		String VecchiaUsername=request.get("UsernameModificaUtente").toString();
+		String VecchiaUsername=request.get("UsernameAccesso").toString();
 		
 		if(utenteService.setUtente(nuoviDati,VecchiaUsername)) {
 			System.out.println("\nProfilo modificato Correttamente!");
 		}else {
 			System.out.println("\nErrore nella modifica del profilo!");
 		}
-		//utenteService.setUtente(nuoviDati,VecchiaUsername);
+		utenteService.setUtente(nuoviDati,VecchiaUsername);
 
 	}
 

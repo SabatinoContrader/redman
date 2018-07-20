@@ -36,7 +36,7 @@ public class Nodo {
 	        return statonodo;
 	    }
 
-	    public void setPrice(String statonodo) {
+	    public void setStatoNodo(String statonodo) {
 	        this.statonodo = statonodo;
 	    }
 	    public int getGruppi_idgruppo() {

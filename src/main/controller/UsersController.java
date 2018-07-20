@@ -17,6 +17,7 @@ public class UsersController implements Controller {
 			String password = request.get("password").toString();
 			String ruolo = loginService.login(nomeUtente, password);
 			if (ruolo != null) {
+				request.put("UsernameAccesso", nomeUtente);
 				if (ruolo.equalsIgnoreCase("amministratore")) {
 					MainDispatcher.getInstance().callView("Admin", request);
 				} else if (ruolo.equalsIgnoreCase("responsabile di rete")) {

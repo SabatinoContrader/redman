@@ -20,8 +20,13 @@ public class Utente {
 		return "Utente [ruolo=" + ruolo + ", username=" + username + "]";
 	}
 
-	public Utente(String ruolo, String username, String password) {
+	public Utente(String username, String password) {
 		super();
+		this.username = username;
+		this.password = password;
+	}
+
+	public Utente(String ruolo, String username, String password) {
 		this.ruolo = ruolo;
 		this.username = username;
 		this.password = password;

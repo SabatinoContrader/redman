@@ -10,7 +10,7 @@ import main.model.Utente;
 public class UtenteDAO 
 {
 	private final String QUERY_INSERT = "insert into utenti (username, password, ruolo) values (?,?,?)";
-	private final String QUERY_SET_UTENTI = "UPDATE utenti SET username = ?, password =?, ruolo =? WHERE username=?";
+	private final String QUERY_SET_UTENTI = "UPDATE utenti SET username = ?, password =? WHERE username=?";
     private final String QUERY_DELETE = "DELETE FROM utenti WHERE username=?";		 
     private final String QUERY_SHOW = "Select * from utenti";
     
@@ -38,8 +38,7 @@ public class UtenteDAO
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_SET_UTENTI);
             preparedStatement.setString(1, utente.getUsername());
             preparedStatement.setString(2, utente.getPassword());
-            preparedStatement.setString(3, utente.getRuolo());
-            preparedStatement.setString(4, VecchioUsername);
+            preparedStatement.setString(3, VecchioUsername);
             preparedStatement.execute();
             return true;
         }
