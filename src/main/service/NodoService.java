@@ -14,7 +14,7 @@ package main.service;
 	    }
 	    
 	    public boolean insertNodo (Nodo nodo) {
-	        return this.nodoDAO.insertNodi(nodo);
+	        return this.nodoDAO.insertNodo(nodo);
 	    }
 	    
 	    /*public boolean setNodo (Nodo nodo) {
