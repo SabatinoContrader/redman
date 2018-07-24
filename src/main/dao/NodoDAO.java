@@ -9,7 +9,7 @@ import main.model.Nodo;
 public class NodoDAO {
 	
 	 private final String QUERY_SHOW = "Select * from nodi";
-	 private final String QUERY_INSERT = "insert into nodi (idnodo, infonodo, statonodo, gruppi_idgruppo) values (?,?,?,?)";
+	 private final String QUERY_INSERT = "insert into nodi (infonodo, statonodo, gruppi_idgruppo) values (?,?,?)";
 
 	    public NodoDAO() {
 
@@ -34,14 +34,14 @@ public class NodoDAO {
 	        return nodi;
 	    }
 
-	    public boolean insertNodi(Nodo nodi) {
+	    public boolean insertNodo(Nodo nodo) {
 	        Connection connection = ConnectionSingleton.getInstance();
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT);
-	            preparedStatement.setInt(1, nodi.getIdnodo());
-	            preparedStatement.setString(2, nodi.getInfonodo());
-	            preparedStatement.setString(3, nodi.getStatonodo());
-	            preparedStatement.setInt(4, nodi.getGruppi_idgruppo());
+	            //preparedStatement.setInt(1, nodi.getIdnodo());
+	            preparedStatement.setString(1, nodo.getInfonodo());
+	            preparedStatement.setString(2, nodo.getStatonodo());
+	            preparedStatement.setInt(3, nodo.getGruppi_idgruppo());
 	            preparedStatement.execute();
 	            return true;	          
 	        }

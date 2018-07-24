@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import main.ConnectionSingleton;
 import main.controller.GestoreEccezioni;
-import main.model.Gomma;
 import main.model.Utente;
 
 public class UtenteDAO {
