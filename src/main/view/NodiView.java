@@ -17,7 +17,7 @@ public class NodiView implements View {
 	public void showResults(Request request) {
 		this.request = request;
 
-		if (this.request.get("mode") == "visualizzaListaNodi") {
+		if (this.request.get("mode") == "visualizzaListaNodiAdmin") {
 			List<Nodo> listaNodi = (List<Nodo>) this.request.get("listaNodi");
 			for (Nodo nodo : listaNodi) {
 				System.out.println(nodo);
