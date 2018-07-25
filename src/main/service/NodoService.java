@@ -28,6 +28,14 @@ package main.service;
 	    public List<Nodo> getAllnodi () {
 	        return this.nodoDAO.getAllNodi();
 	    }
+	    
+	    public boolean UtenteNodo (int idUtente, int idNodo) {
+	        return this.nodoDAO.UtenteNodo(idUtente, idNodo);
+	    }
+	    
+	    
+	    
+	    
 	//    
 	//    
 //	    public List<Utente> getAllPaziente () {

@@ -28,6 +28,10 @@ public class UtenteService {
     public List<Utente> getAllUtenti () {
         return this.utenteDAO.getAllUtente();
     }
+    
+    public int getidUtente (String Username) {
+        return this.utenteDAO.idutenteUtente(Username);
+    }
 //    
 //    
 //    public List<Utente> getAllPaziente () {

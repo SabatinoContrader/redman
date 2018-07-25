@@ -2,6 +2,7 @@ package main.view.networkManager;
 
 import java.util.Scanner;
 
+import main.MainDispatcher;
 import main.controller.Request;
 import main.model.Nodo;
 import main.view.View;
@@ -19,10 +20,23 @@ public class NodesManagementNetworkManagerView implements View {
 	public void showOptions() {
 		System.out.println("\n1) Visualizza il tuo blocco di nodi");
 		System.out.println("2) Visualizza lo stato dei tuoi nodi");
-		System.out.println("3) visualizza le informazioni dei tuoi nodi");
-		System.out.println("4) Indietro");
+		System.out.println("3) Visualizza le informazioni dei tuoi nodi");
+		System.out.println("4) Associa nodi agli utenti");
+		System.out.println("5) Cancella associazioni nodi");
+		System.out.println("6) Visualizzare associazioni di nodi");
+		System.out.println("7) Indietro");
+       
+		
+		//System.out.println(") Indietro");
 		this.choice = Integer.parseInt(getInput());
-
+        if (choice==4) {        	
+        	System.out.println("Inserisci username utente:");
+			String usernameNodi = getInput();
+			System.out.println(" Inserisci i nodi da associare all'utente (separati da \";\")");
+			String idNodi = getInput();
+			this.request.put("usernameNodi",usernameNodi);
+			this.request.put("idNodi",idNodi);
+        }
 	}
 
 	@Override
@@ -48,6 +62,15 @@ public class NodesManagementNetworkManagerView implements View {
 			this.request.put("modeNodi", "visualizzaInfoNodiNetworkManager");
 			break;
 		case 4:
+			this.request.put("modeNodi", "associaNodiNetworkManager");
+			break;
+		case 5:
+			this.request.put("modeNodi", "disassociaNodiNetworkManager");
+			break;
+		case 6:
+			this.request.put("modeNodi", "visualizzaAssociazioniNodiNetworkManager");
+			break;
+		case 7:
 			this.request.put("modeNodi", "back");
 			break;
 		default:
@@ -55,7 +78,7 @@ public class NodesManagementNetworkManagerView implements View {
 			this.request.put("modeNodi", "callNodesManagementNetworkManagerView");
 			break;
 		}
-				
+		MainDispatcher.getInstance().callAction("Nodes", "doControl", this.request);	
 	}
 
 }

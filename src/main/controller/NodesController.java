@@ -1,5 +1,7 @@
 package main.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import main.MainDispatcher;
@@ -10,11 +12,13 @@ import main.service.UtenteService;
 
 public class NodesController implements Controller {
 	private NodoService nodoService;
+	private UtenteService utenteService;
 	private Request request;
 	
 	@Override
 	public void doControl(Request request) {
 		this.nodoService = new NodoService();
+		this.utenteService= new UtenteService();
 		this.request = request;
 
 		if (this.request.get("modeNodi") != null) {
@@ -34,12 +38,22 @@ public class NodesController implements Controller {
 				break;
 			case "callNodesManagementAdminView":
 				callView();
-				break;		
-			case "1":
+				break;	
+			case "visualizzaNodiNetworkManager":
+				break;			
+			case "visualizzaStatoNodiNetworkManager":
+				visualizzaListaNodi();
 				break;
-			case "2":
+			case "visualizzaInfoNodiNetworkManager":
+				callView();
+				break;	
+			case "associaNodiNetworkManager":
+				associaNodiUtenti();
+				callView();
 				break;
-			case "3":
+			case "disassociaNodiNetworkManager":
+				break;
+			case "visualizzaAssociazioniNodiNetworkManager":
 				break;
 			case "back":
 				 back();
@@ -89,4 +103,20 @@ public class NodesController implements Controller {
 			MainDispatcher.getInstance().callView("networkManager.NetworkManager", this.request);
 		}
 	}
+	
+	private void associaNodiUtenti() {
+		List<String> ListaIdnodi; 
+		String idNodi=this.request.get("idNodi").toString();
+		String UsernameNodi=this.request.get("usernameNodi").toString();
+		
+		int idUtente=utenteService.getidUtente(UsernameNodi);
+		
+		ListaIdnodi=Arrays.asList(idNodi.split(";"));
+		
+		for(String idNodo:ListaIdnodi) {
+			nodoService.UtenteNodo(idUtente, Integer.valueOf(idNodo));
+		}
+		System.out.println("Nodi Associati con successo");		
+	}
+	
 }

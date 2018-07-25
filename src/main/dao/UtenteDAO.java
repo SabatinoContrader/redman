@@ -12,6 +12,7 @@ public class UtenteDAO {
 	private final String QUERY_SET_UTENTI = "UPDATE utenti SET username = ?, password =? WHERE username=?";
 	private final String QUERY_DELETE = "DELETE FROM utenti WHERE username=?";
 	private final String QUERY_SHOW = "Select * from utenti";
+	private final String QUERY_IDUTENTE = "Select idutente from utenti Where username = ?";
 
 	public boolean insertUtente(Utente utente) {
 		Connection connection = ConnectionSingleton.getInstance();
@@ -91,6 +92,24 @@ public class UtenteDAO {
 			e.printStackTrace();
 		}
 		return UtentiList;
+
+	}
+
+	public int idutenteUtente(String username) {
+		Connection connection = ConnectionSingleton.getInstance();
+		int idutente = 0;
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_IDUTENTE);
+			preparedStatement.setString(1, username);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			idutente = Integer.parseInt(resultSet.getString("idutente"));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return idutente;
 
 	}
 }
