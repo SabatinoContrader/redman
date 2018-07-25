@@ -9,66 +9,86 @@ import main.service.UtenteService;
 public class UtentiController implements Controller {
 	private UtenteService utenteService;
 	private Request request;
-	private String mode;
+	private String modeUtenti;
 
 	@Override
 	public void doControl(Request request) {
 		this.utenteService = new UtenteService();
 		this.request = request;
 
-		if (this.request.get("mode") != null) {
-			mode = request.get("mode").toString();
-			switch (mode) {
-			case "aggiungiUtente":
+		if (this.request.get("modeUtenti") != null) {
+			
+			
+			modeUtenti = request.get("modeUtenti").toString();
+			switch (modeUtenti) {
+			case "aggiungiProfiloAdmin":
 				aggiungiProfilo();
 				callUtentiView();
 				break;
-			case "cancellaUtente":
+			case "cancellaProfiloAdmin":
 				canecellaProfilo();
 				callUtentiView();
 				break;
-			case "visualizzaListaUtenti":
+			case "visualizzaListaUtentiAdmin":
 				List<Utente> UtentiList = utenteService.getAllUtenti();
 				request.put("listaUtenti", UtentiList);
 				callUtentiView();
 				break;
-			case "visualizzaUtentiNodi":
+			case "callUsersManagementAdminView":
+				MainDispatcher.getInstance().callView("admin.UsersManagementAdmin", this.request);
+				break;
+			case "visualizzaUtentiNodiNetworkManager":
+				break;
+			case "callUsersManagementNetworkManagerView":
+				MainDispatcher.getInstance().callView("networkManager.UsersManagementNetworkManager", this.request);
 				break;
 			case "back":
-				Request newRequest=new Request();
-				newRequest.put("UserLoggato", this.request.get("UserLoggato"));
-				MainDispatcher.getInstance().callAction("Home", "doControl", newRequest);
+				back();
 				break;
-
 			}
-		} else {
-			// MainDispatcher.getInstance().callView("Utenti", this.request);
-			callUtentiView();
 		}
 	}
 
 	private void aggiungiProfilo() {
 		Utente utente = (Utente) request.get("nuovoUtente");
 		if (this.utenteService.insertUtente(utente)) {
-			System.out.println("Nuovo utente Aggiunto correttamente\n");
+			System.out.println("Nuovo utente Aggiunto correttamente");
 		} else {
 			System.out.println("Utente già esistente");
 		}
-		// MainDispatcher.getInstance().callView("Admin", null);
 	}
 
 	private void canecellaProfilo() {
 		String nomeUtente = (String) request.get("cancellaUtente");
 		if (this.utenteService.deleteUtente(nomeUtente)) {
-			System.out.println("Utente \"" + nomeUtente + "\" Cancellato correttamente\n");
+			System.out.println("Utente \"" + nomeUtente + "\" Cancellato correttamente");
 		} else {
 			System.out.println("Utente \"" + nomeUtente + "\" non presente");
 		}
-		// MainDispatcher.getInstance().callView("Admin", null);
 	}
 
 	private void callUtentiView() {
 		MainDispatcher.getInstance().callView("Utenti", this.request);
+	}
+
+	private void modificaProfiloPersonale() {
+		Utente nuoviDati = (Utente) request.get("UtenteModificato");
+		String VecchiaUsername = request.get("UsernameAccesso").toString();
+
+		if (utenteService.setUtente(nuoviDati, VecchiaUsername)) {
+			System.out.println("\nProfilo modificato Correttamente!");
+		} else {
+			System.out.println("\nErrore nella modifica del profilo!");
+		}
+	}
+
+	private void back() {
+		Utente utente = (Utente) request.get("UserLoggato");
+		if (utente.getRuolo().equals("amministratore")) {
+			MainDispatcher.getInstance().callView("admin.Admin", this.request);
+		} else if (utente.getRuolo().equals("responsabile di rete")) {
+			MainDispatcher.getInstance().callView("networkManager.NetworkManager", this.request);
+		}
 	}
 
 }
