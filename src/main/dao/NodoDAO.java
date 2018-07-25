@@ -97,7 +97,7 @@ public class NodoDAO {
 		return true;
 	}
 	
-	public List<Nodo> getResponsabileNodi() {
+	public List<Nodo> getResponsabileNodi(int idutente) {
 		List<Nodo> nodi = new ArrayList<>();
 		Connection connection = ConnectionSingleton.getInstance();
 		try {

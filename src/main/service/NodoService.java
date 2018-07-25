@@ -27,7 +27,12 @@ package main.service;
 	    
 	    public List<Nodo> getAllnodi () {
 	        return this.nodoDAO.getAllNodi();
+	      
+	       }
+	    public List<Nodo> getResponsabileNodi(int idutente) {
+	        return this.nodoDAO.getResponsabileNodi(idutente);
 	    }
+	    
 	    
 	    public boolean UtenteNodo (int idUtente, int idNodo) {
 	        return this.nodoDAO.UtenteNodo(idUtente, idNodo);
