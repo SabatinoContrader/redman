@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import main.MainDispatcher;
 import main.controller.Request;
+import main.model.Task;
 import main.model.Utente;
 
 public class UtentiView implements View {
@@ -22,6 +23,7 @@ public class UtentiView implements View {
 				System.out.println(utente);
 			}
 		}
+		
 	}
 
 	@Override

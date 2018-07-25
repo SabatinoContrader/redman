@@ -3,17 +3,21 @@ package main.controller;
 import java.util.List;
 
 import main.MainDispatcher;
+import main.model.Task;
 import main.model.Utente;
+import main.service.TaskService;
 import main.service.UtenteService;
 
 public class UtentiController implements Controller {
 	private UtenteService utenteService;
+	private TaskService taskService;
 	private Request request;
 	private String modeUtenti;
 
 	@Override
 	public void doControl(Request request) {
 		this.utenteService = new UtenteService();
+		this.taskService = new TaskService();
 		this.request = request;
 
 		if (this.request.get("modeUtenti") != null) {

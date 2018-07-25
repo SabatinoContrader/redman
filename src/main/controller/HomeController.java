@@ -33,6 +33,7 @@ public class HomeController implements Controller {
 				MainDispatcher.getInstance().callView("networkManager.NodesManagementNetworkManager", this.request);
 				break;
 			case "gestioneTaskNetworkManager":
+				MainDispatcher.getInstance().callView("networkManager.TasksManagementNetworkManager", this.request);
 				break;
 			case "callNetworkManagerView":
 				MainDispatcher.getInstance().callView("networkManager.NetworkManager", this.request);
