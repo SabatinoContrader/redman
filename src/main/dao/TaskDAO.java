@@ -9,7 +9,7 @@ import main.model.Task;
 
 public class TaskDAO {
 	
-	private final String QUERY_SHOW = "Select * from tasks";
+	private final String QUERY_SHOW = "Select *from tasks";
 	 private final String QUERY_INSERT = "insert into tasks (idtask, idnodo, infotask, statotask) values (?,?,?,?)";
 
 	    public TaskDAO() {

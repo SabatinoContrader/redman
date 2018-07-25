@@ -9,7 +9,7 @@ public class Task {
 
     public Task(int idtask, int idnodo, String infotask, String statotask) {
         this.idtask = idtask;
-        this.idtask = idnodo;
+        this.idnodo = idnodo;
         this.infotask = infotask;
         this.statotask = statotask;
 
@@ -51,7 +51,7 @@ public class Task {
 	  
 		@Override
 		public String toString() {
-			return "Task [idtask=" + idtask + ", idtask=" + idnodo + ", infotask=" + infotask + ", statotask=" + statotask + "]";
+			return "Task [idtask=" + idtask + ", idnodo=" + idnodo + ", infotask=" + infotask + ", statotask=" + statotask + "]";
 		}
 }
 
