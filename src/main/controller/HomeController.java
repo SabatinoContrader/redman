@@ -21,6 +21,7 @@ public class HomeController implements Controller {
 				MainDispatcher.getInstance().callView("admin.UsersManagementAdmin", this.request);
 				break;
 			case "gestioneNodiAdmin":
+				MainDispatcher.getInstance().callView("admin.NodesManagementAdmin", this.request);
 				break;
 			case "callAdminView":
 				MainDispatcher.getInstance().callView("admin.Admin", this.request);
@@ -29,6 +30,7 @@ public class HomeController implements Controller {
 				MainDispatcher.getInstance().callView("networkManager.UsersManagementNetworkManager", this.request);
 				break;
 			case "gestioneNodiNetworkManager":
+				MainDispatcher.getInstance().callView("networkManager.NodesManagementNetworkManager", this.request);
 				break;
 			case "gestioneTaskNetworkManager":
 				break;

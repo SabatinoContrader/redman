@@ -59,7 +59,7 @@ public class NodiController implements Controller {
 	private void visualizzaListaNodi() {
 		List<Nodo> nodi = nodoService.getAllnodi();
 		this.request.put("listaNodi", nodi);
-		MainDispatcher.getInstance().callView("Nodi", this.request);
+		MainDispatcher.getInstance().callView("Nodes", this.request);
 	}
 
 }
