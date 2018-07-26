@@ -36,8 +36,12 @@ public class NodesView implements View {
 				System.out.println("idNodo: " + idNodo + " username: " + match.get(idNodo));
 			}
 
+		}else if (this.request.get("modeNodi").equals("VisualizzaStatoNodiUser")) {
+			List<Nodo> nodi = (List<Nodo>) this.request.get("statoNodiUser");
+			for (Nodo nodo : nodi) {
+				System.out.println(nodo.getInfonodo() + ", " + nodo.getStatonodo());
+			}
 		}
-
 	}
 
 	@Override
@@ -68,7 +72,8 @@ public class NodesView implements View {
 			MainDispatcher.getInstance().callAction("Nodes", "doControl", newRequest);
 			break;
 		case "utente semplice":
-			// MainDispatcher.getInstance().callView("user.User", newRequest);
+			newRequest.put("modeNodi", "callNodesManagementUserView");
+			MainDispatcher.getInstance().callAction("Nodes", "doControl", newRequest);
 			break;
 		}
 

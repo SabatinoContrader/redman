@@ -24,6 +24,12 @@ public class Nodo {
 		this.gruppi_idgruppo = gruppi_idgruppo;
 	}
 	
+
+	public Nodo(String infonodo, String statonodo) {
+		this.infonodo = infonodo;
+		this.statonodo = statonodo;
+	}
+
 	public int getIdnodo() {
 		return idnodo;
 	}

@@ -38,7 +38,8 @@ public class HomeController implements Controller {
 			case "callNetworkManagerView":
 				MainDispatcher.getInstance().callView("networkManager.NetworkManager", this.request);
 				break;
-			case "VisualizzaStatoNodiUser":
+			case "GestioneNodiUser":
+				MainDispatcher.getInstance().callView("user.NodesManagementUser", this.request);
 				break;
 			case "VisualizzaSegnalazioniUser":
 				break;

@@ -18,6 +18,8 @@ public class NodoDAO {
 	private final String QUERY_SHOWNODO = " Select idnodo,infonodo, statonodo, gruppi_idgruppo from nodi where idutente = ?";
 	private final String QUERY_UPDATENULL ="UPDATE nodi SET idutente = null Where idnodo =?";
 	private final String QUERY_SHOWMATCH = "Select idnodo,username from nodi,utenti where nodi.idutente = utenti.idutente";
+	private final String QUERY_SHOWSTATENODO = " Select infonodo, statonodo from nodi Where idutente = ?";
+
 	public NodoDAO() {
 
 	}
@@ -135,8 +137,7 @@ public class NodoDAO {
 		}
 		return nodi;
 	}
-	
-	
+		
 	public HashMap<Integer,String> getAllNodiUtenti() {
 		HashMap<Integer, String> match = new HashMap<>();
 		Connection connection = ConnectionSingleton.getInstance();
@@ -147,13 +148,33 @@ public class NodoDAO {
 				int idnodo = resultSet.getInt("idnodo");
 				String username = resultSet.getString("username");
 				match.put(idnodo, username);
+			}	
+		} catch (SQLException e) {
+				e.printStackTrace();
+		}
+			return match;
+	}
+
+	public List<Nodo> getStatoNodi(int idUtente) {
+		List<Nodo> nodi = new ArrayList<>();
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_SHOWSTATENODO);
+			preparedStatement.setInt(1, idUtente);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				String infonodo = resultSet.getString("infonodo");
+				String statonodo = resultSet.getString("statonodo");
+				nodi.add(new Nodo(infonodo, statonodo));
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		return match;
 	}
 
 	
 	
+		return nodi; 
+	}
+
 }

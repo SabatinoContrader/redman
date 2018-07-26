@@ -55,7 +55,9 @@ import java.util.List;
 	        return this.nodoDAO.UtenteNullNodo(idNodo);
 	    }
 	    
-	    
+	    public List<Nodo> getStatoNodi(int idUtente) {
+	    	return this.nodoDAO.getStatoNodi(idUtente);
+	    }	    
 	    
 	    
 	//    
