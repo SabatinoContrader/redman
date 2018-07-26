@@ -48,10 +48,10 @@ public class UserView implements View {
 			this.request.put("mode", "VisualizzaSegnalazioniUser");
 			break;
 		case 3:
-			this.request.put("mode", "logout");
+			this.request.put("mode", "modificaProfiloPersonale");
 			break;
 		case 4:
-			this.request.put("mode", "modificaProfiloPersonale");
+			this.request.put("mode", "logout");
 			break;
 		default:
 			this.request.put("mode", "callUserView");
