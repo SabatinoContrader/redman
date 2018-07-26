@@ -21,7 +21,7 @@ public class UserView implements View {
 	public void showOptions() {
 		System.out.println("\n--------MENU--------");
 		System.out.println("*******UTENTE*******\n");
-		System.out.println("1) Visualizza stato nodi");
+		System.out.println("1) Gestione nodi");
 		System.out.println("2) Visualizza segnalazioni");
 		System.out.println("3) Modifica profilo personale");
 		System.out.println("4) Logout");
@@ -42,7 +42,7 @@ public class UserView implements View {
 	public void submit() {
 		switch (this.choice) {
 		case 1:
-			this.request.put("mode", "VisualizzaStatoNodiUser");
+			this.request.put("mode", "GestioneNodiUser");
 			break;
 		case 2:
 			this.request.put("mode", "VisualizzaSegnalazioniUser");

@@ -42,6 +42,9 @@ public class NodesController implements Controller {
 			case "callNodesManagementNetworkManagerView":
 				callView();
 				break;	
+			case "callNodesManagementUserView":
+				callView();
+				break;	
 			case "visualizzaNodiNetworkManager":
 				visualizzaBloccoNodiNetworkManager();
 				break;			
@@ -60,6 +63,9 @@ public class NodesController implements Controller {
 				callView();
 				break;
 			case "visualizzaAssociazioniNodiNetworkManager":
+				break;
+			case "VisualizzaStatoNodiUser":
+				VisualizzaStatoNodiUser();
 				break;
 			case "back":
 				 back();
@@ -92,6 +98,9 @@ public class NodesController implements Controller {
 		case "responsabile di rete":
 			MainDispatcher.getInstance().callView("networkManager.NodesManagementNetworkManager", newRequest);
 			break;
+		case "utente semplice":
+			MainDispatcher.getInstance().callView("user.NodesManagementUser", newRequest);
+			break;
 		}
 	}
 	
@@ -115,6 +124,8 @@ public class NodesController implements Controller {
 			MainDispatcher.getInstance().callView("admin.Admin", this.request);
 		} else if (utente.getRuolo().equals("responsabile di rete")) {
 			MainDispatcher.getInstance().callView("networkManager.NetworkManager", this.request);
+		} else if (utente.getRuolo().equals("utente semplice")) {
+			MainDispatcher.getInstance().callView("user.User", this.request);
 		}
 	}
 	
@@ -143,6 +154,14 @@ public class NodesController implements Controller {
 			nodoService.UtenteNullNodo(Integer.valueOf(idNodo));
 		}
 		System.out.println("Nodi Disassociati con successo");		
+	}
+	
+	private void VisualizzaStatoNodiUser() {
+		Utente utente = (Utente) request.get("UserLoggato");
+		int idUtente = this.utenteService.getidUtente(utente.getUsername());
+		List<Nodo> nodi = this.nodoService.getStatoNodi(idUtente);
+		this.request.put("statoNodiUser", nodi);
+		MainDispatcher.getInstance().callView("Nodes", this.request);
 	}
 	
 }

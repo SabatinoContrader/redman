@@ -42,7 +42,9 @@ package main.service;
 	        return this.nodoDAO.UtenteNullNodo(idNodo);
 	    }
 	    
-	    
+	    public List<Nodo> getStatoNodi(int idUtente) {
+	    	return this.nodoDAO.getStatoNodi(idUtente);
+	    }	    
 	    
 	    
 	//    
