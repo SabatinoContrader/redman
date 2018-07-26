@@ -13,7 +13,7 @@ public class NodoDAO {
 	private final String QUERY_INSERT = "insert into nodi (infonodo, statonodo, gruppi_idgruppo) values (?,?,?)";
 	private final String QUERY_GETNODO = "Select * from nodi Where idnodo = ?";
 	private final String QUERY_UPDATE ="UPDATE nodi SET idutente = ? Where idnodo =?";
-	private final String QUERY_SHOWNODO = " Select infonodo, statonodo, gruppi_idgruppo from nodi where idutente = ?";
+	private final String QUERY_SHOWNODO = " Select idnodo,infonodo, statonodo, gruppi_idgruppo from nodi where idutente = ?";
 	public NodoDAO() {
 
 	}
@@ -101,8 +101,10 @@ public class NodoDAO {
 		List<Nodo> nodi = new ArrayList<>();
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(QUERY_SHOWNODO);
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_SHOWNODO);
+			preparedStatement.setInt(1, idutente);
+			//Statement statement = connection.createStatement();
+			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				int idnodo = resultSet.getInt("idnodo");
 				String infonodo = resultSet.getString("infonodo");
@@ -112,6 +114,7 @@ public class NodoDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
 		return nodi;
 	}

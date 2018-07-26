@@ -14,11 +14,18 @@ public class NodesView implements View{
 	public void showResults(Request request) {
 		this.request = request;
 
-		if (this.request.get("modeNodi") == "visualizzaListaNodiAdmin") {
+		if (this.request.get("modeNodi").equals("visualizzaListaNodiAdmin")) {
 			List<Nodo> listaNodi = (List<Nodo>) this.request.get("listaNodi");
 			for (Nodo nodo : listaNodi) {
 				System.out.println(nodo);
 			}
+		}
+		else if (this.request.get("modeNodi").equals("visualizzaNodiNetworkManager")) {
+			List<Nodo>  nodiAssociati= (List<Nodo>) this.request.get("listaNodiNetworkManager");
+			for (Nodo nodoAss : nodiAssociati) {
+				System.out.println(nodoAss);
+			}
+			
 		}
 		
 	}
@@ -47,7 +54,8 @@ public class NodesView implements View{
 			MainDispatcher.getInstance().callAction("Nodes", "doControl", newRequest);
 			break;
 		case "responsabile di rete":
-			//MainDispatcher.getInstance().callView("networkManager.NetworkManager", newRequest);
+			newRequest.put("modeNodi", "callNodesManagementNetworkManagerView");
+			MainDispatcher.getInstance().callAction("Nodes", "doControl", newRequest);
 			break;
 		case "utente semplice":
 			//MainDispatcher.getInstance().callView("user.User", newRequest);

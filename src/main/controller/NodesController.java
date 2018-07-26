@@ -38,8 +38,12 @@ public class NodesController implements Controller {
 				break;
 			case "callNodesManagementAdminView":
 				callView();
+				break;
+			case "callNodesManagementNetworkManagerView":
+				callView();
 				break;	
 			case "visualizzaNodiNetworkManager":
+				visualizzaBloccoNodiNetworkManager();
 				break;			
 			case "visualizzaStatoNodiNetworkManager":
 				visualizzaListaNodi();
@@ -92,6 +96,14 @@ public class NodesController implements Controller {
 	private void visualizzaListaNodi() {
 		List<Nodo> nodi = nodoService.getAllnodi();
 		this.request.put("listaNodi", nodi);
+		MainDispatcher.getInstance().callView("Nodes", this.request);
+	}
+	
+	private void visualizzaBloccoNodiNetworkManager() {
+		String utente=((Utente)this.request.get("UserLoggato")).getUsername();	
+		int idUtente=utenteService.getidUtente(utente);
+		List<Nodo> nodi = nodoService.getResponsabileNodi(idUtente);
+		this.request.put("listaNodiNetworkManager", nodi);
 		MainDispatcher.getInstance().callView("Nodes", this.request);
 	}
 	
