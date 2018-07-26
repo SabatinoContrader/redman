@@ -38,6 +38,10 @@ package main.service;
 	        return this.nodoDAO.UtenteNodo(idUtente, idNodo);
 	    }
 	    
+	    public boolean UtenteNullNodo (int idNodo) {
+	        return this.nodoDAO.UtenteNullNodo(idNodo);
+	    }
+	    
 	    
 	    
 	    

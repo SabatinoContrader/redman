@@ -36,7 +36,11 @@ public class NodesManagementNetworkManagerView implements View {
 			String idNodi = getInput();
 			this.request.put("usernameNodi",usernameNodi);
 			this.request.put("idNodi",idNodi);
-        }
+        } else if (choice==5) {        	
+			System.out.println(" Inserisci i nodi da disassociare (separati da \";\")");
+			String idNodi = getInput();
+			this.request.put("idNodi",idNodi);
+			}
 	}
 
 	@Override

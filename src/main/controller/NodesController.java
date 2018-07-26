@@ -56,6 +56,8 @@ public class NodesController implements Controller {
 				callView();
 				break;
 			case "disassociaNodiNetworkManager":
+				disassociaNodiUtenti();
+				callView();
 				break;
 			case "visualizzaAssociazioniNodiNetworkManager":
 				break;
@@ -129,6 +131,18 @@ public class NodesController implements Controller {
 			nodoService.UtenteNodo(idUtente, Integer.valueOf(idNodo));
 		}
 		System.out.println("Nodi Associati con successo");		
+	}
+	
+	private void disassociaNodiUtenti() {
+		List<String> ListaIdnodi; 
+		String idNodi=this.request.get("idNodi").toString();
+		
+		ListaIdnodi=Arrays.asList(idNodi.split(";"));
+		
+		for(String idNodo:ListaIdnodi) {
+			nodoService.UtenteNullNodo(Integer.valueOf(idNodo));
+		}
+		System.out.println("Nodi Disassociati con successo");		
 	}
 	
 }

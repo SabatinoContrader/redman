@@ -14,6 +14,7 @@ public class NodoDAO {
 	private final String QUERY_GETNODO = "Select * from nodi Where idnodo = ?";
 	private final String QUERY_UPDATE ="UPDATE nodi SET idutente = ? Where idnodo =?";
 	private final String QUERY_SHOWNODO = " Select idnodo,infonodo, statonodo, gruppi_idgruppo from nodi where idutente = ?";
+	private final String QUERY_UPDATENULL ="UPDATE nodi SET idutente = null Where idnodo =?";
 	public NodoDAO() {
 
 	}
@@ -89,6 +90,19 @@ public class NodoDAO {
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_UPDATE);
 			preparedStatement.setInt(1, idUsername);
 			preparedStatement.setInt(2, idNodo);
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean UtenteNullNodo(int idNodo) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_UPDATENULL);
+			preparedStatement.setInt(1, idNodo);
 			preparedStatement.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
