@@ -22,7 +22,9 @@ public class LoginController implements Controller {
 			UserLoggato=(Utente)this.request.get("UserLoggato");
 			Request newRequest= new Request();
 			newRequest.put("UserLoggato", UserLoggato);
+			
 /*GNANNA DA UBUNtu*/
+			
 			switch(UserLoggato.getRuolo()) {
 			case"amministratore":
 				MainDispatcher.getInstance().callView("admin.Admin", newRequest);
