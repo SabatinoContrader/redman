@@ -1,9 +1,16 @@
 package main.service;
 
-	import main.dao.NodoDAO;
+	import main.ConnectionSingleton;
+import main.dao.NodoDAO;
 	import main.model.Nodo;
 
-	import java.util.List;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
 
 	public class NodoService {
 
@@ -29,6 +36,12 @@ package main.service;
 	        return this.nodoDAO.getAllNodi();
 	      
 	       }
+	    
+	    public HashMap<Integer,String> getAllNodiUtenti() {
+			return this.nodoDAO.getAllNodiUtenti();
+			
+		}
+	    
 	    public List<Nodo> getResponsabileNodi(int idutente) {
 	        return this.nodoDAO.getResponsabileNodi(idutente);
 	    }

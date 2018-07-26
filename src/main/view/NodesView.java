@@ -1,13 +1,17 @@
 package main.view;
 
+import java.util.Hashtable;
 import java.util.List;
 
 import main.MainDispatcher;
 import main.controller.Request;
 import main.model.Nodo;
 import main.model.Utente;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Enumeration;
 
-public class NodesView implements View{
+public class NodesView implements View {
 	private Request request;
 
 	@Override
@@ -19,21 +23,27 @@ public class NodesView implements View{
 			for (Nodo nodo : listaNodi) {
 				System.out.println(nodo);
 			}
-		}
-		else if (this.request.get("modeNodi").equals("visualizzaNodiNetworkManager")) {
-			List<Nodo>  nodiAssociati= (List<Nodo>) this.request.get("listaNodiNetworkManager");
+		} else if (this.request.get("modeNodi").equals("visualizzaNodiNetworkManager")) {
+			List<Nodo> nodiAssociati = (List<Nodo>) this.request.get("listaNodiNetworkManager");
 			for (Nodo nodoAss : nodiAssociati) {
 				System.out.println(nodoAss);
 			}
-			
+
+		} else if (this.request.get("modeNodi").equals("visualizzaAssociazioniNodiNetworkManager")) {
+			HashMap<Integer, String> match = (HashMap<Integer, String>) this.request.get("listaAssociazioni");
+
+			for (Integer idNodo : match.keySet()) {
+				System.out.println("idNodo: " + idNodo + " username: " + match.get(idNodo));
+			}
+
 		}
-		
+
 	}
 
 	@Override
 	public void showOptions() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -43,7 +53,7 @@ public class NodesView implements View{
 	}
 
 	@Override
-	public void submit() {		
+	public void submit() {
 		Utente UserLoggato = (Utente) this.request.get("UserLoggato");
 		Request newRequest = new Request();
 		newRequest.put("UserLoggato", UserLoggato);
@@ -58,10 +68,10 @@ public class NodesView implements View{
 			MainDispatcher.getInstance().callAction("Nodes", "doControl", newRequest);
 			break;
 		case "utente semplice":
-			//MainDispatcher.getInstance().callView("user.User", newRequest);
+			// MainDispatcher.getInstance().callView("user.User", newRequest);
 			break;
 		}
-			
+
 	}
 
 }

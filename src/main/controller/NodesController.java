@@ -2,6 +2,8 @@ package main.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 import main.MainDispatcher;
@@ -60,6 +62,8 @@ public class NodesController implements Controller {
 				callView();
 				break;
 			case "visualizzaAssociazioniNodiNetworkManager":
+				visualizzaListaMatchNodiUtenti();
+				callView();
 				break;
 			case "back":
 				 back();
@@ -143,6 +147,12 @@ public class NodesController implements Controller {
 			nodoService.UtenteNullNodo(Integer.valueOf(idNodo));
 		}
 		System.out.println("Nodi Disassociati con successo");		
+	}
+	
+	private void visualizzaListaMatchNodiUtenti() {
+		HashMap<Integer,String> match= nodoService.getAllNodiUtenti();
+		this.request.put("listaAssociazioni",match);
+		MainDispatcher.getInstance().callView("Nodes", this.request);
 	}
 	
 }

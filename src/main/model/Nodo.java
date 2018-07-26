@@ -23,7 +23,7 @@ public class Nodo {
 		this.statonodo = statonodo;
 		this.gruppi_idgruppo = gruppi_idgruppo;
 	}
-
+	
 	public int getIdnodo() {
 		return idnodo;
 	}

@@ -2,6 +2,8 @@ package main.dao;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import main.ConnectionSingleton;
 import main.controller.GestoreEccezioni;
@@ -15,6 +17,7 @@ public class NodoDAO {
 	private final String QUERY_UPDATE ="UPDATE nodi SET idutente = ? Where idnodo =?";
 	private final String QUERY_SHOWNODO = " Select idnodo,infonodo, statonodo, gruppi_idgruppo from nodi where idutente = ?";
 	private final String QUERY_UPDATENULL ="UPDATE nodi SET idutente = null Where idnodo =?";
+	private final String QUERY_SHOWMATCH = "Select idnodo,username from nodi,utenti where nodi.idutente = utenti.idutente";
 	public NodoDAO() {
 
 	}
@@ -132,4 +135,25 @@ public class NodoDAO {
 		}
 		return nodi;
 	}
+	
+	
+	public HashMap<Integer,String> getAllNodiUtenti() {
+		HashMap<Integer, String> match = new HashMap<>();
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(QUERY_SHOWMATCH);
+			while (resultSet.next()) {
+				int idnodo = resultSet.getInt("idnodo");
+				String username = resultSet.getString("username");
+				match.put(idnodo, username);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return match;
+	}
+
+	
+	
 }
