@@ -1,9 +1,9 @@
-package main.service;
+package com.virtualpairprogrammers.services;
 
 import java.util.List;
 
-import main.dao.TaskDAO;
-import main.model.Task;
+import com.virtualpairprogrammers.dao.TaskDAO;
+import com.virtualpairprogrammers.model.Task;
 
 public class TaskService {
 		

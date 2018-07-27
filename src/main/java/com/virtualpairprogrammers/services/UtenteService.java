@@ -1,7 +1,7 @@
-package main.service;
+package com.virtualpairprogrammers.services;
 
-import main.dao.UtenteDAO;
-import main.model.Utente;
+import com.virtualpairprogrammers.dao.UtenteDAO;
+import com.virtualpairprogrammers.model.Utente;
 
 import java.util.List;
 

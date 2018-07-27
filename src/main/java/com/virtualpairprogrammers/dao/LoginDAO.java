@@ -1,7 +1,7 @@
-package main.dao;
+package com.virtualpairprogrammers.dao;
 
-import main.ConnectionSingleton;
-import main.controller.GestoreEccezioni;
+import com.virtualpairprogrammers.utils.ConnectionSingleton;
+import com.virtualpairprogrammers.utils.GestoreEccezioni;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

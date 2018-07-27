@@ -1,16 +1,10 @@
-package main.service;
+package com.virtualpairprogrammers.services;
 
-	import main.ConnectionSingleton;
-import main.dao.NodoDAO;
-	import main.model.Nodo;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
+
+import com.virtualpairprogrammers.dao.NodoDAO;
+import com.virtualpairprogrammers.model.Nodo;
 
 	public class NodoService {
 

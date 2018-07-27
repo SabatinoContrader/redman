@@ -1,6 +1,6 @@
-package main.service;
+package com.virtualpairprogrammers.services;
 
-import main.dao.LoginDAO;
+import com.virtualpairprogrammers.dao.LoginDAO;
 
 public class LoginService {
 

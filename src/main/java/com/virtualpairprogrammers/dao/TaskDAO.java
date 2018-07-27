@@ -1,11 +1,11 @@
-package main.dao;
+package com.virtualpairprogrammers.dao;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import main.ConnectionSingleton;
-import main.controller.GestoreEccezioni;
-import main.model.Task;
+import com.virtualpairprogrammers.utils.ConnectionSingleton;
+import com.virtualpairprogrammers.utils.GestoreEccezioni;
+import com.virtualpairprogrammers.model.Task;
 
 public class TaskDAO {
 	
