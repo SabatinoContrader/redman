@@ -27,9 +27,8 @@ public class LoginTraderServlet extends HttpServlet {
 				getServletContext().getRequestDispatcher("/admin/admin.jsp").forward(request, response);
 			} else if (ruolo.equalsIgnoreCase("responsabile di rete")) {
 				getServletContext().getRequestDispatcher("/networkManager/networkManager.jsp").forward(request, response);
-			} else if (ruolo.equalsIgnoreCase("utente semplice")) {
-				
-				getServletContext().getRequestDispatcher("user/User.jsp").forward(request, response);
+			} else if (ruolo.equalsIgnoreCase("utente semplice")) {		
+				getServletContext().getRequestDispatcher("/user/user.jsp").forward(request, response);
 				
 			}
 		
