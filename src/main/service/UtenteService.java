@@ -32,6 +32,10 @@ public class UtenteService {
     public int getidUtente (String Username) {
         return this.utenteDAO.idutenteUtente(Username);
     }
+    
+    public String getRuoloUtente (String Username) {
+        return this.utenteDAO.getRuoloUtente(Username);
+    }
 //    
 //    
 //    public List<Utente> getAllPaziente () {

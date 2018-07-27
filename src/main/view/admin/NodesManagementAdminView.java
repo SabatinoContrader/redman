@@ -36,6 +36,13 @@ public class NodesManagementAdminView implements View {
 			Nodo nodo = new Nodo(infonodo, statonodo, gruppi_idgruppo);
 			request.put("NuovoNodo", nodo);
 			this.request.put("mode", "creaNuovoNodo");
+		}else if (choice==2) {        	
+        	System.out.println("Inserisci username responsabile:");
+			String usernameResponsabileNodi = getInput();
+			System.out.println(" Inserisci i nodi da associare all'utente (separati da \";\")");
+			String idNodi = getInput();
+			this.request.put("usernameResponsabileNodi",usernameResponsabileNodi);
+			this.request.put("idNodi",idNodi);
 		}
 
 	}

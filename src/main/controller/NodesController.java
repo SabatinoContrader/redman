@@ -32,6 +32,8 @@ public class NodesController implements Controller {
 				callView(); 
 				break;
 			case "AssegnaNodiAdmin":
+				assegnaNodiAdmin();
+				callView(); 
 				break;
 			case "cancellaNodiAdmin":
 				break;			
@@ -79,6 +81,27 @@ public class NodesController implements Controller {
 			
 		}
 
+	}
+	
+	private void assegnaNodiAdmin() {
+		List<String> ListaIdnodi; 
+		String idNodi=this.request.get("idNodi").toString();
+		String UsernameNodi=this.request.get("usernameResponsabileNodi").toString();
+		
+		if(utenteService.getRuoloUtente(UsernameNodi).equals("responsabile di rete")) {
+			int idUtente=utenteService.getidUtente(UsernameNodi);
+			
+			ListaIdnodi=Arrays.asList(idNodi.split(";"));
+			
+			for(String idNodo:ListaIdnodi) {
+				nodoService.UtenteNodo(idUtente, Integer.valueOf(idNodo));
+			}
+			System.out.println("Nodi Associati con successo");	
+		}else {
+			System.out.println("L'utente "+UsernameNodi+" non è un responsabile di rete");
+		}
+		
+		
 	}
 	
 	private void creaNodo() {
