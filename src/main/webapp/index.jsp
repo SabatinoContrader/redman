@@ -11,7 +11,7 @@
      <input type = "text" id = "pass" name ="password" placeholder = "inserisci password"><br>
      <br>
      <button type = "submit" value = "Login" name = "pulsante">Login In</button><br>
-     <!--<a href="register.jsp"> Registrati </a>  -->
+     <a href="UtentiServlet"> Gestione Utenti </a>
      </fieldset>
      </form>
    </div>
