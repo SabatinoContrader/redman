@@ -11,10 +11,20 @@
 		<servlet-name>HelloWorldServlet</servlet-name>
 		<servlet-class>com.virtualpairprogrammers.servlets.HelloWorldServlet</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>LoginTraderServlet</servlet-name>
+		<servlet-class>com.virtualpairprogrammers.servlets.LoginTraderServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>HelloWorldServlet</servlet-name>
-		<url-pattern>/hello-everyone.html</url-pattern>
+		<url-pattern>/HelloWorldServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>LoginTraderServlet</servlet-name>
+		<url-pattern>/LoginTraderServlet</url-pattern>
 	</servlet-mapping>
 	
 	<session-config>
