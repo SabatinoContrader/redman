@@ -17,6 +17,11 @@
 		<servlet-class>com.virtualpairprogrammers.servlets.LoginTraderServlet</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>HomeServlet</servlet-name>
+		<servlet-class>com.virtualpairprogrammers.servlets.HomeServlet</servlet-class>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>HelloWorldServlet</servlet-name>
 		<url-pattern>/HelloWorldServlet</url-pattern>
@@ -25,6 +30,11 @@
 	<servlet-mapping>
 		<servlet-name>LoginTraderServlet</servlet-name>
 		<url-pattern>/LoginTraderServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>HomeServlet</servlet-name>
+		<url-pattern>/HomeServlet</url-pattern>
 	</servlet-mapping>
 	
 	<session-config>
