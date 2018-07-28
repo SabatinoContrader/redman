@@ -17,6 +17,8 @@ public class HomeController implements Controller {
 		if (this.request.get("mode") != null) {
 			mode = this.request.get("mode").toString();
 			switch (mode) {
+			
+				/**AMMINISTRATORE */
 			case "gestioneUtentiAdmin":
 				MainDispatcher.getInstance().callView("admin.UsersManagementAdmin", this.request);
 				break;
@@ -26,6 +28,8 @@ public class HomeController implements Controller {
 			case "callAdminView":
 				MainDispatcher.getInstance().callView("admin.Admin", this.request);
 				break;
+				
+				/**RESPONSABILE */
 			case "gestioneUtentiNetworkManager":
 				MainDispatcher.getInstance().callView("networkManager.UsersManagementNetworkManager", this.request);
 				break;
@@ -38,6 +42,8 @@ public class HomeController implements Controller {
 			case "callNetworkManagerView":
 				MainDispatcher.getInstance().callView("networkManager.NetworkManager", this.request);
 				break;
+				
+				/**UTENTE SEMPLICE */
 			case "GestioneNodiUser":
 				MainDispatcher.getInstance().callView("user.NodesManagementUser", this.request);
 				break;
@@ -46,9 +52,11 @@ public class HomeController implements Controller {
 			case "callUserView":
 				MainDispatcher.getInstance().callView("user.User", this.request);
 				break;
+				
+				/**QUALSIASI UTENTE */
 			case "modificaProfiloPersonale":
 				MainDispatcher.getInstance().callView("ModifyProfile", this.request);
-				break;
+				break;				
 			case "logout":
 				MainDispatcher.getInstance().callAction("Login", "doControl", null);
 				break;
