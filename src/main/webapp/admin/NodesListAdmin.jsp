@@ -1,4 +1,4 @@
-<%@ page import="com.virtualpairprogrammers.model.Utente" %>
+<%@ page import="com.virtualpairprogrammers.model.Nodo" %>
 <%@ page import="java.util.*" %>
 
 <!DOCTYPE html>
@@ -8,15 +8,15 @@
 
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<% List<Utente> all_utenti = (List<Utente>) request.getAttribute("listaUtenti");%>
+<% List<Nodo> all_nodi = (List<Nodo>) request.getAttribute("listaNodi");%>
 </head>
 
 <body>
-        <form action="UtentiServlet" method="post">
+        <form action="NodesServlet" method="post">
                 <table>
                 <tr>
                   <td>
-                     Utenti:
+                     Nodi:
                   </td>
                   <td>
                   </td>
@@ -25,14 +25,19 @@
                     <tr>
                        <th></th>
                         <th>
-                            ID_UTENTE
+                            ID_NODO
                         </th>
                
                         <th>
-                            USERNAME
+                            INFO_NODO
                         </th>
+                         
                         <th>
-                            RUOLO
+                            STATO_NODO
+                        </th>
+                         
+                        <th>
+                            GRUPPI_IDGRUPPO
                         </th>
                         <th>
                          </th>
@@ -40,26 +45,33 @@
                          </th>
                
                     </tr>
-                       <%for (Utente utente : all_utenti) { %>
+                       <%for (Nodo nodo : all_nodi) { %>
                     <tr>
                         <td>
-                            <input type="checkbox" name="products" value="<%= utente.getIdutente()%>"/>
+                            <input type="checkbox" name="products" value="<%= nodo.getIdnodo()%>"/>
                         </td>
                
                         <td>
                         <p align = center>
-                            <%= utente.getIdutente()%>
-                        </td>
+                            <%= nodo.getIdnodo()%>
+                        </td>             
                
                         <td>
-                        <p align = center>
-                            <%=  utente.getUsername()%>
-                        </td>
-               
+                         <p align = center>
+                            <%=  nodo.getInfonodo()%>  
+                        </td>             
+
                         <td>
-                        <p align = center>
-                            <%=  utente.getRuolo()%>
+                         <p align = center>
+                            <%=  nodo.getStatonodo()%>    
+                        </td>             
+
+                        
+                        <td> 
+                         <p align = center>                      
+                            <%=  nodo.getGruppi_idgruppo()%>                 
                         </td>
+                       
             
                         <td>             
                         </td>
@@ -69,12 +81,5 @@
                     </tr>
                     <% }%>
                 </table>
-                
-                <form action = "RegisterServlet" method= "post">
-				<h2>username: <input type = "text" id = "user" name ="username"></h2>
-				<h2>password: <input type = "text" id = "pass" name ="password"></h2>
-				<h2>ruolo: <input type = "text" id = "role" name ="ruolo"></h2>
-				<button type = "submit" value = "Register" name = "pulsante">Registra Utente</button><br>
-				</form>
 </body>
 </html>

@@ -1,10 +1,7 @@
 package com.virtualpairprogrammers.servlets;
 
 import com.virtualpairprogrammers.model.Nodo;
-import com.virtualpairprogrammers.services.LoginService;
 import com.virtualpairprogrammers.services.NodoService;
-import com.virtualpairprogrammers.model.Utente;
-import com.virtualpairprogrammers.services.UtenteService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,17 +13,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NodesServlet {
+public class NodesServlet extends HttpServlet {
 	
 	private NodoService nodoService;
-	private UtenteService utenteService;
+	private HttpServletRequest request;
 	
-	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String gestionenodo = request.getParameter("richiesta");
-        HttpSession session = request.getSession(true);
-        nodoService =  new NodoService();
+	public NodesServlet() {
+		nodoService= new NodoService();
+	}
+
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//super.service(req, resp);
 		
-		 switch (gestionenodo) {
+		this.request=request;
+		visualizzaListaNodi();
+		getServletContext().getRequestDispatcher("/admin/NodesListAdmin.jsp").forward(this.request, response);
+
+	}
+
+	private void visualizzaListaNodi() {
+		List<Nodo> nodi = nodoService.getAllnodi();
+		this.request.setAttribute("listaNodi", nodi);
+	}
+		
+		/* switch (gestionenodo) {
          case "CreaNodoAdmin":
              break;
          case "AssegnaNodiAdmin":
@@ -34,6 +45,10 @@ public class NodesServlet {
          case "CancellaNodiAdmin":
         	 break;
          case "VisualizzaListaNodiAdmin":
+        	 List<Nodo> nodi = this.nodoService.getAllnodi();
+             request.setAttribute("ListaNodi", nodi);
+             getServletContext().getRequestDispatcher("/NodesListAdmin.jsp").forward(request,response);
+             break;
              break;
          case "VisualizzaNodiNetworkManager":
             break;
@@ -48,10 +63,6 @@ public class NodesServlet {
          case "VisualizzaStatoNodiUser":
         	 break;
          case "back":
-        	 break;
-		 }
-
+        	 break; */
 	}
-
-}
 
