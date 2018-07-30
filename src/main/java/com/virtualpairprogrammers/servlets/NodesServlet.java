@@ -3,6 +3,7 @@ package com.virtualpairprogrammers.servlets;
 import com.virtualpairprogrammers.model.Nodo;
 import com.virtualpairprogrammers.model.Utente;
 import com.virtualpairprogrammers.services.NodoService;
+import com.virtualpairprogrammers.services.UtenteService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,29 +18,43 @@ import java.util.List;
 public class NodesServlet extends HttpServlet {
 	
 	private NodoService nodoService;
+	private UtenteService utenteService;
 	private HttpServletRequest request;
+	private Utente utente;
 	
 	public NodesServlet() {
-		nodoService= new NodoService();
+		this.nodoService= new NodoService();
+		this.utenteService = new UtenteService();
 	}
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//super.service(req, resp);
-		HttpSession session = request.getSession();
-		Utente utente = (Utente) session.getAttribute("UtenteLoggato");
-		this.request=request;
-		visualizzaListaNodi();
-		if (utente.getRuolo().equalsIgnoreCase("amministratore")) {
+		this.request = request;
+		HttpSession session = this.request.getSession(true);
+		this.utente= (Utente) session.getAttribute("UserLoggato");
+		
+		if (this.utente.getRuolo().equalsIgnoreCase("amministratore")) {
+			visualizzaListaNodi();
 			getServletContext().getRequestDispatcher("/admin/NodesListAdmin.jsp").forward(this.request, response);
-		} else if (utente.getRuolo().equalsIgnoreCase("utente semplice")) {
+		} else if(this.utente.getRuolo().equalsIgnoreCase("utente semplice")) {
+			visualizzaListaNodi();
 			getServletContext().getRequestDispatcher("/user/NodesListUser.jsp").forward(this.request, response);
 		}
+		
 	}
 
 	private void visualizzaListaNodi() {
-		List<Nodo> nodi = nodoService.getAllnodi();
-		this.request.setAttribute("listaNodi", nodi);
+		int idUtente = this.utenteService.getidUtente(this.utente.getUsername());
+		System.out.println(idUtente);
+		if(this.utente.getRuolo().equalsIgnoreCase("amministratore")) {
+			List<Nodo> nodi = this.nodoService.getAllnodi();
+			this.request.setAttribute("listaNodi", nodi);
+		}else if(this.utente.getRuolo().equalsIgnoreCase("utente semplice")) {
+			List<Nodo> nodi = this.nodoService.getStatoNodi(idUtente);
+			this.request.setAttribute("listaNodi", nodi);
+		}
+		
 	}
 		
 		/* switch (gestionenodo) {

@@ -104,9 +104,9 @@ public class UtenteDAO {
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_IDUTENTE);
 			preparedStatement.setString(1, username);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			idutente = Integer.parseInt(resultSet.getString("idutente"));
-
+			if(resultSet.next()) {
+				idutente = Integer.parseInt(resultSet.getString("idutente"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return -1;

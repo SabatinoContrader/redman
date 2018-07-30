@@ -25,20 +25,13 @@
                   </tr>
                     <tr>
                        <th></th>
-                        <th>
-                            ID_NODO
-                        </th>
-               
+                                      
                         <th>
                             INFO_NODO
                         </th>
                          
                         <th>
                             STATO_NODO
-                        </th>
-                         
-                        <th>
-                            GRUPPI_IDGRUPPO
                         </th>
                         <th>
                          </th>
@@ -51,12 +44,7 @@
                         <td>
                             <input type="checkbox" name="products" value="<%= nodo.getIdnodo()%>"/>
                         </td>
-               
-                        <td>
-                        <p align = center>
-                            <%= nodo.getIdnodo()%>
-                        </td>             
-               
+                 
                         <td>
                          <p align = center>
                             <%=  nodo.getInfonodo()%>  
@@ -68,12 +56,6 @@
                         </td>             
 
                         
-                        <td> 
-                         <p align = center>                      
-                            <%=  nodo.getGruppi_idgruppo()%>                 
-                        </td>
-                       
-            
                         <td>             
                         </td>
                         <td>

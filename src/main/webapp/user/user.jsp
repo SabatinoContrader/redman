@@ -20,16 +20,19 @@
      </form>
 </li>
 
- 
+ <li>
+Visualizza segnalazioni
+</li>
+
 <li><form action="RegisterServlet" method="post">
      <input type="submit" value="Modifica profilo personale" name="mode">
-     </form></li>
-<li>
+     </form>
+</li>
 
-<li>
-<form action="LogoutServlet" method="post">
+<li><form action="LogoutServlet" method="post">
      <input type="submit" value="Logout" name="Logout">
-     </form></li>
+     </form>
+</li>
 </ol>
 
 </body>
