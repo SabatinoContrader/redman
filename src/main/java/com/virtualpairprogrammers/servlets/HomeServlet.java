@@ -1,5 +1,6 @@
 package com.virtualpairprogrammers.servlets;
 
+import com.virtualpairprogrammers.model.Utente;
 import com.virtualpairprogrammers.services.LoginService;
 
 import javax.servlet.ServletException;
@@ -14,27 +15,20 @@ public class HomeServlet extends HttpServlet {
 	private LoginService loginService;
 
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
 		String mode = request.getParameter("mode"); 
-        HttpSession session = request.getSession(true); 
         switch (mode) { 
         	case "GestioneUtentiNetworkManager": 
         		getServletContext().getRequestDispatcher("/networkManager/usersManagementNetworkManager.jsp").forward(request,response); 
 		        break; 
 		    case "GestioneNodiNetworkManager": 
-		    	int prodottoModifica = Integer.parseInt(request.getParameter("id")); 
-        		//session.setAttribute("prodotto", prodotto); 
 		        getServletContext().getRequestDispatcher("/insertProdotto.jsp").forward(request,response); 
-		        //response.sendRedirect("insertProdotto.jsp"); 
 		        break;
 		    case "GestioneTaskNetworkManager": 
-		    	//session.setAttribute("prodotto", prodotto); 
 		        getServletContext().getRequestDispatcher("/insertProdotto.jsp").forward(request,response); 
-		        //response.sendRedirect("insertProdotto.jsp"); 
 		        break;
 		    case "ModificaProfiloPersonale": 
-		    	//session.setAttribute("prodotto", prodotto); 
 		        getServletContext().getRequestDispatcher("/insertProdotto.jsp").forward(request,response); 
-		        //response.sendRedirect("insertProdotto.jsp"); 
 		        break;
 		
 		}

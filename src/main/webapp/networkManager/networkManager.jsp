@@ -7,7 +7,7 @@
 </head> 
 <body> 
      <h1 align="center">MENU <br>*** RESPONSABILE *** <br>
-     <%= request.getSession().getAttribute("utente")%></h1> 
+     <%= request.getSession().getAttribute("UserLoggato")%></h1> 
      
      <form action="HomeServlet" method="post"> 
      <button type="submit" value="GestioneUtentiNetworkManager" name="mode">Gestione Utenti</button> 
