@@ -16,19 +16,41 @@ import java.util.List;
 public class UtentiServlet extends HttpServlet {
 	private UtenteService utenteService;
 	private HttpServletRequest request;
-	
-	public UtentiServlet() {
-		utenteService= new UtenteService();
-	}
+	private HttpServletResponse response;
+//	public UtentiServlet() {
+//		this.utenteService= new UtenteService();
+//	}
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//super.service(req, resp);
+		this.request = req;
+		this.response = resp;
+		HttpSession session = this.request.getSession(true);
+		String modeUtenti = this.request.getParameter("modeUtenti");
+		if (modeUtenti != null) {
+			switch (modeUtenti) {
+			case "back":
+				back(session);
+				break;
+			}
+				
+		}
 		
-		this.request=req;
-		visualizzaListaUtenti();
-		getServletContext().getRequestDispatcher("/admin/gestioneUtentiAdmin.jsp").forward(this.request, resp);
+//		visualizzaListaUtenti();
+//		getServletContext().getRequestDispatcher("/admin/gestioneUtentiAdmin.jsp").forward(this.request, resp);
 
+	}
+	
+	private void back(HttpSession session) throws ServletException, IOException {
+		Utente userLoggato = (Utente) session.getAttribute("UserLoggato");
+		System.out.println(userLoggato.getRuolo().toString());
+		if (userLoggato.getRuolo().equalsIgnoreCase("amministratore")) {
+			getServletContext().getRequestDispatcher("/admin/admin.jsp").forward(this.request, this.response);;
+		} else if (userLoggato.getRuolo().equalsIgnoreCase("responsabile di rete")) {
+			getServletContext().getRequestDispatcher("/networkManager/networkManager.jsp").forward(this.request, this.response);;
+		} else if (userLoggato.getRuolo().equalsIgnoreCase("utente semplice")) {		
+			getServletContext().getRequestDispatcher("/user/user.jsp").forward(this.request, this.response);;
+		}
 	}
 
 	private void visualizzaListaUtenti() {
