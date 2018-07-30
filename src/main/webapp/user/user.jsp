@@ -9,15 +9,27 @@
 </head>
 <body>
 
-<a href="https://www.google.it/">******UTENTE*******</a>
+<a>******UTENTE*******</a>
 <h1>--------MENU--------</h1>
 <br>
 <ol>
 
-<li>Gestione nodi</li>
-<li>Visualizza segnalazioni</li>
+<li>
+      <a href="gestioneNodiUtente.jsp">Gestione nodi</a>
+     
+</li>
+
 <li>Modifica profilo personale</li>
-<li>Logout</li>
+<%-- 
+<li><form action="RegisterServlet" method="post">
+     <input type="submit" value="" name="">
+     </form></li>
+<li>
+--%>
+<li>
+<form action="LogoutServlet" method="post">
+     <input type="submit" value="Logout" name="Logout">
+     </form></li>
 </ol>
 
 </body>
