@@ -1,6 +1,7 @@
 package com.virtualpairprogrammers.servlets;
 
 import com.virtualpairprogrammers.model.Nodo;
+import com.virtualpairprogrammers.model.Utente;
 import com.virtualpairprogrammers.services.NodoService;
 
 import javax.servlet.RequestDispatcher;
@@ -25,11 +26,15 @@ public class NodesServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//super.service(req, resp);
-		
+		HttpSession session = request.getSession();
+		Utente utente = (Utente) session.getAttribute("UtenteLoggato");
 		this.request=request;
 		visualizzaListaNodi();
-		getServletContext().getRequestDispatcher("/admin/NodesListAdmin.jsp").forward(this.request, response);
-
+		if (utente.getRuolo().equalsIgnoreCase("amministratore")) {
+			getServletContext().getRequestDispatcher("/admin/NodesListAdmin.jsp").forward(this.request, response);
+		} else if (utente.getRuolo().equalsIgnoreCase("utente semplice")) {
+			getServletContext().getRequestDispatcher("/user/NodesListUser.jsp").forward(this.request, response);
+		}
 	}
 
 	private void visualizzaListaNodi() {

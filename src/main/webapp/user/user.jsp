@@ -15,17 +15,17 @@
 <ol>
 
 <li>
-      <a href="gestioneNodiUtente.jsp">Gestione nodi</a>
-     
+     <form action="NodesServlet" method="post">
+     <input type="submit" value="Gestione nodi" name="mode" >
+     </form>
 </li>
 
-<li>Modifica profilo personale</li>
-<%-- 
+ 
 <li><form action="RegisterServlet" method="post">
-     <input type="submit" value="" name="">
+     <input type="submit" value="Modifica profilo personale" name="mode">
      </form></li>
 <li>
---%>
+
 <li>
 <form action="LogoutServlet" method="post">
      <input type="submit" value="Logout" name="Logout">
