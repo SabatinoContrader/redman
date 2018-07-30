@@ -6,6 +6,11 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+		
+	<servlet>
+		<servlet-name>RegisterServlet</servlet-name>
+		<servlet-class>com.virtualpairprogrammers.servlets.RegisterServlet</servlet-class>
+	</servlet>
 
 	<servlet>
 		<servlet-name>HelloWorldServlet</servlet-name>
@@ -15,6 +20,11 @@
 	<servlet>
 		<servlet-name>UtentiServlet</servlet-name>
 		<servlet-class>com.virtualpairprogrammers.servlets.UtentiServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>NodesServlet</servlet-name>
+		<servlet-class>com.virtualpairprogrammers.servlets.NodesServlet</servlet-class>
 	</servlet>
 
 	<servlet>
@@ -48,15 +58,24 @@
 	</servlet-mapping>
 	
 	<servlet-mapping>
+		<servlet-name>RegisterServlet</servlet-name>
+		<url-pattern>/RegisterServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
 		<servlet-name>HomeServlet</servlet-name>
 		<url-pattern>/HomeServlet</url-pattern>
 	</servlet-mapping>
 	
 
-
 	<servlet-mapping>
 		<servlet-name>UtentiServlet</servlet-name>
 		<url-pattern>/UtentiServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>NodesServlet</servlet-name>
+		<url-pattern>/NodesServlet</url-pattern>
 	</servlet-mapping>
 
 

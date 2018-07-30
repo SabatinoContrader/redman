@@ -12,8 +12,8 @@
 <br>
 
 
-<form action="LogoutServlet" method="post">
-     <input type="submit" value="Gestione utenti" name="mode">
+<form action="UtentiServlet" method="post">
+     <input type="submit" value="Gestione utenti" name="mode">     
  </form>
  
 <!-- <form action = "RegisterServlet" method= "post">
@@ -24,8 +24,8 @@
 </form> -->
 
 <br>
-<form action="LogoutServlet" method="post">
-     <input type="submit" value="Gestione nodi" name="mode">
+<form action="NodesServlet" method="post">
+     <input type="submit" value="Gestione nodi" name="mode" >
  </form>
 <br>
 <form action="LogoutServlet" method="post">
