@@ -30,7 +30,9 @@ public class HomeServlet extends HttpServlet {
 		    case "ModificaProfiloPersonale": 
 		        getServletContext().getRequestDispatcher("/insertProdotto.jsp").forward(request,response); 
 		        break;
-		
+		    case "indietro": 
+		        getServletContext().getRequestDispatcher("/user/user.jsp").forward(request,response); 
+		        break;
 		}
 	}
 }

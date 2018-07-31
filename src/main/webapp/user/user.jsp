@@ -21,7 +21,9 @@
 </li>
 
  <li>
-Visualizza segnalazioni
+ <form action="NodesServlet" method="post">
+     <input type="submit" value="Visualizza segnalazioni" name="mode" >
+     </form>
 </li>
 
 <li><form action="RegisterServlet" method="post">
