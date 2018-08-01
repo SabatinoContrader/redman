@@ -46,6 +46,8 @@ public class UtentiServlet extends HttpServlet {
 				visualizzaListaUtenti();
 				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
 				break;
+			case "ModificaProfiloAdmin":
+				
 //			case "Register":
 //				int idUtente = Integer.parseInt(request.getAttribute("idUser").toString());
 //				String username2 = request.getAttribute("username").toString();

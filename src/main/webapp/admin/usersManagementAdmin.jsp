@@ -64,11 +64,6 @@
              				<a href="UtentiServlet?mode=CancellaProfiloAdmin&username=<%= utente.getUsername()%>">Cancella Profilo</a>							
                         </td>
                			
-               			<td>
-                        <p align = center>
-                        	<a href="UtentiServlet?mode=ModificaProfiloAdmin&username=<%= utente.getUsername()%>">Modifica Profilo</a>						               
-                        </td>
-                        
                         <td>             
                         </td>
                         <td>
@@ -77,7 +72,10 @@
                     </tr>
                     <% }%>
                 </table>
-           	<br>        
+           	<br>
+
+
+           	        
 <form action="UtentiServlet" method="post">
     <button type="submit" value="back" name="mode">Indietro</button> 
 </form>            
