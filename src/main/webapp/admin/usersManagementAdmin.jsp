@@ -18,9 +18,7 @@
                   <td>
                      Utenti:
                   </td>
-                  <td>
-                  </td>
-                  </td>
+                  
                   </tr>
                     <tr>
                        <th></th>
@@ -68,7 +66,7 @@
                			
                			<td>
                         <p align = center>
-                        	<a href="UtentiServlet?mode=ModificaProfiloAdmin&username=<%= utente.getUsername()%>">Modifica Profilo Personale</a>						               
+                        	<a href="UtentiServlet?mode=ModificaProfiloAdmin&username=<%= utente.getUsername()%>">Modifica Profilo</a>						               
                         </td>
                         
                         <td>             
@@ -82,6 +80,6 @@
            	<br>        
 <form action="UtentiServlet" method="post">
     <button type="submit" value="back" name="mode">Indietro</button> 
-    </form>            
+</form>            
 </body>
 </html>
