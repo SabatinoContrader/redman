@@ -43,7 +43,7 @@
                        <%for (Utente utente : all_utenti) { %>
                     <tr>
                         <td>
-                            <input type="checkbox" name="products" value="<%= utente.getIdutente()%>"/>
+                            <input type="checkbox" name="users" value="<%= utente.getIdutente()%>"/>
                         </td>
                
                         <td>
@@ -61,6 +61,16 @@
                             <%=  utente.getRuolo()%>
                         </td>
             
+            			<td>
+                        <p align = center>
+             				<a href="UtentiServlet?mode=CancellaProfiloAdmin&username=<%= utente.getUsername()%>">Cancella Profilo</a>							
+                        </td>
+               			
+               			<td>
+                        <p align = center>
+                        	<a href="UtentiServlet?mode=ModificaProfiloAdmin&username=<%= utente.getUsername()%>">Modifica Profilo Personale</a>						               
+                        </td>
+                        
                         <td>             
                         </td>
                         <td>
@@ -69,12 +79,9 @@
                     </tr>
                     <% }%>
                 </table>
-                
-                <form action = "RegisterServlet" method= "post">
-				<h2>username: <input type = "text" id = "user" name ="username"></h2>
-				<h2>password: <input type = "text" id = "pass" name ="password"></h2>
-				<h2>ruolo: <input type = "text" id = "role" name ="ruolo"></h2>
-				<button type = "submit" value = "Register" name = "pulsante">Registra Utente</button><br>
-				</form>
+           	<br>        
+<form action="UtentiServlet" method="post">
+    <button type="submit" value="back" name="mode">Indietro</button> 
+    </form>            
 </body>
 </html>

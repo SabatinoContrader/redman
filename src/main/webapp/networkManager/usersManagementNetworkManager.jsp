@@ -7,7 +7,7 @@
 </head> 
 <body> 
     <h1 align="center">MENU <br>*** RESPONSABILE *** <br>
-    <%= request.getSession().getAttribute("UserLoggato")%></h1> <br>
+    </h1> <br>
     <h2 align="center">Gestione Utenti</h2> <br>
               
     <form action="UtentiServlet" method="post"> 

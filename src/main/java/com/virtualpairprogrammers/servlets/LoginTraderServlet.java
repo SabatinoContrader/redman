@@ -18,11 +18,11 @@ public class LoginTraderServlet extends HttpServlet {
 
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.loginService = new LoginService();
-		HttpSession session = request.getSession();
 		this.request = request;
+		HttpSession session = this.request.getSession();
 		if(this.request==null) {
 			getServletContext().getRequestDispatcher("index.jsp").forward(request, response);
-		}else if(checkUser(session)) {
+		} else if(checkUser(session)) {
 			switch(this.userLoggato.getRuolo()) {
 			case"amministratore":
 				getServletContext().getRequestDispatcher("/admin/admin.jsp").forward(request, response);
@@ -42,7 +42,7 @@ public class LoginTraderServlet extends HttpServlet {
 	private boolean checkUser(HttpSession session) {
 		String nomeUtente = this.request.getParameter("username");
 		String password = this.request.getParameter("password");
-		String ruolo = loginService.login(nomeUtente, password);
+		String ruolo = this.loginService.login(nomeUtente, password);
 		if (ruolo != null) {
 			this.userLoggato = new Utente(ruolo, nomeUtente, password);
 			session.setAttribute("UserLoggato", this.userLoggato);
