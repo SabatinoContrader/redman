@@ -19,11 +19,16 @@ public class TaskService {
 		    
 		    /*public boolean setNodo (Nodo nodo) {
 		        return this.nodoDAO.setNodi(nodo);
+		    }*/
+		    
+		    public boolean deleteTask (Task task) {
+		        return this.deleteTask(task);
 		    }
 		    
-		    public boolean deleteNodo (Nodo nodo) {
-		        return this.nodoDAO.deleteNodi(nodo);
-		    }*/
+		    public boolean changeStatoTask (String statoTask,int idTask ) {
+		        return this.changeStatoTask(statoTask,idTask);
+		    }
+
 		    
 		    public List<Task> getAllTasks () {
 		        return this.taskDAO.getAllTasks();

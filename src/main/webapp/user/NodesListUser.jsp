@@ -65,6 +65,10 @@
                     <% }%>
                 </table>
 </form>
+</form>
+ <form action="HomeServlet" method="post">
+     <input type="submit" value="indietro" name="mode" >
+     </form>
 
 </body>
 </html>

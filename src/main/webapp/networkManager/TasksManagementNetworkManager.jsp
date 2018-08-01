@@ -72,12 +72,28 @@
                         <td>             
                         </td>
                         <td>
+                        <p align = center>
+             				<a href="TasksServlet?mode=SegnalaFaultTask">Segnala Fault</a>							
+                        </td>
+                         <td>
+                           <a href="TasksServlet?mode=SospendiTask">Sospendi</a>
+                        </td>  
+                        <td>
+                           <a href="TasksServlet?mode=Associa=<%=  tasks.getIdnodo()%>"> Associa</a>
+                        </td>
+                              
+                         <td>
+                        <td>
                         </td>
                
                     </tr>
                     <% }%>
                 </table>
                 </form>
+</form>
+ <form action="HomeServlet" method="post">
+     <input type="submit" value="indietroNM" name="mode" >
+     </form>
 
 </body>
 </html>

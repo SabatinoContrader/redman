@@ -18,13 +18,15 @@
 
 <li>
      <form action="NodesServlet" method="post">
-     <input type="submit" value="Gestione nodi" name="mode" >
+     <input type="submit" value="VisualizzaStatoNodiUser" name="mode" hidden>
+     <button type = "submit">Gestione nodi</button><br>
      </form>
 </li>
 
  <li>
- <form action="NodesServlet" method="post">
-     <input type="submit" value="Visualizza segnalazioni" name="mode" >
+ <form action="TasksServlet" method="post">
+     <input type="submit" value="Gestione tasks" name="mode" hidden>
+     <button type = "submit">Gestione tasks</button><br>
      </form>
 </li>
 

@@ -15,6 +15,12 @@ public class Task {
 
     }
     
+    public Task( int idnodo, String statotask) {
+        this.idnodo = idnodo;
+        this.statotask = statotask;
+    }
+    
+    
     public Task() {}
 	
 	 public int getIdtask() {
