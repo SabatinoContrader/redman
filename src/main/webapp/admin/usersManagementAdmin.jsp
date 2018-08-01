@@ -21,7 +21,7 @@
                   
                   </tr>
                     <tr>
-                       <th></th>
+                       
                         <th>
                             ID_UTENTE
                         </th>
@@ -40,10 +40,10 @@
                     </tr>
                        <%for (Utente utente : all_utenti) { %>
                     <tr>
-                        <td>
+                       <!-- <td>
                             <input type="checkbox" name="users" value="<%= utente.getIdutente()%>"/>
-                        </td>
-               
+                        </td>-->
+                                     
                         <td>
                         <p align = center>
                             <%= utente.getIdutente()%>
@@ -59,12 +59,15 @@
                             <%=  utente.getRuolo()%>
                         </td>
             
-            			<td>
+            			<!--<td>
                         <p align = center>
              				<a href="UtentiServlet?mode=CancellaProfiloAdmin&username=<%= utente.getUsername()%>">Cancella Profilo</a>							
-                        </td>
+                        </td>-->
                			
-                        <td>             
+                        <td>
+                        <a href="UtentiServlet?mode=CancellaProfiloAdmin&username=<%= utente.getUsername()%>">
+                        	<img src="./icon/delete_user.png" alt="Delete" style="width:40px;height:40px;">
+                        	</a>           
                         </td>
                         <td>
                         </td>
@@ -75,9 +78,11 @@
            	<br>
 
 
-           	        
-<form action="UtentiServlet" method="post">
-    <button type="submit" value="back" name="mode">Indietro</button> 
-</form>            
-</body>
+
+		<form action="UtentiServlet" method="post">
+			<button type="submit" value="add" name="mode">Aggiungi profilo</button>
+			<button type="submit" value="back" name="mode">Indietro</button>
+		</form></body>
+		
+		
 </html>
