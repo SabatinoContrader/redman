@@ -17,6 +17,9 @@ public class UtentiServlet extends HttpServlet {
 	private UtenteService utenteService;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
+	private Utente userLoggato;
+
+	
 	public UtentiServlet() {
 		this.utenteService= new UtenteService();
 	}
@@ -27,6 +30,10 @@ public class UtentiServlet extends HttpServlet {
 		this.response = response;
 		HttpSession session = this.request.getSession(true);
 		String mode = this.request.getParameter("mode");
+		
+		this.userLoggato= (Utente) session.getAttribute("UserLoggato");
+		String usernameLoggato = this.userLoggato.getUsername();
+		
 		if (mode != null) {
 			switch (mode) {
 			case "GestioneUtentiAdmin":
@@ -54,6 +61,13 @@ public class UtentiServlet extends HttpServlet {
 				Utente newUtente = new Utente(idUtente, ruolo, username2, password);
 				aggiungiProfilo(newUtente);
 				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
+				break;
+			case "ChangeUser":
+				String username2User = this.request.getParameter("username").toString();
+				String passwordUser = this.request.getParameter("password").toString();
+				Utente newUtenteUser = new Utente("utente semplice", username2User, passwordUser);
+				modificaProfilo(newUtenteUser,usernameLoggato);
+				getServletContext().getRequestDispatcher("/index.jsp").forward(this.request, this.response);
 				break;
 			case "back":
 				back(session);
@@ -85,6 +99,15 @@ public class UtentiServlet extends HttpServlet {
 			System.out.println("Utente già esistente");
 		}
 	}
+	
+	private void modificaProfilo(Utente newUtenteUser,String usernameLoggato) {
+		if (this.utenteService.setUtente(newUtenteUser,usernameLoggato)) {
+			System.out.println("Utente Aggiornato correttamente");
+		} else {
+			System.out.println("Utente già esistente");
+		}
+	}
+
 	
 	private void cancellaProfilo(String username) {
 		if (this.utenteService.deleteUtente(username)) {
