@@ -17,33 +17,53 @@ public class UtentiServlet extends HttpServlet {
 	private UtenteService utenteService;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
-//	public UtentiServlet() {
-//		this.utenteService= new UtenteService();
-//	}
+	public UtentiServlet() {
+		this.utenteService= new UtenteService();
+	}
 
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		this.request = req;
-		this.response = resp;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.request = request;
+		this.response = response;
 		HttpSession session = this.request.getSession(true);
-		String modeUtenti = this.request.getParameter("modeUtenti");
-		if (modeUtenti != null) {
-			switch (modeUtenti) {
+		String mode = this.request.getParameter("mode");
+		if (mode != null) {
+			switch (mode) {
+			case "GestioneUtentiAdmin":
+				visualizzaListaUtenti();
+				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
+				break;
+			case "GestioneUtentiNetworkManager":
+				break;
+			case "AggiungiProfiloAdmin":
+//				Utente newUtente = new Utente(0, "", "", "");
+//				this.request.setAttribute("newUtente", newUtente);
+				getServletContext().getRequestDispatcher("/admin/insertUserAdmin.jsp").forward(this.request, this.response);
+				break;
+			case "CancellaProfiloAdmin":
+				String username = this.request.getParameter("username");
+				cancellaProfilo(username);
+				visualizzaListaUtenti();
+				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
+				break;
+			case "Register":
+				int idUtente = Integer.parseInt(request.getAttribute("idUser").toString());
+				String username2 = request.getAttribute("username").toString();
+				String password = request.getAttribute("password").toString();
+				String ruolo = request.getAttribute("ruolo").toString();
+				Utente newUtente = new Utente(idUtente, ruolo, username2, password);
+				aggiungiProfilo(newUtente);
+				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
+				break;
 			case "back":
 				back(session);
 				break;
-			}
-				
+			}	
 		}
-		
-//		visualizzaListaUtenti();
-//		getServletContext().getRequestDispatcher("/admin/gestioneUtentiAdmin.jsp").forward(this.request, resp);
-
 	}
 	
 	private void back(HttpSession session) throws ServletException, IOException {
 		Utente userLoggato = (Utente) session.getAttribute("UserLoggato");
-		System.out.println(userLoggato.getRuolo().toString());
 		if (userLoggato.getRuolo().equalsIgnoreCase("amministratore")) {
 			getServletContext().getRequestDispatcher("/admin/admin.jsp").forward(this.request, this.response);;
 		} else if (userLoggato.getRuolo().equalsIgnoreCase("responsabile di rete")) {
@@ -54,8 +74,24 @@ public class UtentiServlet extends HttpServlet {
 	}
 
 	private void visualizzaListaUtenti() {
-		List<Utente> UtentiList = utenteService.getAllUtenti();
-		this.request.setAttribute("listaUtenti", UtentiList);
+		List<Utente> utentiList = this.utenteService.getAllUtenti();
+		this.request.setAttribute("listaUtenti", utentiList);
+	}
+	
+	private void aggiungiProfilo(Utente newUtente) {
+		if (this.utenteService.insertUtente(newUtente)) {
+			System.out.println("Nuovo utente Aggiunto correttamente");
+		} else {
+			System.out.println("Utente già esistente");
+		}
+	}
+	
+	private void cancellaProfilo(String username) {
+		if (this.utenteService.deleteUtente(username)) {
+			System.out.println("Utente \"" + username + "\" Cancellato correttamente");
+		} else {
+			System.out.println("Utente \"" + username + "\" non presente");
+		}
 	}
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="com.virtualpairprogrammers.model.Utente" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,34 +9,25 @@
 </head>
 <body>
 
-<h1>--------MENU ADMIN--------</h1>
-<br>
-
+<h1 align="center">--------MENU ADMIN--------</h1>
+<%Utente utente = (Utente) request.getSession().getAttribute("UserLoggato"); %>
+<h2 align="center">Benvenuto <%=utente.getUsername() %></h2>
 
 <form action="UtentiServlet" method="post">
-     <input type="submit" value="Gestione utenti" name="mode">     
- </form>
- 
-<!-- <form action = "RegisterServlet" method= "post">
-<h2>username: <input type = "text" id = "user" name ="username"></h2>
-<h2>password: <input type = "text" id = "pass" name ="password"></h2>
-<h2>ruolo: <input type = "text" id = "role" name ="ruolo"></h2>
-<button type = "submit" value = "Register" name = "pulsante">Registra Utente</button><br>
-</form> -->
-
+    <button type="submit" value="GestioneUtentiAdmin" name="mode">Gestione Utenti</button> 
+</form>
 <br>
 <form action="NodesServlet" method="post">
-     <input type="submit" value="Gestione nodi" name="mode" >
+    <button type="submit" value="GestioneNodiAdmin" name="mode">Gestione Nodi</button> 
  </form>
 <br>
 <form action="LogoutServlet" method="post">
-     <input type="submit" value="Modifica Profilo" name="Logout">
+    <button type="submit" value="ModificaProfiloPersonale" name="mode">Modifica Profilo Personale</button> 
  </form>
 <br> 
 <form action="LogoutServlet" method="post">
      <input type="submit" value="Logout" name="Logout">
 </form>
-
 
 </body>
 </html>

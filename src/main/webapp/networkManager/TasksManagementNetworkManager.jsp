@@ -1,4 +1,4 @@
-<%@ page import="com.virtualpairprogrammers.model.Utente" %>
+<%@ page import="com.virtualpairprogrammers.model.Task" %>
 <%@ page import="java.util.*" %>
 
 <!DOCTYPE html>
@@ -8,15 +8,15 @@
 
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<% List<Utente> all_utenti = (List<Utente>) request.getAttribute("listaUtenti");%>
+<% List<Task> listaTasks = (List<Task>) request.getAttribute("listaTasks");%>
 </head>
 
 <body>
-        <form action="UtentiServlet" method="post">
+        <form action="TasksServlet" method="post">
                 <table>
                 <tr>
                   <td>
-                     Utenti:
+                     Tasks:
                   </td>
                   <td>
                   </td>
@@ -25,40 +25,48 @@
                     <tr>
                        <th></th>
                         <th>
-                            ID_UTENTE
+                            ID_TASK
                         </th>
                
                         <th>
-                            USERNAME
+                            ID_NODO
                         </th>
                         <th>
-                            RUOLO
+                            INFO_TASK
                         </th>
                         <th>
+                        	STATO_TASK
                          </th>
                         <th>
+                         </th>
+                         <th>
                          </th>
                
                     </tr>
-                       <%for (Utente utente : all_utenti) { %>
+                       <%for (Task tasks : listaTasks) { %>
                     <tr>
                         <td>
-                            <input type="checkbox" name="products" value="<%= utente.getIdutente()%>"/>
+                            <input type="checkbox" name="products" value="<%= tasks.getIdtask()%>"/>
                         </td>
                
                         <td>
                         <p align = center>
-                            <%= utente.getIdutente()%>
+                            <%= tasks.getIdtask()%>
                         </td>
                
                         <td>
                         <p align = center>
-                            <%=  utente.getUsername()%>
+                            <%=  tasks.getIdnodo()%>
                         </td>
                
                         <td>
                         <p align = center>
-                            <%=  utente.getRuolo()%>
+                            <%=  tasks.getInfotask()%>
+                        </td>
+                        
+                             <td>
+                        <p align = center>
+                            <%=  tasks.getStatotask()%>
                         </td>
             
                         <td>             
@@ -69,12 +77,7 @@
                     </tr>
                     <% }%>
                 </table>
-                
-                <form action = "RegisterServlet" method= "post">
-				<h2>username: <input type = "text" id = "user" name ="username"></h2>
-				<h2>password: <input type = "text" id = "pass" name ="password"></h2>
-				<h2>ruolo: <input type = "text" id = "role" name ="ruolo"></h2>
-				<button type = "submit" value = "Register" name = "pulsante">Registra Utente</button><br>
-				</form>
+                </form>
+
 </body>
 </html>

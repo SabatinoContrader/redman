@@ -1,14 +1,13 @@
 <%@ page import="com.virtualpairprogrammers.model.Nodo" %>
 <%@ page import="java.util.*" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<!DOCTYPE html>
 <html>
-
 <head>
-
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<% List<Nodo> all_nodi = (List<Nodo>) request.getAttribute("listaNodi");%>
+<form action="NodesServlet" method="post">
+    <input type="submit" value="SearchCategory" name="richiesta"> 
+</form>
+<% List<Nodo> ListaNodi = (List<Nodo>) request.getAttribute("ListaNodi");%>
 </head>
 
 <body>
@@ -45,31 +44,31 @@
                          </th>
                
                     </tr>
-                       <%for (Nodo nodo : all_nodi) { %>
+                       <%for (Nodo nodi : ListaNodi) { %>
                     <tr>
                         <td>
-                            <input type="checkbox" name="products" value="<%= nodo.getIdnodo()%>"/>
+                            <input type="checkbox" name="products" value="<%= nodi.getIdnodo()%>"/>
                         </td>
                
                         <td>
                         <p align = center>
-                            <%= nodo.getIdnodo()%>
+                            <%= nodi.getIdnodo()%>
                         </td>             
                
                         <td>
                          <p align = center>
-                            <%=  nodo.getInfonodo()%>  
+                            <%=  nodi.getInfonodo()%>  
                         </td>             
 
                         <td>
                          <p align = center>
-                            <%=  nodo.getStatonodo()%>    
+                            <%=  nodi.getStatonodo()%>    
                         </td>             
 
                         
                         <td> 
                          <p align = center>                      
-                            <%=  nodo.getGruppi_idgruppo()%>                 
+                            <%=  nodi.getGruppi_idgruppo()%>                 
                         </td>
                        
             
@@ -81,5 +80,6 @@
                     </tr>
                     <% }%>
                 </table>
+                </form>
 </body>
 </html>
