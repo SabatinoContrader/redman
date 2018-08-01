@@ -3,6 +3,12 @@
 <title>Login Trader</title>
 </head>
 <body>
+
+	<h3>
+	<%if(request.getAttribute("Login_Expired") != null) {
+		out.print("Username o password errato"); }
+	%></h3>
+
    <div>
      <form action = "LoginTraderServlet" method= "post" style="text-align: center;">
      <fieldset>
