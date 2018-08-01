@@ -35,7 +35,7 @@ img {
 			Nodi</button>
 	</form>
 	<br>
-	<form action="LogoutServlet" method="post">
+	<form action="ModifyProfileServlet" method="post">
 		<button type="submit" value="ModificaProfiloPersonale" name="mode">Modifica
 			Profilo Personale</button>
 	</form>

@@ -69,7 +69,7 @@ public class UtentiServlet extends HttpServlet {
 				modificaProfilo(newUtenteUser,usernameLoggato);
 				getServletContext().getRequestDispatcher("/index.jsp").forward(this.request, this.response);
 				break;
-			case "ModificaProfiloAdmin":
+//			case "ModificaProfiloAdmin":
 				
 //			case "Register":
 //				int idUtente = Integer.parseInt(request.getAttribute("idUser").toString());
@@ -79,7 +79,7 @@ public class UtentiServlet extends HttpServlet {
 //				Utente newUtente = new Utente(idUtente, ruolo, username2, password);
 //				aggiungiProfilo(newUtente);
 //				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
-//				break;
+	//			break;
 			case "back":
 				back(session);
 				break;

@@ -6,7 +6,7 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-		
+
 	<servlet>
 		<servlet-name>RegisterServlet</servlet-name>
 		<servlet-class>com.virtualpairprogrammers.servlets.RegisterServlet</servlet-class>
@@ -21,12 +21,12 @@
 		<servlet-name>UtentiServlet</servlet-name>
 		<servlet-class>com.virtualpairprogrammers.servlets.UtentiServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>NodesServlet</servlet-name>
 		<servlet-class>com.virtualpairprogrammers.servlets.NodesServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>TasksServlet</servlet-name>
 		<servlet-class>com.virtualpairprogrammers.servlets.TasksServlet</servlet-class>
@@ -41,12 +41,17 @@
 		<servlet-name>LogoutServlet</servlet-name>
 		<servlet-class>com.virtualpairprogrammers.servlets.LogoutServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>HomeServlet</servlet-name>
 		<servlet-class>com.virtualpairprogrammers.servlets.HomeServlet</servlet-class>
 	</servlet>
-	
+
+	<servlet>
+		<servlet-name>ModifyProfileServlet</servlet-name>
+		<servlet-class>com.virtualpairprogrammers.servlets.ModifyProfileServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>HelloWorldServlet</servlet-name>
 		<url-pattern>/HelloWorldServlet</url-pattern>
@@ -56,36 +61,41 @@
 		<servlet-name>LoginTraderServlet</servlet-name>
 		<url-pattern>/LoginTraderServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>LogoutServlet</servlet-name>
 		<url-pattern>/LogoutServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>RegisterServlet</servlet-name>
 		<url-pattern>/RegisterServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>HomeServlet</servlet-name>
 		<url-pattern>/HomeServlet</url-pattern>
 	</servlet-mapping>
-	
+
 
 	<servlet-mapping>
 		<servlet-name>UtentiServlet</servlet-name>
 		<url-pattern>/UtentiServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>NodesServlet</servlet-name>
 		<url-pattern>/NodesServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>TasksServlet</servlet-name>
 		<url-pattern>/TasksServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ModifyProfileServlet</servlet-name>
+		<url-pattern>/ModifyProfileServlet</url-pattern>
 	</servlet-mapping>
 
 
