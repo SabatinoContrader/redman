@@ -20,25 +20,28 @@ public class LoginTraderServlet extends HttpServlet {
 		this.loginService = new LoginService();
 		this.request = request;
 		HttpSession session = this.request.getSession();
-		if(this.request==null) {
+		if (this.request == null) {
 			getServletContext().getRequestDispatcher("index.jsp").forward(request, response);
-		} else if(checkUser(session)) {
-			switch(this.userLoggato.getRuolo()) {
-			case"amministratore":
+		} else if (checkUser(session)) {
+			switch (this.userLoggato.getRuolo()) {
+			case "amministratore":
 				getServletContext().getRequestDispatcher("/admin/admin.jsp").forward(request, response);
 				break;
-			case"responsabile di rete":
-				getServletContext().getRequestDispatcher("/networkManager/networkManager.jsp").forward(this.request, response);
+			case "responsabile di rete":
+				getServletContext().getRequestDispatcher("/networkManager/networkManager.jsp").forward(this.request,
+						response);
 				break;
-			case"utente semplice":
+			case "utente semplice":
 				getServletContext().getRequestDispatcher("/user/user.jsp").forward(request, response);
 				break;
 			}
-		}else {
-			getServletContext().getRequestDispatcher("index.jsp").forward(request, response);
+		} else {
+			this.request.setAttribute("Login_Expired", "Expired");
+			getServletContext().getRequestDispatcher("/index.jsp").forward(this.request, response);
 		}
+
 	}
-	
+
 	private boolean checkUser(HttpSession session) {
 		String nomeUtente = this.request.getParameter("username");
 		String password = this.request.getParameter("password");

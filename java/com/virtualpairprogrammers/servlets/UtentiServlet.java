@@ -69,6 +69,17 @@ public class UtentiServlet extends HttpServlet {
 				modificaProfilo(newUtenteUser,usernameLoggato);
 				getServletContext().getRequestDispatcher("/index.jsp").forward(this.request, this.response);
 				break;
+			case "ModificaProfiloAdmin":
+				
+//			case "Register":
+//				int idUtente = Integer.parseInt(request.getAttribute("idUser").toString());
+//				String username2 = request.getAttribute("username").toString();
+//				String password = request.getAttribute("password").toString();
+//				String ruolo = request.getAttribute("ruolo").toString();
+//				Utente newUtente = new Utente(idUtente, ruolo, username2, password);
+//				aggiungiProfilo(newUtente);
+//				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
+//				break;
 			case "back":
 				back(session);
 				break;

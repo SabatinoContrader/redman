@@ -1,13 +1,10 @@
 <%@ page import="com.virtualpairprogrammers.model.Nodo" %>
 <%@ page import="java.util.*" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 <head>
-<form action="NodesServlet" method="post">
-    <input type="submit" value="SearchCategory" name="richiesta"> 
-</form>
-<% List<Nodo> ListaNodi = (List<Nodo>) request.getAttribute("ListaNodi");%>
+<meta charset="ISO-8859-1">
+<% List<Nodo> ListaNodi = (List<Nodo>) request.getAttribute("listaNodi");%>
 </head>
 
 <body>
@@ -56,22 +53,26 @@
                         </td>             
                
                         <td>
-                         <p align = center>
+                        <p align = center>
                             <%=  nodi.getInfonodo()%>  
                         </td>             
 
                         <td>
-                         <p align = center>
+                        <p align = center>
                             <%=  nodi.getStatonodo()%>    
                         </td>             
 
                         
                         <td> 
-                         <p align = center>                      
+                        <p align = center>                      
                             <%=  nodi.getGruppi_idgruppo()%>                 
                         </td>
-                       
-            
+                       	
+                       	<td>
+                        <p align = center>
+             				<a href="NodesServlet?mode=CancellaNodoAdmin&idNodo=<%= nodi.getIdnodo()%>">Cancella Nodo</a>							
+                        </td>
+               			
                         <td>             
                         </td>
                         <td>
@@ -81,5 +82,12 @@
                     <% }%>
                 </table>
                 </form>
+<form action="NodesServlet" method="post">
+    <button type="submit" value="CreaNodoAdmin" name="mode">Crea Nuovo Nodo</button> 
+</form>            
+<form action="NodesServlet" method="post">
+    <button type="submit" value="back" name="mode">Indietro</button> 
+</form>            
+                
 </body>
 </html>

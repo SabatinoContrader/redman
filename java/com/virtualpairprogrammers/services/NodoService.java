@@ -18,13 +18,13 @@ import com.virtualpairprogrammers.model.Nodo;
 	        return this.nodoDAO.insertNodo(nodo);
 	    }
 	    
-	    /*public boolean setNodo (Nodo nodo) {
-	        return this.nodoDAO.setNodi(nodo);
+//	    public boolean setNodo (Nodo nodo) {
+//	        return this.nodoDAO.setNodi(nodo);
+//	    }
+//	    
+	    public boolean deleteNodo (int idNodo) {
+	        return this.nodoDAO.deleteNodo(idNodo);
 	    }
-	    
-	    public boolean deleteNodo (Nodo nodo) {
-	        return this.nodoDAO.deleteNodi(nodo);
-	    }*/
 	    
 	    public List<Nodo> getAllnodi () {
 	        return this.nodoDAO.getAllNodi();
