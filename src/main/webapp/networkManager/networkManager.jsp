@@ -4,10 +4,18 @@
 <!DOCTYPE html>
 <html> 
 <head> 
-<title>Responsabile</title> 
+<title>Responsabile</title>
+<style>
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
 </head> 
 <body> 
      <h1 align="center">MENU <br>*** RESPONSABILE *** </h1><br>
+     <img src="./icon/worker.png" alt="Network Manager icon "	style="width: 64px; height: 64px;">
      <% Utente utente = (Utente) request.getSession().getAttribute("UserLoggato"); %>
      <h2 align = "center" > Benvenuto <%=utente.getUsername() %> </h2>
      
@@ -24,9 +32,9 @@
      <button type="submit" value="GestioneTaskNetworkManager" name="mode">Gestione Task</button>
      </form>
      <br>      
-     <form action="HomeServlet" method="post"> 
-     <button type="submit" value="ModificaProfiloPersonale" name="mode">Modifica Profilo Personale</button> 
-     </form> 
+    <form action="ModifyProfileServlet" method="post">
+	<button type="submit" value="ModificaProfiloPersonale" name="mode">Modifica Profilo Personale</button>
+	</form> 
      <br>
 	 <form action="LogoutServlet" method="post"> 
      <button type="submit" value="Logout" name="Logout">Logout</button> 

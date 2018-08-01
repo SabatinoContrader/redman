@@ -62,9 +62,19 @@ public class NodesServlet extends HttpServlet {
 //					break;
 				case "CancellaNodoAdmin"://OK
 					int idNodo = Integer.parseInt(this.request.getParameter("idNodo").toString());
-					cancellaNodo(idNodo);
-					visualizzaListaNodi();
-					getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, this.response);
+					String string =	cancellaNodo(idNodo);
+					if (string.equalsIgnoreCase("true")) {
+						visualizzaListaNodi();
+						getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, this.response);
+					} else if (string.equalsIgnoreCase("constraintViolation")) {
+						this.request.setAttribute("error", "constraintViolation");
+						visualizzaListaNodi();
+						getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, response);
+					} else if (string.equalsIgnoreCase("false")) {
+						this.request.setAttribute("error", "false");
+						visualizzaListaNodi();
+						getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, response);
+					}
 					break;
 				case "GestioneNodiAdmin"://OK
 					visualizzaListaNodi();
@@ -126,12 +136,8 @@ public class NodesServlet extends HttpServlet {
 		}
 	}
 	
-	private void cancellaNodo(int idNodo) {
-		if (this.nodoService.deleteNodo(idNodo)) {
-			System.out.println("Nodo \"" + idNodo + "\" Cancellato correttamente");
-		} else {
-			System.out.println("Nodo \"" + idNodo + "\" non presente");
-		}
+	private String cancellaNodo(int idNodo) {
+		return this.nodoService.deleteNodo(idNodo);
 	}
 	
 	private void back(HttpSession session) throws ServletException, IOException {

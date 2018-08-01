@@ -88,6 +88,15 @@
 <form action="NodesServlet" method="post">
     <button type="submit" value="back" name="mode">Indietro</button> 
 </form>            
+<h3 align="center">
+	<%if(request.getAttribute("error") != null) {
+		if(request.getAttribute("error").toString().equalsIgnoreCase("constraintViolation")) {
+			out.print("Impossibile eliminare nodo: task in esecuzione");
+		} else if(request.getAttribute("error").toString().equalsIgnoreCase("false")) {
+			out.print("Errore: impossibile eliminare nodo"); 
+		}
+	  } %>
+</h3>
                 
 </body>
 </html>

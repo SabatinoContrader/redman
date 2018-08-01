@@ -22,14 +22,14 @@ import com.virtualpairprogrammers.model.Nodo;
 //	        return this.nodoDAO.setNodi(nodo);
 //	    }
 //	    
-	    public boolean deleteNodo (int idNodo) {
+	    public String deleteNodo (int idNodo) {
 	        return this.nodoDAO.deleteNodo(idNodo);
 	    }
 	    
 	    public List<Nodo> getAllnodi () {
 	        return this.nodoDAO.getAllNodi();
 	      
-	       }
+	    }
 	    
 	    public HashMap<Integer,String> getAllNodiUtenti() {
 			return this.nodoDAO.getAllNodiUtenti();

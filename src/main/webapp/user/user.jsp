@@ -38,6 +38,11 @@
 				<button type = "submit">Modifica profilo</button><br>
 				</form>
 
+<form action="ModifyProfileServlet" method="post">
+		<button type="submit" value="ModificaProfiloPersonale" name="mode">Modifica
+			Profilo Personale</button>
+	</form>
+
 
 <%--<form action="RegisterServlet" method="post">
      <input type="submit" value="Modifica profilo personale" name="mode">

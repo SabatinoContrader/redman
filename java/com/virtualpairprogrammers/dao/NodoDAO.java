@@ -25,26 +25,22 @@ public class NodoDAO {
 
 	}
 
-	public boolean deleteNodo(int idNodo) {
+	public String deleteNodo(int idNodo) {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DELETE);
 			preparedStatement.setInt(1, idNodo);
-			ResultSet rs = preparedStatement.executeQuery("select * from nodi");
-			boolean status = false;
-			while (rs.next()) {
-				int idnodo = rs.getInt("idNodo");
-				if (idnodo == idNodo) {
-					preparedStatement.execute();
-					status = true;
-					break;
-				}
-			}
-			return status;
+			preparedStatement.execute();
+			return "true";
 		} catch (SQLException e) {
-			GestoreEccezioni.getInstance().gestisciEccezione(e);
-			return false;
-		}
+			if (e instanceof SQLIntegrityConstraintViolationException) {
+				System.out.println("Impossibile eliminare");
+				return "constraintViolation";
+			} else {
+				GestoreEccezioni.getInstance().gestisciEccezione(e);
+				return "false";
+			}
+		}	
 	}
 	
 	public List<Nodo> getAllNodi() {
