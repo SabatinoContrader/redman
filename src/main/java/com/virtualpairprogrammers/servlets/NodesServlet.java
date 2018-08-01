@@ -13,76 +13,89 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class NodesServlet extends HttpServlet {
-	
-	private NodoService nodoService;
-	private UtenteService utenteService;
-	private HttpServletRequest request;
-	private Utente utente;
-	
-	public NodesServlet() {
-		this.nodoService= new NodoService();
-		this.utenteService = new UtenteService();
-	}
 
-	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//super.service(req, resp);
-		this.request = request;
-		HttpSession session = this.request.getSession(true);
-		this.utente= (Utente) session.getAttribute("UserLoggato");
-		
-		if (this.utente.getRuolo().equalsIgnoreCase("amministratore")) {
-			visualizzaListaNodi();
-			getServletContext().getRequestDispatcher("/admin/NodesListAdmin.jsp").forward(this.request, response);
-		} else if(this.utente.getRuolo().equalsIgnoreCase("utente semplice")) {
-			visualizzaListaNodi();
-			getServletContext().getRequestDispatcher("/user/NodesListUser.jsp").forward(this.request, response);
-		}
-		
-	}
+    private NodoService nodoService;
+    private UtenteService utenteService;
+    private HttpServletRequest request;
 
-	private void visualizzaListaNodi() {
-		int idUtente = this.utenteService.getidUtente(this.utente.getUsername());
-		System.out.println(idUtente);
-		if(this.utente.getRuolo().equalsIgnoreCase("amministratore")) {
-			List<Nodo> nodi = this.nodoService.getAllnodi();
-			this.request.setAttribute("listaNodi", nodi);
-		}else if(this.utente.getRuolo().equalsIgnoreCase("utente semplice")) {
-			List<Nodo> nodi = this.nodoService.getStatoNodi(idUtente);
-			this.request.setAttribute("listaNodi", nodi);
-		}
-		
-	}
-		
-		/* switch (gestionenodo) {
+    public void service (HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
+        String gestionenodo = request.getParameter("richiesta");
+        HttpSession session = request.getSession(true);
+        nodoService =  new NodoService();
+        switch (gestionenodo) {
          case "CreaNodoAdmin":
+        	 Nodo nodo = (Nodo) request.getAttribute("NuovoNodo");
+     		if (this.nodoService.insertNodo(nodo)) {
+     			System.out.println("Nuovo nodo Aggiunto con successo\n");
+     		} else {
+     			System.out.println("Nodo già presente nel sistema");
+     		}
              break;
          case "AssegnaNodiAdmin":
+        	 List<String> ListaIdnodi; 
+     		String idNodi= request.getAttribute("idNodi").toString();
+     		String UsernameNodi= request.getAttribute("usernameResponsabileNodi").toString();
+     		if(utenteService.getRuoloUtente(UsernameNodi).equals("responsabile di rete")) {
+     			int idUtente=utenteService.getidUtente(UsernameNodi);
+     			ListaIdnodi=Arrays.asList(idNodi.split(";"));
+     			for(String idNodo:ListaIdnodi) {
+     				nodoService.UtenteNodo(idUtente, Integer.valueOf(idNodo));
+     			}
+     			System.out.println("Nodi Associati con successo");	
+     		}else {
+     			System.out.println("L'utente "+UsernameNodi+" non è un responsabile di rete");
+     		}
              break;
          case "CancellaNodiAdmin":
         	 break;
          case "VisualizzaListaNodiAdmin":
-        	 List<Nodo> nodi = this.nodoService.getAllnodi();
-             request.setAttribute("ListaNodi", nodi);
-             getServletContext().getRequestDispatcher("/NodesListAdmin.jsp").forward(request,response);
-             break;
+        	 List<Nodo> listanodiadmin = this.nodoService.getAllnodi();
+             request.setAttribute("ListaNodi", listanodiadmin);
+             getServletContext().getRequestDispatcher("/admin/NodesListAdmin.jsp").forward(request,response);
              break;
          case "VisualizzaNodiNetworkManager":
-            break;
-         case "VisualizzaInfoNodiNetworkManager":
+        	 String utente=((Utente) request.getAttribute("UserLoggato")).getUsername();	
+     		 int Utente= utenteService.getidUtente(utente);
+     		 List<Nodo> nodi = nodoService.getResponsabileNodi(Utente);
+     		 request.setAttribute("listaNodiNetworkManager", nodi);
+     		 getServletContext().getRequestDispatcher("/user/NodesManagementeNetworkManager.jsp").forward(request,response);
              break;
          case "AssociaNodiNetworkManager":
+        	List<String> ListaIdnodiAss; 
+     		String idNodiAss= request.getAttribute("idNodi").toString();
+     		String UsernameNodiAss= request.getAttribute("usernameNodi").toString();
+     		int UtenteAss=utenteService.getidUtente(UsernameNodiAss);
+     		ListaIdnodiAss=Arrays.asList(idNodiAss.split(";"));
+     		for(String idNodo:ListaIdnodiAss) {
+     			nodoService.UtenteNodo(UtenteAss, Integer.valueOf(idNodo));
+     		}
+     		System.out.println("Nodi Associati con successo");				
              break;
          case "DisassociaNodiNetworkManager":
+        	List<String> DisassociaNodi; 
+     		String idNodiDiss= request.getAttribute("idNodi").toString();
+     		DisassociaNodi= Arrays.asList(idNodiDiss.split(";"));
+     		for(String idNodo:DisassociaNodi) {
+     			nodoService.UtenteNullNodo(Integer.valueOf(idNodo));
+     		}
+     		System.out.println("Nodi Disassociati con successo");
          	 break;
          case "VisualizzaAssociazioniNodiNetworkManager":
          	 break;
          case "VisualizzaStatoNodiUser":
+        	 Utente utentenodi = (Utente) request.getAttribute("UserLoggato");
+     		 int idUtente = this.utenteService.getidUtente(utentenodi.getUsername());
+        	 List<Nodo> listanodiuser = this.nodoService.getStatoNodi(idUtente);
+     		 request.setAttribute("statoNodiUser", listanodiuser);
+     		 getServletContext().getRequestDispatcher("/user/NodesListUser.jsp").forward(request,response);
         	 break;
          case "back":
-        	 break; */
-	}
-
+        	 break; 
+        }
+    }
+}
+	

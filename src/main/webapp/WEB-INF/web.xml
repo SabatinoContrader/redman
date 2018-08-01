@@ -26,6 +26,11 @@
 		<servlet-name>NodesServlet</servlet-name>
 		<servlet-class>com.virtualpairprogrammers.servlets.NodesServlet</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>TasksServlet</servlet-name>
+		<servlet-class>com.virtualpairprogrammers.servlets.TasksServlet</servlet-class>
+	</servlet>
 
 	<servlet>
 		<servlet-name>LoginTraderServlet</servlet-name>
@@ -76,6 +81,11 @@
 	<servlet-mapping>
 		<servlet-name>NodesServlet</servlet-name>
 		<url-pattern>/NodesServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>TasksServlet</servlet-name>
+		<url-pattern>/TasksServlet</url-pattern>
 	</servlet-mapping>
 
 

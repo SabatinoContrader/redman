@@ -8,7 +8,7 @@
 
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<% List<Nodo> all_nodi = (List<Nodo>) request.getAttribute("listaNodi");%>
+<% List<Nodo> listaNodi = (List<Nodo>) request.getAttribute("listaNodi");%>
 
 </head>
 <body>
@@ -39,20 +39,20 @@
                          </th>
                
                     </tr>
-                       <%for (Nodo nodo : all_nodi) { %>
+                       <%for (Nodo nodi : listaNodi) { %>
                     <tr>
                         <td>
-                            <input type="checkbox" name="products" value="<%= nodo.getIdnodo()%>"/>
+                            <input type="checkbox" name="products" value="<%= nodi.getIdnodo()%>"/>
                         </td>
                  
                         <td>
                          <p align = center>
-                            <%=  nodo.getInfonodo()%>  
+                            <%=  nodi.getInfonodo()%>  
                         </td>             
 
                         <td>
                          <p align = center>
-                            <%=  nodo.getStatonodo()%>    
+                            <%=  nodi.getStatonodo()%>    
                         </td>             
 
                         
@@ -65,9 +65,6 @@
                     <% }%>
                 </table>
 </form>
- <form action="HomeServlet" method="post">
-     <input type="submit" value="indietro" name="mode" >
-     </form>
 
 </body>
 </html>
