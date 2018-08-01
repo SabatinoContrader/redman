@@ -1,0 +1,9 @@
+INDEX VERSION 1.131
+C:\Users\Contrader18_019\Desktop\workspaceJSP\redman\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2666211997.index
+\redman\src\main\java
+C:\Users\Contrader18_019\Desktop\workspaceJSP\redman\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3408716191.index
+\redman\src\main\java
+C:\Users\Contrader18_019\Desktop\workspaceJSP\redman\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3891840416.index
+\redman\src\main\java
+C:\Users\Contrader18_019\Desktop\workspaceJSP\redman\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\935385203.index
+\redman\src\main\java

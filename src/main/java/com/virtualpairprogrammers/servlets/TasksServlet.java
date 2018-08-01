@@ -13,8 +13,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TasksServlet {
+public class TasksServlet extends HttpServlet {
 	
 	private TaskService taskService;
+	private HttpServletRequest request;
+
+public TasksServlet() {
+	taskService= new TaskService();
+}
+
+@Override
+protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	//super.service(req, resp);
+	
+	this.request=request;
+	visualizzaListaTasks();
+	getServletContext().getRequestDispatcher("/networkManager/TasksManagementNetworkManager.jsp").forward(this.request, response);
 
 }
+
+private void visualizzaListaTasks() {
+	List<Task> listatask = taskService.getAllTasks();
+	this.request.setAttribute("listaTasks", listatask);
+	}
+}
+	
