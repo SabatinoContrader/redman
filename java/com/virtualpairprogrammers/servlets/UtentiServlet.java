@@ -36,6 +36,14 @@ public class UtentiServlet extends HttpServlet {
 		
 		if (mode != null) {
 			switch (mode) {
+			case "CreaUtenteAdmin":
+				getServletContext().getRequestDispatcher("/admin/insertUserAdmin.jsp").forward(this.request, this.response);
+				break;
+			case "InsertUtenteAdmin":
+				aggiungiProfilo();
+				visualizzaListaUtenti();
+				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
+				break;
 			case "GestioneUtentiAdmin":
 				visualizzaListaUtenti();
 				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
@@ -48,18 +56,8 @@ public class UtentiServlet extends HttpServlet {
 				getServletContext().getRequestDispatcher("/admin/insertUserAdmin.jsp").forward(this.request, this.response);
 				break;
 			case "CancellaProfiloAdmin":
-				String username = this.request.getParameter("username");
-				cancellaProfilo(username);
+				cancellaProfilo();
 				visualizzaListaUtenti();
-				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
-				break;
-			case "Register":
-				int idUtente = Integer.parseInt(request.getAttribute("idUser").toString());
-				String username2 = request.getAttribute("username").toString();
-				String password = request.getAttribute("password").toString();
-				String ruolo = request.getAttribute("ruolo").toString();
-				Utente newUtente = new Utente(idUtente, ruolo, username2, password);
-				aggiungiProfilo(newUtente);
 				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
 				break;
 			case "ChangeUser":
@@ -103,12 +101,12 @@ public class UtentiServlet extends HttpServlet {
 		this.request.setAttribute("listaUtenti", utentiList);
 	}
 	
-	private void aggiungiProfilo(Utente newUtente) {
-		if (this.utenteService.insertUtente(newUtente)) {
-			System.out.println("Nuovo utente Aggiunto correttamente");
-		} else {
-			System.out.println("Utente già esistente");
-		}
+	private void aggiungiProfilo() {
+		int idUser = Integer.parseInt(this.request.getParameter("idUser").toString());
+		String username = this.request.getParameter("username");
+		String password = this.request.getParameter("password");
+		String ruolo = this.request.getParameter("ruolo");
+		this.utenteService.insertUtente(new Utente(idUser, ruolo, username, password));
 	}
 	
 	private void modificaProfilo(Utente newUtenteUser,String usernameLoggato) {
@@ -119,13 +117,13 @@ public class UtentiServlet extends HttpServlet {
 		}
 	}
 
-	
-	private void cancellaProfilo(String username) {
+	private void cancellaProfilo() {
+		String username = this.request.getParameter("username");
 		if (this.utenteService.deleteUtente(username)) {
 			System.out.println("Utente \"" + username + "\" Cancellato correttamente");
 		} else {
 			System.out.println("Utente \"" + username + "\" non presente");
 		}
 	}
-
+	
 }
