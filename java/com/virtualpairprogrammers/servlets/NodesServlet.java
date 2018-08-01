@@ -21,13 +21,20 @@ public class NodesServlet extends HttpServlet {
     private NodoService nodoService;
     private UtenteService utenteService;
     private HttpServletRequest request;
+    private HttpServletResponse response;
+    
+    public NodesServlet() {
+		this.nodoService= new NodoService();
+	}
 
     public void service (HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
-        String gestionenodo = request.getParameter("richiesta");
-        HttpSession session = request.getSession(true);
-        nodoService =  new NodoService();
-        switch (gestionenodo) {
-         case "CreaNodoAdmin":
+    	this.request = request;
+		this.response = response;
+		HttpSession session = this.request.getSession(true);
+		String mode = this.request.getParameter("mode");
+		if (mode != null) {
+			switch (mode) {         	
+			case "CreaNodoAdmin":
         	 Nodo nodo = (Nodo) request.getAttribute("NuovoNodo");
      		if (this.nodoService.insertNodo(nodo)) {
      			System.out.println("Nuovo nodo Aggiunto con successo\n");
@@ -52,10 +59,9 @@ public class NodesServlet extends HttpServlet {
              break;
          case "CancellaNodiAdmin":
         	 break;
-         case "VisualizzaListaNodiAdmin":
-        	 List<Nodo> listanodiadmin = this.nodoService.getAllnodi();
-             request.setAttribute("ListaNodi", listanodiadmin);
-             getServletContext().getRequestDispatcher("/admin/NodesListAdmin.jsp").forward(request,response);
+         case "GestioneNodiAdmin":
+        	 visualizzaListaNodi();
+			 getServletContext().getRequestDispatcher("/admin/NodesListAdmin.jsp").forward(this.request, this.response);
              break;
          case "VisualizzaNodiNetworkManager":
         	 String utente=((Utente) request.getAttribute("UserLoggato")).getUsername();	
@@ -95,7 +101,12 @@ public class NodesServlet extends HttpServlet {
         	 break;
          case "back":
         	 break; 
-        }
-    }
+			}
+		}
+	}
+    private void visualizzaListaNodi() {
+		List<Nodo> nodeslist = this.nodoService.getAllnodi();
+		this.request.setAttribute("listaNodi", nodeslist);
+	}
 }
 	
