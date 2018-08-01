@@ -4,7 +4,7 @@
 </head>
 <body>
 
-	<h3>
+	<h3 align="center">
 	<%if(request.getAttribute("Login_Expired") != null) {
 		out.print("Username o password errato"); }
 	%></h3>
