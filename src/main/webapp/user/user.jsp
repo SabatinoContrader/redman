@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
@@ -9,8 +11,8 @@
 </head>
 <body>
 
-<a>******UTENTE*******</a>
-<h1>--------MENU--------</h1>
+
+<h1>--------MENU-UTENTE-------</h1>
 <br>
 <ol>
 
@@ -26,9 +28,18 @@
      </form>
 </li>
 
-<li><form action="RegisterServlet" method="post">
+<li>
+<form action = "RegisterServlet" method= "post">
+				<h2>username: <input type = "text" id = "user" name ="username"></h2>
+				<h2>password: <input type = "text" id = "pass" name ="password"></h2>
+				<h2>ruolo: <input type = "text" id = "role" name ="ruolo"></h2>
+				<button type = "submit" value = "Register" name = "pulsante">Modifica profilo</button><br>
+				</form>
+
+
+<%--<form action="RegisterServlet" method="post">
      <input type="submit" value="Modifica profilo personale" name="mode">
-     </form>
+     </form> --%>
 </li>
 
 <li><form action="LogoutServlet" method="post">
