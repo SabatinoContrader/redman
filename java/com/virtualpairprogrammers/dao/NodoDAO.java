@@ -19,11 +19,34 @@ public class NodoDAO {
 	private final String QUERY_UPDATENULL ="UPDATE nodi SET idutente = null Where idnodo =?";
 	private final String QUERY_SHOWMATCH = "Select idnodo,username from nodi,utenti where nodi.idutente = utenti.idutente";
 	private final String QUERY_SHOWSTATENODO = " Select infonodo, statonodo from nodi Where idutente = ?";
+	private final String QUERY_DELETE = "DELETE FROM nodi WHERE idnodo=?";
 
 	public NodoDAO() {
 
 	}
 
+	public boolean deleteNodo(int idNodo) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DELETE);
+			preparedStatement.setInt(1, idNodo);
+			ResultSet rs = preparedStatement.executeQuery("select * from nodi");
+			boolean status = false;
+			while (rs.next()) {
+				int idnodo = rs.getInt("idNodo");
+				if (idnodo == idNodo) {
+					preparedStatement.execute();
+					status = true;
+					break;
+				}
+			}
+			return status;
+		} catch (SQLException e) {
+			GestoreEccezioni.getInstance().gestisciEccezione(e);
+			return false;
+		}
+	}
+	
 	public List<Nodo> getAllNodi() {
 		List<Nodo> nodi = new ArrayList<>();
 		Connection connection = ConnectionSingleton.getInstance();

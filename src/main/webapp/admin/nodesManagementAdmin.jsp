@@ -67,8 +67,12 @@
                         <p align = center>                      
                             <%=  nodi.getGruppi_idgruppo()%>                 
                         </td>
-                       
-            
+                       	
+                       	<td>
+                        <p align = center>
+             				<a href="NodesServlet?mode=CancellaNodoAdmin&idNodo=<%= nodi.getIdnodo()%>">Cancella Nodo</a>							
+                        </td>
+               			
                         <td>             
                         </td>
                         <td>
@@ -78,5 +82,12 @@
                     <% }%>
                 </table>
                 </form>
+<form action="NodesServlet" method="post">
+    <button type="submit" value="CreaNodoAdmin" name="mode">Crea Nuovo Nodo</button> 
+</form>            
+<form action="NodesServlet" method="post">
+    <button type="submit" value="back" name="mode">Indietro</button> 
+</form>            
+                
 </body>
 </html>
