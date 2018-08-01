@@ -17,6 +17,7 @@ public class TasksServlet extends HttpServlet {
 	
 	private TaskService taskService;
 	private HttpServletRequest request;
+	private HttpServletResponse response;
 
 public TasksServlet() {
 	taskService= new TaskService();
@@ -25,16 +26,47 @@ public TasksServlet() {
 @Override
 protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	//super.service(req, resp);
+	this.request = request;
+	this.response = response;
 	
-	this.request=request;
-	visualizzaListaTasks();
-	getServletContext().getRequestDispatcher("/networkManager/TasksManagementNetworkManager.jsp").forward(this.request, response);
+	String mode = this.request.getParameter("mode");
+	System.out.println(mode);
+	if(mode!=null) {
+	switch(mode) {
+	    case "GestioneTaskNetworkManager":
+	    	visualizzaListaTasks();
+	    	getServletContext().getRequestDispatcher("/networkManager/TasksManagementNetworkManager.jsp").forward(this.request, response);
+	    	break;
+	    case "SegnalaFaultTask":
+	    	System.out.println("FAULT");
+	    	getServletContext().getRequestDispatcher("/networkManager/TasksManagementNetworkManager.jsp").forward(this.request, response);
+	    	break;
+	    case "Visualizza segnalazioni":
+	    	visualizzaListaTasks();
+	    	getServletContext().getRequestDispatcher("/user/TasksListUser.jsp").forward(this.request, response);
+	    	break;
+	    case "SospendiTask":
+	    	System.out.println("SOSPENDI");
+	    	getServletContext().getRequestDispatcher("/networkManager/TasksManagementNetworkManager.jsp").forward(this.request, response);
+	    	break;
+	    case "Associa":
+	    	visualizzaListaTasks();
+	    	getServletContext().getRequestDispatcher("/networkManager/TasksManagementNetworkManager.jsp").forward(this.request, response);
+	    	break;
 
+	}
+	}
+	
+	
 }
 
 private void visualizzaListaTasks() {
 	List<Task> listatask = taskService.getAllTasks();
 	this.request.setAttribute("listaTasks", listatask);
 	}
+
+
+
+
 }
 	

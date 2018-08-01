@@ -33,6 +33,9 @@ public class HomeServlet extends HttpServlet {
 		    case "indietro": 
 		        getServletContext().getRequestDispatcher("/user/user.jsp").forward(request,response); 
 		        break;
+		    case "indietroNM": 
+		        getServletContext().getRequestDispatcher("/networkManager/networkManager.jsp").forward(request,response); 
+		        break;
 		}
 	}
 }
