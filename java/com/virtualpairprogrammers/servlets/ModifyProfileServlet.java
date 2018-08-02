@@ -14,29 +14,26 @@ import com.virtualpairprogrammers.services.UtenteService;
 public class ModifyProfileServlet extends HttpServlet {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
-
 	private UtenteService utenteService;
-	private HttpSession session;
+	private Utente userLoggato;
 
 	public ModifyProfileServlet() {
 		this.utenteService = new UtenteService();
 	}
 
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		this.request = req;
-		this.response = resp;
-		//HttpSession session = this.request.getSession(true);
-		String mode = this.request.getParameter("mode");
-
-		// this.userLoggato= (Utente) session.getAttribute("UserLoggato");
-		// String usernameLoggato = this.userLoggato.getUsername();
-
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.request = request;
+		this.response = response;
+		HttpSession session = this.request.getSession(true);
+		String mode = this.request.getParameter("mode");		
 		if (mode != null) {
 			switch (mode) {
-
+			case "back":
+				back(session);
+				break;
 			case "ModificaProfiloPersonale":
-				getServletContext().getRequestDispatcher("/modifyProfile.jsp").forward(this.request, resp);
+				getServletContext().getRequestDispatcher("/modifyProfile.jsp").forward(this.request, this.response);
 				break;
 
 //			case "ModificaProfiloPersonaleNetworkManager":
@@ -48,14 +45,25 @@ public class ModifyProfileServlet extends HttpServlet {
 //				break;
 
 			case "ModifyProfile":
-				modifyProfile();
+				modifyProfile(session);
 				break;
 			}
 		}
 	}
 
-	private void modifyProfile() {
-		Utente utente = (Utente) request.getSession().getAttribute("UserLoggato");
+	private void back(HttpSession session) throws ServletException, IOException {
+		Utente userLoggato = (Utente) session.getAttribute("UserLoggato");
+		if (userLoggato.getRuolo().equalsIgnoreCase("amministratore")) {
+			getServletContext().getRequestDispatcher("/admin/admin.jsp").forward(this.request, this.response);;
+		} else if (userLoggato.getRuolo().equalsIgnoreCase("responsabile di rete")) {
+			getServletContext().getRequestDispatcher("/networkManager/networkManager.jsp").forward(this.request, this.response);;
+		} else if (userLoggato.getRuolo().equalsIgnoreCase("utente semplice")) {		
+			getServletContext().getRequestDispatcher("/user/user.jsp").forward(this.request, this.response);;
+		}
+	}
+	
+	private void modifyProfile(HttpSession session) {
+		Utente utente = (Utente) this.request.getSession().getAttribute("UserLoggato");
 
 		String nuovaUsername = this.request.getParameter("username");
 		String nuovaPassword = this.request.getParameter("password");

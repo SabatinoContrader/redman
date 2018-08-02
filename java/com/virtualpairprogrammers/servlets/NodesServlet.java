@@ -22,9 +22,11 @@ public class NodesServlet extends HttpServlet {
     private UtenteService utenteService;
     private HttpServletRequest request;
     private HttpServletResponse response;
+    private Utente userLoggato;
     
     public NodesServlet() {
 		this.nodoService= new NodoService();
+		this.utenteService = new UtenteService();
 	}
 
     public void service (HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
@@ -32,6 +34,9 @@ public class NodesServlet extends HttpServlet {
 		this.response = response;
 		HttpSession session = this.request.getSession(true);
 		String mode = this.request.getParameter("mode");
+		this.userLoggato= (Utente) session.getAttribute("UserLoggato");
+		String usernameLoggato = this.userLoggato.getUsername();
+
 		if (mode != null) {
 			switch (mode) {         	
 				case "CreaNodoAdmin":
@@ -110,11 +115,8 @@ public class NodesServlet extends HttpServlet {
 				case "VisualizzaAssociazioniNodiNetworkManager":
 					break;
 				case "VisualizzaStatoNodiUser":
-					Utente utentenodi = (Utente) request.getAttribute("UserLoggato");
-					int idUtente = this.utenteService.getidUtente(utentenodi.getUsername());
-					List<Nodo> listanodiuser = this.nodoService.getStatoNodi(idUtente);
-					request.setAttribute("statoNodiUser", listanodiuser);
-					getServletContext().getRequestDispatcher("/user/NodesListUser.jsp").forward(request,response);
+					visualizzaStatoNodiUser();
+					getServletContext().getRequestDispatcher("/user/nodesManagementUser.jsp").forward(this.request,this.response);
 					break;
 				case "back":
 					back(session);
@@ -122,6 +124,13 @@ public class NodesServlet extends HttpServlet {
 				}
 			}
 		}
+    
+    private void visualizzaStatoNodiUser() {
+    	int idUtente = this.utenteService.getidUtente(this.userLoggato.getUsername());
+		System.out.println(idUtente);
+    	List<Nodo> listanodiuser = this.nodoService.getStatoNodi(idUtente);
+		this.request.setAttribute("statoNodiUser", listanodiuser);
+    }
     
     private void visualizzaListaNodi() {
 		List<Nodo> nodeslist = this.nodoService.getAllnodi();

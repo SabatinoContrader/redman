@@ -1,7 +1,6 @@
-
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="com.virtualpairprogrammers.model.Utente"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,42 +11,24 @@
 <body>
 
 
-<h1>--------MENU-UTENTE-------</h1>
+<h1 align="center">--------MENU-UTENTE-------</h1>
 <br>
+<% Utente utente = (Utente) request.getSession().getAttribute("UserLoggato"); %>
+	<h2 align="center">	Benvenuto <%=utente.getUsername()%> </h2>
 <ol>
 
 <li>
-     <form action="NodesServlet" method="post">
-     <input type="submit" value="VisualizzaStatoNodiUser" name="mode" hidden>
-     <button type = "submit">Gestione nodi</button><br>
-     </form>
-</li>
-
- <li>
- <form action="TasksServlet" method="post">
-     <input type="submit" value="Gestione tasks" name="mode" hidden>
-     <button type = "submit">Gestione tasks</button><br>
-     </form>
+	<form action="NodesServlet" method="post">
+		<button type="submit" value="VisualizzaStatoNodiUser" name="mode">Gestione Nodi</button>
+	</form>
 </li>
 
 <li>
-<form action = "UtentiServlet" method= "post">
-				<h2>username: <input type = "text" id = "user" name ="username"></h2>
-				<h2>password: <input type = "text" id = "pass" name ="password"></h2>
-				<input type="text" value="ChangeUser" name="mode" hidden>
-				<button type = "submit">Modifica profilo</button><br>
-				</form>
 
 <form action="ModifyProfileServlet" method="post">
 		<button type="submit" value="ModificaProfiloPersonale" name="mode">Modifica
 			Profilo Personale</button>
-	</form>
-
-
-<%--<form action="RegisterServlet" method="post">
-     <input type="submit" value="Modifica profilo personale" name="mode">
-     </form> --%>
-</li>
+</form>
 
 <li><form action="LogoutServlet" method="post">
      <input type="submit" value="Logout" name="Logout">

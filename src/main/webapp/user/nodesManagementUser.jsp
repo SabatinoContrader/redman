@@ -8,7 +8,7 @@
 
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<% List<Nodo> listaNodi = (List<Nodo>) request.getAttribute("listaNodi");%>
+<% List<Nodo> listaNodi = (List<Nodo>) request.getAttribute("statoNodiUser");%>
 
 </head>
 <body>
@@ -66,8 +66,8 @@
                 </table>
 </form>
 </form>
- <form action="HomeServlet" method="post">
-     <input type="submit" value="indietro" name="mode" >
+ <form action="NodesServlet" method="post">
+     <button type="submit" value="back" name="mode" >Indietro</button>
      </form>
 
 </body>

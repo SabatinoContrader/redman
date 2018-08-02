@@ -16,5 +16,10 @@
 			<br>
 		</fieldset>
 	</form>
+	
+	<form action="ModifyProfileServlet" method="post">
+    	<button type="submit" value="back" name="mode" >Indietro</button>
+    </form>
+	
 </body>
 </html>
