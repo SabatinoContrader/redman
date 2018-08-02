@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class NodesServlet extends HttpServlet {
@@ -22,9 +23,11 @@ public class NodesServlet extends HttpServlet {
     private UtenteService utenteService;
     private HttpServletRequest request;
     private HttpServletResponse response;
+    private List<Nodo> nodeslist;
     
     public NodesServlet() {
 		this.nodoService= new NodoService();
+		this.utenteService = new UtenteService();
 	}
 
     public void service (HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
@@ -109,6 +112,10 @@ public class NodesServlet extends HttpServlet {
 //         	 		break;
 				case "VisualizzaAssociazioniNodiNetworkManager":
 					break;
+				case "AssegnaNodiAdmin":
+					AssegnaNodiAdmin();
+					getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, this.response);
+					break;
 				case "VisualizzaStatoNodiUser":
 					Utente utentenodi = (Utente) request.getAttribute("UserLoggato");
 					int idUtente = this.utenteService.getidUtente(utentenodi.getUsername());
@@ -124,7 +131,7 @@ public class NodesServlet extends HttpServlet {
 		}
     
     private void visualizzaListaNodi() {
-		List<Nodo> nodeslist = this.nodoService.getAllnodi();
+		nodeslist = this.nodoService.getAllnodi();
 		this.request.setAttribute("listaNodi", nodeslist);
 	}
     
@@ -138,6 +145,21 @@ public class NodesServlet extends HttpServlet {
 	
 	private String cancellaNodo(int idNodo) {
 		return this.nodoService.deleteNodo(idNodo);
+	}
+	
+	private void AssegnaNodiAdmin() {
+		for(Nodo nodo:nodeslist) {
+			String parameter="nodo_"+nodo.getIdnodo();
+			String usernameResponsabile = (String) this.request.getParameter(parameter);
+			if(usernameResponsabile.equals("")) {
+				nodoService.UtenteNodo(-1, nodo.getIdnodo());
+			}else {
+				int idUtente=utenteService.getidUtente(usernameResponsabile);
+				nodoService.UtenteNodo(idUtente, nodo.getIdnodo());
+			}
+			
+		}
+		visualizzaListaNodi();
 	}
 	
 	private void back(HttpSession session) throws ServletException, IOException {

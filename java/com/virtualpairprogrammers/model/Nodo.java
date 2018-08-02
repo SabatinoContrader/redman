@@ -4,12 +4,23 @@ public class Nodo {
 
 	private int idnodo;
 	private String infonodo;
+	private String responsabileNodo;
 	private String statonodo;
 	private int gruppi_idgruppo;
 
 	public Nodo() {
 
 	}
+	
+	public Nodo(int idnodo, String infonodo,String responsabileNodo, String statonodo, int gruppi_idgruppo) {
+		this.responsabileNodo=responsabileNodo;
+		this.idnodo = idnodo;
+		this.infonodo = infonodo;
+		this.statonodo = statonodo;
+		this.gruppi_idgruppo = gruppi_idgruppo;
+	}
+
+
 
 	public Nodo(int idnodo, String infonodo, String statonodo, int gruppi_idgruppo) {
 		this.idnodo = idnodo;
@@ -50,6 +61,10 @@ public class Nodo {
 		return statonodo;
 	}
 
+	public String getResponsabileNodo() {
+		return responsabileNodo;
+	}
+	
 	public void setStatoNodo(String statonodo) {
 		this.statonodo = statonodo;
 	}
