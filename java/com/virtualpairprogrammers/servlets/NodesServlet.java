@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class NodesServlet extends HttpServlet {
@@ -23,6 +24,7 @@ public class NodesServlet extends HttpServlet {
     private HttpServletRequest request;
     private HttpServletResponse response;
     private Utente userLoggato;
+    private List<Nodo> nodeslist;
     
     public NodesServlet() {
 		this.nodoService= new NodoService();
@@ -114,6 +116,10 @@ public class NodesServlet extends HttpServlet {
 //         	 		break;
 				case "VisualizzaAssociazioniNodiNetworkManager":
 					break;
+				case "AssegnaNodiAdmin":
+					AssegnaNodiAdmin();
+					getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, this.response);
+					break;
 				case "VisualizzaStatoNodiUser":
 					visualizzaStatoNodiUser();
 					getServletContext().getRequestDispatcher("/user/nodesManagementUser.jsp").forward(this.request,this.response);
@@ -133,7 +139,7 @@ public class NodesServlet extends HttpServlet {
     }
     
     private void visualizzaListaNodi() {
-		List<Nodo> nodeslist = this.nodoService.getAllnodi();
+		nodeslist = this.nodoService.getAllnodi();
 		this.request.setAttribute("listaNodi", nodeslist);
 	}
     
@@ -147,6 +153,21 @@ public class NodesServlet extends HttpServlet {
 	
 	private String cancellaNodo(int idNodo) {
 		return this.nodoService.deleteNodo(idNodo);
+	}
+	
+	private void AssegnaNodiAdmin() {
+		for(Nodo nodo:nodeslist) {
+			String parameter="nodo_"+nodo.getIdnodo();
+			String usernameResponsabile = (String) this.request.getParameter(parameter);
+			if(usernameResponsabile.equals("")) {
+				nodoService.UtenteNodo(-1, nodo.getIdnodo());
+			}else {
+				int idUtente=utenteService.getidUtente(usernameResponsabile);
+				nodoService.UtenteNodo(idUtente, nodo.getIdnodo());
+			}
+			
+		}
+		visualizzaListaNodi();
 	}
 	
 	private void back(HttpSession session) throws ServletException, IOException {
