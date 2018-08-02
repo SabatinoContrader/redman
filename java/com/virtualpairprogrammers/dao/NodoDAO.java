@@ -119,7 +119,6 @@ public class NodoDAO {
 			}else {
 				preparedStatement.setInt(1, idUsername);
 			}
-			
 			preparedStatement.setInt(2, idNodo);
 			preparedStatement.execute();
 		} catch (SQLException e) {

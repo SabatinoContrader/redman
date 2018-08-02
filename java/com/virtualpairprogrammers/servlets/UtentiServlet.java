@@ -86,11 +86,11 @@ public class UtentiServlet extends HttpServlet {
 	}
 	
 	private void aggiungiProfilo() {
-		int idUser = Integer.parseInt(this.request.getParameter("idUser").toString());
+		//int idUser = Integer.parseInt(this.request.getParameter("idUser").toString());
 		String username = this.request.getParameter("username");
 		String password = this.request.getParameter("password");
 		String ruolo = this.request.getParameter("ruolo");
-		this.utenteService.insertUtente(new Utente(idUser, ruolo, username, password));
+		this.utenteService.insertUtente(new Utente(ruolo, username, password));
 	}
 	
 	private void modificaProfilo(Utente newUtenteUser,String usernameLoggato) {
