@@ -15,6 +15,7 @@ public class NodoDAO {
 	private final String QUERY_INSERT = "insert into nodi (infonodo, statonodo, gruppi_idgruppo) values (?,?,?)";
 	private final String QUERY_GETNODO = "Select * from nodi Where idnodo = ?";
 	private final String QUERY_UPDATE = "UPDATE nodi SET idresponsabile = ? Where idnodo =?";
+	private final String QUERY_UPDATE_USER = "UPDATE nodi SET idutentesemplice = ? Where idnodo =?";
 	private final String QUERY_SHOWNODO = " Select idnodo,infonodo, statonodo, gruppi_idgruppo from nodi where idutente = ?";
 	private final String QUERY_UPDATENULL = "UPDATE nodi SET idutente = null Where idnodo =?";
 	private final String QUERY_SHOWMATCH = "Select idnodo,username from nodi,utenti where nodi.idutente = utenti.idutente";
@@ -154,7 +155,7 @@ public class NodoDAO {
 		Connection connection = ConnectionSingleton.getInstance();
 
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_UPDATE);
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_UPDATE_USER);
 			if (idUsername == -1) {
 				preparedStatement.setNull(1, Types.NULL);
 			}else {

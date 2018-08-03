@@ -156,14 +156,14 @@ public class NodesServlet extends HttpServlet {
 	}
 	
 	private void AssegnaNodiNM() {
-		for(Nodo nodo:nodeslist) {
+		for(Nodo nodo:nodi) {
 			String parameter="nodo_" + nodo.getIdnodo();
 			String usernameUtenteSemplice = (String) this.request.getParameter(parameter);
 			if(usernameUtenteSemplice.equals("")) {
 				nodoService.UtenteNodo(-1, nodo.getIdnodo());
 			}else {
 				int idUtente=utenteService.getidUtente(usernameUtenteSemplice);
-				nodoService.UtenteNodo(idUtente, nodo.getIdnodo());
+				nodoService.UtenteNodoNM(idUtente, nodo.getIdnodo());
 			}
 			
 		}
