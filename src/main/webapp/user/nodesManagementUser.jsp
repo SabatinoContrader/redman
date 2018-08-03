@@ -1,7 +1,6 @@
 <%@ page import="com.virtualpairprogrammers.model.Nodo" %>
 <%@ page import="java.util.*" %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,20 +11,11 @@
 
 </head>
 <body>
+<h2 align="center">Gestione Nodi Utente Semplice</h2>
 
  <form action="NodesServlet" method="post">
                 <table>
-                <tr>
-                  <td>
-                     Nodi:
-                  </td>
-                  <td>
-                  </td>
-                  </td>
-                  </tr>
-                    <tr>
-                       <th></th>
-                                      
+                    <tr>            
                         <th>
                             INFO_NODO
                         </th>
@@ -41,10 +31,6 @@
                     </tr>
                        <%for (Nodo nodi : listaNodi) { %>
                     <tr>
-                        <td>
-                            <input type="checkbox" name="products" value="<%= nodi.getIdnodo()%>"/>
-                        </td>
-                 
                         <td>
                          <p align = center>
                             <%=  nodi.getInfonodo()%>  

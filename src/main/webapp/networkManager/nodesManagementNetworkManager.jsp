@@ -31,7 +31,7 @@
 
 				<th>Info nodo</th>
 				
-				<th>Id utente</th>
+				<th>Utente</th>
 
 				<th>Stato nodo</th>
 
@@ -100,7 +100,7 @@
 		%>
 		</h3>
 		<br>
-		<button type="submit" value="AssegnaNodiAdmin" name="mode">Associa Nodi</button>
+		<button type="submit" value="AssociaNodiNetworkManager" name="mode">Associa Nodi</button>
 		<button type="submit" value="CreaNodoAdmin" name="mode">Crea Nuovo Nodo</button>
 		<button type="submit" value="back" name="mode">Indietro</button>
 	</form>

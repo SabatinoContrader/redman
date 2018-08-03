@@ -11,16 +11,16 @@ import com.virtualpairprogrammers.model.Nodo;
 
 public class NodoDAO {
 
-	private final String QUERY_SHOW = "select * from nodi LEFT JOIN utenti on nodi.idutente=utenti.idutente";
+	private final String QUERY_SHOW = "select * from nodi LEFT JOIN utenti on nodi.idresponsabile=utenti.idutente";
 	private final String QUERY_INSERT = "insert into nodi (infonodo, statonodo, gruppi_idgruppo) values (?,?,?)";
 	private final String QUERY_GETNODO = "Select * from nodi Where idnodo = ?";
-	private final String QUERY_UPDATE = "UPDATE nodi SET idutente = ? Where idnodo =?";
+	private final String QUERY_UPDATE = "UPDATE nodi SET idresponsabile = ? Where idnodo =?";
 	private final String QUERY_SHOWNODO = " Select idnodo,infonodo, statonodo, gruppi_idgruppo from nodi where idutente = ?";
 	private final String QUERY_UPDATENULL = "UPDATE nodi SET idutente = null Where idnodo =?";
 	private final String QUERY_SHOWMATCH = "Select idnodo,username from nodi,utenti where nodi.idutente = utenti.idutente";
-	private final String QUERY_SHOWSTATENODO = " Select infonodo, statonodo from nodi Where idutente = ?";
+	private final String QUERY_SHOWSTATENODO = " Select infonodo, statonodo from nodi Where idutentesemplice = ?";
 	private final String QUERY_DELETE = "DELETE FROM nodi WHERE idnodo=?";
-	private final String QUERY_SHOW_NETMAN = "select*from nodi where idnodo IN (select idnodo from nodi where idutente = ?)";
+	private final String QUERY_SHOW_NETMAN = "select * from nodi LEFT JOIN utenti on nodi.idutentesemplice=utenti.idutente where idresponsabile=?";
 	
 	public NodoDAO() {
 
@@ -35,11 +35,11 @@ public class NodoDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				int idnodo = resultSet.getInt("idnodo");
+				String utenteSemplice = resultSet.getString("username");
 				String infonodo = resultSet.getString("infonodo");
-				String responsabileNodo = resultSet.getString("idutente");
 				String statonodo = resultSet.getString("statonodo");
 				int gruppi_idgruppo = resultSet.getInt("gruppi_idgruppo");
-				nodi.add(new Nodo(idnodo, infonodo, responsabileNodo, statonodo, gruppi_idgruppo));
+				nodi.add(new Nodo(idnodo, infonodo, utenteSemplice, statonodo, gruppi_idgruppo));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -74,10 +74,10 @@ public class NodoDAO {
 			while (resultSet.next()) {
 				int idnodo = resultSet.getInt("idnodo");
 				String infonodo = resultSet.getString("infonodo");
-				String responsabileNodo = resultSet.getString("username");
+				String idUtente = resultSet.getString("username");
 				String statonodo = resultSet.getString("statonodo");
 				int gruppi_idgruppo = resultSet.getInt("gruppi_idgruppo");
-				nodi.add(new Nodo(idnodo, infonodo, responsabileNodo, statonodo, gruppi_idgruppo));
+				nodi.add(new Nodo(idnodo, infonodo, idUtente, statonodo, gruppi_idgruppo));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -132,6 +132,25 @@ public class NodoDAO {
 	}
 
 	public boolean UtenteNodo(int idUsername, int idNodo) {
+		Connection connection = ConnectionSingleton.getInstance();
+
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_UPDATE);
+			if (idUsername == -1) {
+				preparedStatement.setNull(1, Types.NULL);
+			}else {
+				preparedStatement.setInt(1, idUsername);
+			}
+			preparedStatement.setInt(2, idNodo);
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean UtenteNodoNM(int idUsername, int idNodo) {
 		Connection connection = ConnectionSingleton.getInstance();
 
 		try {

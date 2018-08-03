@@ -33,6 +33,10 @@ public class UtenteService {
         return this.utenteDAO.idutenteUtente(Username);
     }
     
+    public String getUsernameUtente(int idUtente) {
+    	return this.utenteDAO.usernameUtente(idUtente);
+    }
+    
     public String getRuoloUtente (String Username) {
         return this.utenteDAO.getRuoloUtente(Username);
     }

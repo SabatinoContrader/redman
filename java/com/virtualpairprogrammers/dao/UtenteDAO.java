@@ -13,6 +13,7 @@ public class UtenteDAO {
 	private final String QUERY_DELETE = "DELETE FROM utenti WHERE username=?";
 	private final String QUERY_SHOW = "Select * from utenti";
 	private final String QUERY_IDUTENTE = "Select idutente from utenti Where username = ?";
+	private final String QUERY_USERNAME_UTENTE = "Select username from utenti Where idutente = ?";
 	private final String QUERY_RUOLOUTENTE = "Select ruolo from utenti Where username = ?";
 
 
@@ -114,6 +115,22 @@ public class UtenteDAO {
 		return idutente;
 	}
 	
+	public String usernameUtente(int idUtente) {
+		Connection connection = ConnectionSingleton.getInstance();
+		String username = "";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_USERNAME_UTENTE);
+			preparedStatement.setInt(1, idUtente);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				username = resultSet.getString("username");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();	
+		}
+		return username;
+	}
+
 	public String getRuoloUtente(String username) {
 		Connection connection = ConnectionSingleton.getInstance();
 		String Ruolo = null;

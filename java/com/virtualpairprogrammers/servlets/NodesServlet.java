@@ -25,6 +25,7 @@ public class NodesServlet extends HttpServlet {
     private HttpServletResponse response;
     private Utente userLoggato;
     private List<Nodo> nodeslist;
+    private List<Nodo> nodi;
     
     public NodesServlet() {
 		this.nodoService= new NodoService();
@@ -58,6 +59,11 @@ public class NodesServlet extends HttpServlet {
 					getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, this.response);
 					break;
 				case "GestioneNodiNetworkManager":
+					visualizzaListaNodiNetworkManager();
+					getServletContext().getRequestDispatcher("/networkManager/nodesManagementNetworkManager.jsp").forward(request,response);
+					break;
+				case "AssociaNodiNetworkManager":
+					AssegnaNodiNM();
 					visualizzaListaNodiNetworkManager();
 					getServletContext().getRequestDispatcher("/networkManager/nodesManagementNetworkManager.jsp").forward(request,response);
 					break;
@@ -112,7 +118,7 @@ public class NodesServlet extends HttpServlet {
     
     private void visualizzaListaNodiNetworkManager() {
 		int idUtente= this.utenteService.getidUtente(this.userLoggato.getUsername());
-		List<Nodo> nodi = nodoService.getNodiNetworkManager(idUtente);
+		nodi = nodoService.getNodiNetworkManager(idUtente);
 		this.request.setAttribute("listaNodiNetworkManager", nodi);
     }
     
@@ -136,7 +142,7 @@ public class NodesServlet extends HttpServlet {
 	
 	private void AssegnaNodiAdmin() {
 		for(Nodo nodo:nodeslist) {
-			String parameter="nodo_"+nodo.getIdnodo();
+			String parameter="nodo_" + nodo.getIdnodo();
 			String usernameResponsabile = (String) this.request.getParameter(parameter);
 			if(usernameResponsabile.equals("")) {
 				nodoService.UtenteNodo(-1, nodo.getIdnodo());
@@ -147,6 +153,21 @@ public class NodesServlet extends HttpServlet {
 			
 		}
 		visualizzaListaNodi();
+	}
+	
+	private void AssegnaNodiNM() {
+		for(Nodo nodo:nodeslist) {
+			String parameter="nodo_" + nodo.getIdnodo();
+			String usernameUtenteSemplice = (String) this.request.getParameter(parameter);
+			if(usernameUtenteSemplice.equals("")) {
+				nodoService.UtenteNodo(-1, nodo.getIdnodo());
+			}else {
+				int idUtente=utenteService.getidUtente(usernameUtenteSemplice);
+				nodoService.UtenteNodo(idUtente, nodo.getIdnodo());
+			}
+			
+		}
+		visualizzaListaNodiNetworkManager();
 	}
 	
 	private void back(HttpSession session) throws ServletException, IOException {

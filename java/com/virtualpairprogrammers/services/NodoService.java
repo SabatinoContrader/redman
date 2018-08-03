@@ -48,6 +48,9 @@ import com.virtualpairprogrammers.model.Nodo;
 	    public boolean UtenteNodo (int idUtente, int idNodo) {
 	        return this.nodoDAO.UtenteNodo(idUtente, idNodo);
 	    }
+	    public boolean UtenteNodoNM (int idUtente, int idNodo) {
+	        return this.nodoDAO.UtenteNodoNM(idUtente, idNodo);
+	    }
 	    
 	    public boolean UtenteNullNodo (int idNodo) {
 	        return this.nodoDAO.UtenteNullNodo(idNodo);
