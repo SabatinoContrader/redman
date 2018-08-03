@@ -1,3 +1,4 @@
+<%@page import="com.virtualpairprogrammers.model.Nodo"%>
 <%@page import="java.awt.Window.Type"%>
 <%@ page import="com.virtualpairprogrammers.model.Task" %>
 <%@ page import="java.util.*" %>
@@ -10,6 +11,8 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <% List<Task> listaTasks = (List<Task>) request.getAttribute("listaTasks");%>
+<%! ArrayList<Nodo> listaNodi;  %>
+<% String nodoList;  %>
 
 <style type="text/css">
 	table{
@@ -20,17 +23,22 @@
 </head>
 
 <body>
+
+<% listaNodi = new ArrayList<Nodo>();
+listaNodi.add(new Nodo(1,"nodo1","ON",2));
+listaNodi.add(new Nodo(2,"nodo1","ON",2));
+listaNodi.add(new Nodo(3,"nodo1","ON",2));
+listaNodi.add(new Nodo(4,"nodo1","ON",2));
+listaNodi.add(new Nodo(5,"nodo1","ON",2));
+%>
+
+<h2 align="center">Gestione Tasks Network Manager</h2>
+
         <form action="TasksServlet" method="post">
                 <table>
                 <tr>
-                  <td>
-                     Tasks:
-                  </td>
-                  <td>
-                  </td>
-                  </tr>
+                </tr>
                     <tr>
-                       <th></th>
                         <th>
                             ID_TASK
                         </th>
@@ -38,12 +46,15 @@
                         <th>
                             ID_NODO
                         </th>
+                        
                         <th>
                             INFO_TASK
                         </th>
+                        
                         <th>
                         	STATO_TASK
                          </th>
+                         
                         <th>
                          </th>
                          <th>
@@ -52,10 +63,7 @@
                     </tr>
                        <%for (Task tasks : listaTasks) { %>
                     <tr>
-                        <td>
-                            <input type="checkbox" name="products" value="<%= tasks.getIdtask()%>"/>
-                        </td>
-               
+                               
                         <td>
                         <p align = center>
                             <%= tasks.getIdtask()%>
@@ -63,9 +71,13 @@
                
                         <td>
                         <p align = center>
-                            <%=  tasks.getIdnodo()%>
+                            <%if(tasks.getIdnodo()==0){
+                            	out.print("/");
+                            }else{
+                            	out.print(tasks.getIdnodo());
+                            }%>
                         </td>
-               
+                                      
                         <td>
                         <p align = center>
                             <%=  tasks.getInfotask()%>
@@ -89,10 +101,22 @@
                            <a href="TasksServlet?mode=Associa=<%=  tasks.getIdnodo()%>"> Associa</a>
                         </td>
                               
-                         <td>
-                         <input type="number" name="task_<%=tasks.getIdnodo()%>" value="<%=tasks.getIdnodo()%>"
-							placeholder="Inserisci idnoodo da associare" size="30">
+<%--                          <td>
+                         <input type="number" name="task_<%=tasks.getIdtask()%>" <%
+	                         if(tasks.getIdnodo()==0){
+								out.print("value=\"\"");
+							 }else{
+								out.print("value='"+tasks.getIdnodo()+"'");
+							}%> placeholder="Inserisci idnoodo da associare" size="30">
+                        </td> --%>
+                        
                         <td>
+                        <select name="task_<%=tasks.getIdtask()%>">
+	                        <%for(Nodo nodo:listaNodi){%>
+	                        	<option value="<%=nodo.getIdnodo()%>"><%=nodo.getIdnodo()%></option>
+	                        <%}%>
+	                        	<option value="/">/</option>
+						</select>
                         </td>
                
                     </tr>
@@ -100,9 +124,20 @@
                 </table>
                 
                   <input type="submit" value="Indietro" name="mode" >
-                  <input type="submit" value="Associa" name="mode" >
+                  <input type="submit" value="AssociaTasks" name="mode" >
                 
                 </form>
+                
+                
+        <script>
+        
+        function getSelectValue(){
+        	nodoList=document.getElementById("list").value;
+            //console.log(selectedValue);
+        }
+        //getSelectValue();
+
+    	</script>
 	
 </body>
 </html>

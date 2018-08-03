@@ -55,8 +55,8 @@ public class TasksServlet extends HttpServlet {
 				System.out.println("SOSPENDI");
 				getServletContext().getRequestDispatcher("/networkManager/TasksManagementNetworkManager.jsp").forward(this.request, response);
 				break;
-			case "Associa":
-				associaTasks();
+			case "AssociaTasks":
+				newAssociaTasks();
 				getServletContext().getRequestDispatcher("/networkManager/TasksManagementNetworkManager.jsp").forward(this.request, response);
 				break;
 			case "indietroNM":
@@ -75,18 +75,32 @@ public class TasksServlet extends HttpServlet {
 	}
 	
 	private void associaTasks() {
-//		for(Task task:listatask) {
-//			String parameter="nodo_"+task.getIdtask();
-//			String idnodo = (String) this.request.getParameter(parameter);
-//			if(usernameResponsabile.equals("")) {
-//				nodoService.UtenteNodo(-1, nodo.getIdnodo());
-//			}else {
-//				int idUtente=utenteService.getidUtente(usernameResponsabile);
-//				nodoService.UtenteNodo(idUtente, nodo.getIdnodo());
-//			}
-//			
-//		}
-//		visualizzaListaTasks();
+		for(Task task:listatask) {
+			String parameter="task_"+task.getIdtask();
+			String stringIdnodo = (String) this.request.getParameter(parameter);
+			if(stringIdnodo.equals("")) {
+				taskService.setTask(task.getIdtask(), -1);
+			}else {
+				int idnodo=Integer.parseInt(stringIdnodo);
+				taskService.setTask(task.getIdtask(),idnodo);
+			}		
+		}
+		visualizzaListaTasks();
+	}
+	
+	private void newAssociaTasks() {
+		for(Task task:listatask) {
+			
+			String parameter="task_"+task.getIdtask();
+			String stringIdnodo = (String) this.request.getParameter(parameter);
+			if(stringIdnodo.equals("/")) {
+				taskService.setTask(task.getIdtask(), -1);
+			}else {
+				int idnodo=Integer.parseInt(stringIdnodo);
+				taskService.setTask(task.getIdtask(),idnodo);
+			}		
+		}
+		visualizzaListaTasks();
 	}
 
 }
