@@ -4,6 +4,7 @@ public class Task {
 	
 	private int idtask;
 	private int idnodo;
+	private int idutente;
     private String infotask;
     private String statotask;
 
@@ -21,7 +22,16 @@ public class Task {
     }
     
     
-    public Task() {}
+    
+    public Task(int idtask, int idnodo, int idutente, String infotask, String statotask) {
+		this.idtask = idtask;
+		this.idnodo = idnodo;
+		this.idutente = idutente;
+		this.infotask = infotask;
+		this.statotask = statotask;
+	}
+
+	public Task() {}
 	
 	 public int getIdtask() {
 	        return idtask;
@@ -34,8 +44,12 @@ public class Task {
 	    public int getIdnodo() {
 	        return idnodo;
 	    }
+	    
+	    public int getIdutente() {
+			return idutente;
+		}
 
-	    public void setIdnodo(int idnodo) {
+		public void setIdnodo(int idnodo) {
 	        this.idnodo = idnodo;
 	    }
 
