@@ -20,11 +20,11 @@ img {
      <h2 align = "center" > Benvenuto <%=utente.getUsername() %> </h2>
      
      
-     <form action="HomeServlet" method="post"> 
+     <form action="UtentiServlet" method="post"> 
      <button type="submit" value="GestioneUtentiNetworkManager" name="mode">Gestione Utenti</button> 
      </form> 
  	 <br>
-     <form action="HomeServlet" method="post"> 
+     <form action="NodesServlet" method="post"> 
      <button type="submit" value="GestioneNodiNetworkManager" name="mode">Gestione Nodi</button> 
      </form> 
  	 <br>

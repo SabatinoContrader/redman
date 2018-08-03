@@ -26,6 +26,10 @@ import com.virtualpairprogrammers.model.Nodo;
 	        return this.nodoDAO.deleteNodo(idNodo);
 	    }
 	    
+	    public List<Nodo> getNodiNetworkManager(int idUtente) {
+	    	return this.nodoDAO.getNodiNetworkManager(idUtente);
+	    }
+	    
 	    public List<Nodo> getAllnodi () {
 	        return this.nodoDAO.getAllNodi();
 	      

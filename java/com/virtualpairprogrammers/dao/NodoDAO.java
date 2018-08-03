@@ -20,11 +20,33 @@ public class NodoDAO {
 	private final String QUERY_SHOWMATCH = "Select idnodo,username from nodi,utenti where nodi.idutente = utenti.idutente";
 	private final String QUERY_SHOWSTATENODO = " Select infonodo, statonodo from nodi Where idutente = ?";
 	private final String QUERY_DELETE = "DELETE FROM nodi WHERE idnodo=?";
-
+	private final String QUERY_SHOW_NETMAN = "select*from nodi where idnodo IN (select idnodo from nodi where idutente = ?)";
+	
 	public NodoDAO() {
 
 	}
 
+	public List<Nodo> getNodiNetworkManager(int idUtente) {
+		List<Nodo> nodi = new ArrayList<>();
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_SHOW_NETMAN);
+			preparedStatement.setInt(1, idUtente);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				int idnodo = resultSet.getInt("idnodo");
+				String infonodo = resultSet.getString("infonodo");
+				String responsabileNodo = resultSet.getString("idutente");
+				String statonodo = resultSet.getString("statonodo");
+				int gruppi_idgruppo = resultSet.getInt("gruppi_idgruppo");
+				nodi.add(new Nodo(idnodo, infonodo, responsabileNodo, statonodo, gruppi_idgruppo));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return nodi;
+	}
+	
 	public String deleteNodo(int idNodo) {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {

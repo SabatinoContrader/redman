@@ -1,22 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ page import="com.virtualpairprogrammers.model.Nodo"%>
 <%@ page import="java.util.*"%>
-
+    
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <%
-	List<Nodo> ListaNodi = (List<Nodo>) request.getAttribute("listaNodi");
+	List<Nodo> ListaNodi = (List<Nodo>) request.getAttribute("listaNodiNetworkManager");
 %>
 <style type="text/css">
 	table{
 		width:100%;
 	} 
 </style>
-
 </head>
-
 <body>
-	<h2 align="center">Gestione Nodi Amministratore</h2>
+<h2 align="center">Gestione Nodi Network Manager</h2>
 
 	<form action="NodesServlet" method="post">
 		<table>
@@ -30,13 +31,13 @@
 
 				<th>Info nodo</th>
 				
-				<th>Responsabile nodo</th>
+				<th>Id utente</th>
 
 				<th>Stato nodo</th>
 
 				<th>Id gruppo</th>
 				
-				<th align="left">Modifica responsabile nodo</th>
+				<th align="left">Modifica utente nodo</th>
 				<th></th>
 
 			</tr>
@@ -103,6 +104,6 @@
 		<button type="submit" value="CreaNodoAdmin" name="mode">Crea Nuovo Nodo</button>
 		<button type="submit" value="back" name="mode">Indietro</button>
 	</form>
-	
+
 </body>
 </html>

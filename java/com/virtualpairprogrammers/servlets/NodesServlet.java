@@ -57,12 +57,9 @@ public class NodesServlet extends HttpServlet {
 					visualizzaListaNodi();
 					getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, this.response);
 					break;
-				case "VisualizzaNodiNetworkManager":
-					String utente=((Utente) request.getAttribute("UserLoggato")).getUsername();	
-					int Utente= utenteService.getidUtente(utente);
-					List<Nodo> nodi = nodoService.getResponsabileNodi(Utente);
-					request.setAttribute("listaNodiNetworkManager", nodi);
-					getServletContext().getRequestDispatcher("/user/NodesManagementeNetworkManager.jsp").forward(request,response);
+				case "GestioneNodiNetworkManager":
+					visualizzaListaNodiNetworkManager();
+					getServletContext().getRequestDispatcher("/networkManager/nodesManagementNetworkManager.jsp").forward(request,response);
 					break;
 //         		case "AssociaNodiNetworkManager":
 //        			List<String> ListaIdnodiAss; 
@@ -112,6 +109,12 @@ public class NodesServlet extends HttpServlet {
 		nodeslist = this.nodoService.getAllnodi();
 		this.request.setAttribute("listaNodi", nodeslist);
 	}
+    
+    private void visualizzaListaNodiNetworkManager() {
+		int idUtente= this.utenteService.getidUtente(this.userLoggato.getUsername());
+		List<Nodo> nodi = nodoService.getNodiNetworkManager(idUtente);
+		this.request.setAttribute("listaNodiNetworkManager", nodi);
+    }
     
     private void aggiungiProfilo(Utente newUtente) {
 		if (this.utenteService.insertUtente(newUtente)) {

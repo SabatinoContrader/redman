@@ -49,6 +49,7 @@ public class UtentiServlet extends HttpServlet {
 				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
 				break;
 			case "GestioneUtentiNetworkManager":
+				
 				break;
 			case "CancellaProfiloAdmin":
 				cancellaProfilo();
