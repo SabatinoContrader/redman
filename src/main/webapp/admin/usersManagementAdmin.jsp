@@ -9,6 +9,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <% List<Utente> all_utenti = (List<Utente>) request.getAttribute("listaUtenti");%>
+
 </head>
 
 <body>

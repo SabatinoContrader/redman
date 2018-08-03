@@ -1,3 +1,4 @@
+<%@page import="java.awt.Window.Type"%>
 <%@ page import="com.virtualpairprogrammers.model.Task" %>
 <%@ page import="java.util.*" %>
 
@@ -9,6 +10,13 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <% List<Task> listaTasks = (List<Task>) request.getAttribute("listaTasks");%>
+
+<style type="text/css">
+	table{
+		width:100%;
+	} 
+</style>
+
 </head>
 
 <body>
@@ -19,7 +27,6 @@
                      Tasks:
                   </td>
                   <td>
-                  </td>
                   </td>
                   </tr>
                     <tr>
@@ -83,17 +90,19 @@
                         </td>
                               
                          <td>
+                         <input type="number" name="task_<%=tasks.getIdnodo()%>" value="<%=tasks.getIdnodo()%>"
+							placeholder="Inserisci idnoodo da associare" size="30">
                         <td>
                         </td>
                
                     </tr>
                     <% }%>
                 </table>
+                
+                  <input type="submit" value="Indietro" name="mode" >
+                  <input type="submit" value="Associa" name="mode" >
+                
                 </form>
-</form>
- <form action="HomeServlet" method="post">
-     <input type="submit" value="indietroNM" name="mode" >
-     </form>
-
+	
 </body>
 </html>

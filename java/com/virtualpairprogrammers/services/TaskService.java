@@ -17,9 +17,9 @@ public class TaskService {
 		        return this.taskDAO.insertTask(task);
 		    }
 		    
-		    /*public boolean setNodo (Nodo nodo) {
-		        return this.nodoDAO.setNodi(nodo);
-		    }*/
+		    public boolean setTask (int idtask, int idnodo) {
+		        return this.taskDAO.setTask(idtask,idnodo);
+		    }
 		    
 		    public boolean deleteTask (Task task) {
 		        return this.deleteTask(task);
@@ -32,6 +32,10 @@ public class TaskService {
 		    
 		    public List<Task> getAllTasks () {
 		        return this.taskDAO.getAllTasks();
+		    }
+		    
+		    public List<Task> getTasksNM (int idutente) {
+		        return this.taskDAO.getTasksNM(idutente);
 		    }
 		//    
 		//    
