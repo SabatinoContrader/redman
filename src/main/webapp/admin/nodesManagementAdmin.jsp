@@ -1,5 +1,6 @@
 <%@ page import="com.virtualpairprogrammers.model.Nodo"%>
 <%@ page import="java.util.*"%>
+<%@ page import="com.virtualpairprogrammers.model.Utente"%>
 
 <html>
 <head>
@@ -16,17 +17,8 @@
 </head>
 
 <body>
-	<%!
-       String someOutput(Nodo nodi) {
-		if(nodi.getResponsabileNodo()==null){
-			return "";
-		}else{
-			return nodi.getResponsabileNodo();
-		}
-       }
-	%>
+	<h2 align="center">Gestione Nodi Amministratore</h2>
 
-<h1>Gestione nodi amministratore</h1>
 	<form action="NodesServlet" method="post">
 		<table>
 			<tr>
@@ -96,14 +88,7 @@
 				}
 			%>
 		</table>
-		<button type="submit" value="AssegnaNodiAdmin" name="mode">Associa Nodi</button>
-	</form>
-	<form action="NodesServlet" method="post">
-		<button type="submit" value="CreaNodoAdmin" name="mode">Crea Nuovo Nodo</button>
-		<button type="submit" value="back" name="mode">Indietro</button>
-	</form>
-	
-	<h3 align="center">
+		<h3 align="center">
 		<%
 			if (request.getAttribute("error") != null) {
 				if (request.getAttribute("error").toString().equalsIgnoreCase("constraintViolation")) {
@@ -113,7 +98,12 @@
 				}
 			}
 		%>
-	</h3>
+		</h3>
+		<br>
+		<button type="submit" value="AssegnaNodiAdmin" name="mode">Associa Nodi</button>
+		<button type="submit" value="CreaNodoAdmin" name="mode">Crea Nuovo Nodo</button>
+		<button type="submit" value="back" name="mode">Indietro</button>
+	</form>
 	
 </body>
 </html>

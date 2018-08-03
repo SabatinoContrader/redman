@@ -12,12 +12,10 @@
 </head>
 
 <body>
+	<h2 align="center">Gestione Utenti Amministratore</h2>
+	<br>
 	<form action="UtentiServlet" method="post">
 		<table>
-			<tr>
-				<td>Utenti:</td>
-
-			</tr>
 			<tr>
 
 				<th>ID_UTENTE</th>
@@ -70,10 +68,7 @@
 
 		<form action="UtentiServlet" method="post">
 			<button type="submit" value="CreaUtenteAdmin" name="mode">Registra Nuovo Utente</button>
-		</form>
-		<br>
-		<form action="UtentiServlet" method="post">
-			<button type="submit" value="back" name="mode">Indietro</button>
+			<button type="submit" value="back" name="mode">Indietro</button>	
 		</form>
 </body>
 

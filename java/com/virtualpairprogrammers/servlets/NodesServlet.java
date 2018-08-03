@@ -37,7 +37,6 @@ public class NodesServlet extends HttpServlet {
 		HttpSession session = this.request.getSession(true);
 		String mode = this.request.getParameter("mode");
 		this.userLoggato= (Utente) session.getAttribute("UserLoggato");
-		String usernameLoggato = this.userLoggato.getUsername();
 
 		if (mode != null) {
 			switch (mode) {         	
@@ -45,43 +44,14 @@ public class NodesServlet extends HttpServlet {
 					getServletContext().getRequestDispatcher("/admin/insertNodoAdmin.jsp").forward(this.request, this.response);
 					break;
 				case "InsertNodoAdmin":
-					int idNodoIns = Integer.parseInt(request.getParameter("idNodo").toString());
-					String infoNodo = request.getParameter("infonodo");
-					int gruppo = Integer.parseInt(request.getParameter("gruppi_idgruppo").toString());
-					this.nodoService.insertNodo(new Nodo(idNodoIns, infoNodo, "OFF", gruppo));
+					insertNodoAdmin();
 					visualizzaListaNodi();
 					getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, this.response);
 					break;
-//				case "AssegnaNodiAdmin":
-//					List<String> ListaIdnodi; 
-//					String idNodi= request.getAttribute("idNodi").toString();
-//					String UsernameNodi= request.getAttribute("usernameResponsabileNodi").toString();
-//					if(utenteService.getRuoloUtente(UsernameNodi).equals("responsabile di rete")) {
-//						int idUtente=utenteService.getidUtente(UsernameNodi);
-//						ListaIdnodi=Arrays.asList(idNodi.split(";"));
-//						for(String idNodo:ListaIdnodi) {
-//							nodoService.UtenteNodo(idUtente, Integer.valueOf(idNodo));
-//						}
-//						System.out.println("Nodi Associati con successo");	
-//					}else {
-//						System.out.println("L'utente "+UsernameNodi+" non è un responsabile di rete");
-//					}
-//					break;
-				case "CancellaNodoAdmin"://OK
-					int idNodo = Integer.parseInt(this.request.getParameter("idNodo").toString());
-					String string =	cancellaNodo(idNodo);
-					if (string.equalsIgnoreCase("true")) {
-						visualizzaListaNodi();
-						getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, this.response);
-					} else if (string.equalsIgnoreCase("constraintViolation")) {
-						this.request.setAttribute("error", "constraintViolation");
-						visualizzaListaNodi();
-						getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, response);
-					} else if (string.equalsIgnoreCase("false")) {
-						this.request.setAttribute("error", "false");
-						visualizzaListaNodi();
-						getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, response);
-					}
+				case "CancellaNodoAdmin":
+					cancellaNodoAdmin();
+					visualizzaListaNodi();
+					getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, response);
 					break;
 				case "GestioneNodiAdmin"://OK
 					visualizzaListaNodi();
@@ -151,8 +121,14 @@ public class NodesServlet extends HttpServlet {
 		}
 	}
 	
-	private String cancellaNodo(int idNodo) {
-		return this.nodoService.deleteNodo(idNodo);
+	private void cancellaNodoAdmin() {
+		int idNodo = Integer.parseInt(this.request.getParameter("idNodo").toString());
+		String string = this.nodoService.deleteNodo(idNodo);
+		if (string.equalsIgnoreCase("constraintViolation")) {
+			this.request.setAttribute("error", "constraintViolation");
+		} else if (string.equalsIgnoreCase("false")) {
+			this.request.setAttribute("error", "false");
+		}
 	}
 	
 	private void AssegnaNodiAdmin() {
@@ -179,6 +155,13 @@ public class NodesServlet extends HttpServlet {
 		} else if (userLoggato.getRuolo().equalsIgnoreCase("utente semplice")) {		
 			getServletContext().getRequestDispatcher("/user/user.jsp").forward(this.request, this.response);;
 		}
+	}
+	
+	private void insertNodoAdmin() {
+		int idNodoIns = Integer.parseInt(this.request.getParameter("idNodo").toString());
+		String infoNodo = this.request.getParameter("infonodo");
+		int gruppo = Integer.parseInt(this.request.getParameter("gruppi_idgruppo").toString());
+		this.nodoService.insertNodo(new Nodo(idNodoIns, infoNodo, "OFF", gruppo));
 	}
 
 }
