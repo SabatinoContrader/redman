@@ -3,6 +3,7 @@ package com.virtualpairprogrammers.servlets;
 import com.virtualpairprogrammers.model.Nodo;
 import com.virtualpairprogrammers.model.Task;
 import com.virtualpairprogrammers.model.Utente;
+import com.virtualpairprogrammers.services.NodoService;
 import com.virtualpairprogrammers.services.TaskService;
 import com.virtualpairprogrammers.services.UtenteService;
 
@@ -19,6 +20,7 @@ import java.util.List;
 public class TasksServlet extends HttpServlet {
 
 	private TaskService taskService;
+	private NodoService nodoService;
 	private UtenteService utenteService;
 	private HttpServletRequest request;
     private Utente userLoggato;
@@ -27,6 +29,7 @@ public class TasksServlet extends HttpServlet {
 	public TasksServlet() {
 		this.taskService = new TaskService();
 		this.utenteService = new UtenteService();
+		this.nodoService=new NodoService();
 	}
 
 	@Override
@@ -72,6 +75,8 @@ public class TasksServlet extends HttpServlet {
 		int idutente=utenteService.getidUtente(userLoggato.getUsername());
 		listatask = taskService.getTasksNM(idutente);
 		this.request.setAttribute("listaTasks", listatask);
+		
+		this.request.setAttribute("listaNodiNetworkManager", nodoService.getNodiNetworkManager(idutente));
 	}
 	
 	private void associaTasks() {

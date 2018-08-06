@@ -3,6 +3,7 @@
 <%@ page import="com.virtualpairprogrammers.model.Task" %>
 <%@ page import="java.util.*" %>
 
+
 <!DOCTYPE html>
 <html>
 
@@ -11,8 +12,8 @@
 	<link rel="stylesheet" type="text/css" href="./css/tables.css">
 	<title>Gestione Task Network Manager</title>
 	<% List<Task> listaTasks = (List<Task>) request.getAttribute("listaTasks");%>
-	<%! ArrayList<Nodo> listaNodi;  %>
-	<% String nodoList;  %>
+	<% List<Nodo> listaNodi= (List<Nodo>) request.getAttribute("listaNodiNetworkManager");%>
+	
 
 </head>
 
@@ -21,14 +22,6 @@
 		<a href="TasksServlet?mode=back" ><img alt="Home" src="./icon/home.png"></a>
 		<h1>Gestione Tasks Network Manager</h1><br>
 	</div>
-
-<% listaNodi = new ArrayList<Nodo>();
-listaNodi.add(new Nodo(1,"nodo1","ON",2));
-listaNodi.add(new Nodo(2,"nodo1","ON",2));
-listaNodi.add(new Nodo(3,"nodo1","ON",2));
-listaNodi.add(new Nodo(4,"nodo1","ON",2));
-listaNodi.add(new Nodo(5,"nodo1","ON",2));
-%>
 
 	<form action="TasksServlet" method="post">
 		<div class="tables">
@@ -91,22 +84,22 @@ listaNodi.add(new Nodo(5,"nodo1","ON",2));
 						<a href="TasksServlet?mode=Associa=<%=  tasks.getIdnodo()%>"> Associa</a>
 					</td>
                               
-<%--                          <td>
-                         <input type="number" name="task_<%=tasks.getIdtask()%>" <%
-	                         if(tasks.getIdnodo()==0){
-								out.print("value=\"\"");
-							 }else{
-								out.print("value='"+tasks.getIdnodo()+"'");
-							}%> placeholder="Inserisci idnoodo da associare" size="30">
-                        </td> --%>
-                        
 					<td>
+
 						<select class ="center" name="task_<%=tasks.getIdtask()%>">
 							<%for(Nodo nodo:listaNodi){%>
-								<option value="<%=nodo.getIdnodo()%>"><%=nodo.getIdnodo()%></option>
+								<option value="<%=nodo.getIdnodo()%>"<%
+								if(nodo.getIdnodo()==tasks.getIdnodo()){
+									out.print("selected");
+								}%>><%=nodo.getIdnodo()%></option>
+								
 							<%}%>
-		                   	<option value="/">/</option>
+		                   		<option value="/" <%
+								if(tasks.getIdnodo()==0){
+									out.print("selected");
+								}%>>/</option>
 						</select>
+						
 					</td>
                
 				</tr>

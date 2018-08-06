@@ -18,7 +18,7 @@ img {
 <body>
 
 
-<h1 align="center">--------MENU-UTENTE-------</h1>
+<h1 align="center">--------MENU UTENTE-------</h1>
 <img src="./icon/programmer.png" alt="Administrator icon "	style="width: 64px; height: 64px;">
 <% Utente utente = (Utente) request.getSession().getAttribute("UserLoggato"); %>
 	<h2 align="center">	Benvenuto <%=utente.getUsername()%> </h2>

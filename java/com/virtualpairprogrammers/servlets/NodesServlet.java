@@ -111,7 +111,6 @@ public class NodesServlet extends HttpServlet {
     
     private void visualizzaStatoNodiUser() {
     	int idUtente = this.utenteService.getidUtente(this.userLoggato.getUsername());
-		System.out.println(idUtente);
     	List<Nodo> listanodiuser = this.nodoService.getStatoNodi(idUtente);
 		this.request.setAttribute("statoNodiUser", listanodiuser);
     }
