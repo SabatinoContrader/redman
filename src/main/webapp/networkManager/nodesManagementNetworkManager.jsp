@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="./css/header.css">
 	<link rel="stylesheet" type="text/css" href="./css/tables.css">
 	<meta charset="ISO-8859-1">
 	<%

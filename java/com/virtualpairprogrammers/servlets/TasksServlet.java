@@ -59,7 +59,7 @@ public class TasksServlet extends HttpServlet {
 				newAssociaTasks();
 				getServletContext().getRequestDispatcher("/networkManager/TasksManagementNetworkManager.jsp").forward(this.request, response);
 				break;
-			case "indietroNM":
+			case "back":
 				getServletContext().getRequestDispatcher("/networkManager/networkManager.jsp").forward(this.request,response);
 				break;
 
