@@ -12,7 +12,8 @@
      <input type = "text" id = "pass" name ="password" placeholder = "password nuovo utente"><br>
      <input type = "text" id = "role" name ="ruolo" placeholder = "ruolo nuovo utente"><br>
      <br>
-     <button type = "submit" value = "InsertUtenteAdmin" name = "mode">Registra Nuovo Utente</button><br>
+     <button type = "submit" value = "InsertUtenteAdmin" name = "mode">Registra</button>
+     <button type = "submit" value = "Annulla" name = "mode">Annulla</button><br>
      </fieldset>
      </form>
    </div>

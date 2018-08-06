@@ -18,6 +18,7 @@ public class UtentiServlet extends HttpServlet {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private Utente userLoggato;
+	private HttpSession session;
 
 	
 	public UtentiServlet() {
@@ -28,7 +29,7 @@ public class UtentiServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.request = request;
 		this.response = response;
-		HttpSession session = this.request.getSession(true);
+		session = this.request.getSession(true);
 		String mode = this.request.getParameter("mode");
 		
 		this.userLoggato= (Utente) session.getAttribute("UserLoggato");
@@ -50,6 +51,9 @@ public class UtentiServlet extends HttpServlet {
 				break;
 			case "GestioneUtentiNetworkManager":
 				
+				break;
+			case "Annulla":
+				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
 				break;
 			case "CancellaProfiloAdmin":
 				cancellaProfilo();
@@ -83,7 +87,8 @@ public class UtentiServlet extends HttpServlet {
 
 	private void visualizzaListaUtenti() {
 		List<Utente> utentiList = this.utenteService.getAllUtenti();
-		this.request.setAttribute("listaUtenti", utentiList);
+		this.session.setAttribute("listaUtenti", utentiList);
+		//this.request.setAttribute("listaUtenti", utentiList);
 	}
 	
 	private void aggiungiProfilo() {

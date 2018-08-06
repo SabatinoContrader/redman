@@ -23,6 +23,7 @@ public class NodesServlet extends HttpServlet {
     private UtenteService utenteService;
     private HttpServletRequest request;
     private HttpServletResponse response;
+    private HttpSession session;
     private Utente userLoggato;
     private List<Nodo> nodeslist;
     private List<Nodo> nodi;
@@ -35,7 +36,7 @@ public class NodesServlet extends HttpServlet {
     public void service (HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
     	this.request = request;
 		this.response = response;
-		HttpSession session = this.request.getSession(true);
+		session = this.request.getSession(true);
 		String mode = this.request.getParameter("mode");
 		this.userLoggato= (Utente) session.getAttribute("UserLoggato");
 
@@ -97,9 +98,13 @@ public class NodesServlet extends HttpServlet {
 					visualizzaStatoNodiUser();
 					getServletContext().getRequestDispatcher("/user/nodesManagementUser.jsp").forward(this.request,this.response);
 					break;
+				case "Annulla":
+					getServletContext().getRequestDispatcher("/admin/nodesManagementAdmin.jsp").forward(this.request, this.response);
+					break;	
 				case "back":
 					back(session);
-					break; 
+					break;
+					
 				}
 			}
 		}
@@ -113,7 +118,8 @@ public class NodesServlet extends HttpServlet {
     
     private void visualizzaListaNodi() {
 		nodeslist = this.nodoService.getAllnodi();
-		this.request.setAttribute("listaNodi", nodeslist);
+		//this.request.setAttribute("listaNodi", nodeslist);
+		this.session.setAttribute("listaNodi", nodeslist);
 	}
     
     private void visualizzaListaNodiNetworkManager() {

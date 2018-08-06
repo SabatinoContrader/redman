@@ -5,72 +5,62 @@
 <html>
 
 <head>
-
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<% List<Utente> all_utenti = (List<Utente>) request.getAttribute("listaUtenti");%>
-
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+	<% List<Utente> all_utenti = (List<Utente>) session.getAttribute("listaUtenti");%>
+	<link rel="stylesheet" type="text/css" href="./css/tables.css">
 </head>
 
 <body>
-	<h2 align="center">Gestione Utenti Amministratore</h2>
-	<br>
+	<div class="header">
+		<a href="UtentiServlet?mode=back" ><img alt="Home" src="./icon/home.png"></a>
+		<a href="UtentiServlet?mode=CreaUtenteAdmin" ><img alt="Add User" src="./icon/add_user.png"></a>
+		<h1>Gestione Utenti Amministratore</h1><br>
+	</div>
+
 	<form action="UtentiServlet" method="post">
-		<table>
-			<tr>
-
-				<th>ID_UTENTE</th>
-
-				<th>USERNAME</th>
-				<th>RUOLO</th>
-				<th></th>
-				<th></th>
-
-			</tr>
-			<%for (Utente utente : all_utenti) { %>
-			<tr>
-				<!-- <td>
-                            <input type="checkbox" name="users" value="<%= utente.getIdutente()%>"/>
-                        </td>-->
-
-				<td>
-					<p align=center>
-						<%= utente.getIdutente()%>
-				</td>
-
-				<td>
-					<p align=center>
-						<%=  utente.getUsername()%>
-				</td>
-
-				<td>
-					<p align=center>
-						<%=  utente.getRuolo()%>
-				</td>
-
-				<!--<td>
-                        <p align = center>
-             				<a href="UtentiServlet?mode=CancellaProfiloAdmin&username=<%= utente.getUsername()%>">Cancella Profilo</a>							
-                        </td>-->
-
-				<td><a
-					href="UtentiServlet?mode=CancellaProfiloAdmin&username=<%=utente.getUsername()%>">
-						<img src="./icon/delete_user.png" alt="Delete"
-						style="width: 40px; height: 40px;">
-				</a></td>
-				<td></td>
-
-			</tr>
-			<%
-				}
-			%>
-		</table>
-		<br>
-
-		<form action="UtentiServlet" method="post">
-			<button type="submit" value="CreaUtenteAdmin" name="mode">Registra Nuovo Utente</button>
-			<button type="submit" value="back" name="mode">Indietro</button>	
+		<div class="tables">
+			<table>
+			<thead>
+				<tr>
+					<th>Id Utente</th>
+					<th>Username</th>
+					<th>Ruolo</th>
+					<th>Elimina</th>
+	
+				</tr>
+				</thead>
+				<tbody>
+				<%for (Utente utente : all_utenti) { %>
+				<tr>
+					<td>
+						<p align=center><%= utente.getIdutente()%>
+					</td>
+	
+					<td>
+						<p align=center><%=  utente.getUsername()%>
+					</td>
+	
+					<td>
+						<p align=center><%=  utente.getRuolo()%>
+					</td>
+		
+					<td><a
+						href="UtentiServlet?mode=CancellaProfiloAdmin&username=<%=utente.getUsername()%>">
+							<img src="./icon/delete_user.png" alt="Delete"
+							style="width: 40px; height: 40px;" class="center">
+					</a></td>
+					
+				</tr>
+				<%
+					}
+				%>
+				</tbody>
+			</table>
+		</div>
+	
 		</form>
+
 </body>
 
 

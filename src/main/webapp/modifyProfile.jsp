@@ -13,12 +13,11 @@
 			<input type="text" id="user" name="username"placeholder="inserisci nuovo username"><br> 
 			<input type="text" id="pass" name="password"placeholder="inserisci nuova password"><br> <br>
 			<button type="submit" value="ModifyProfile" name="mode">Modifica</button>
+			<button type="submit" value="back" name="mode" >Annulla</button>
 			<br>
 		</fieldset>
-	</form>
-	
-	<form action="ModifyProfileServlet" method="post">
-    	<button type="submit" value="back" name="mode" >Indietro</button>
+
+    	
     </form>
 	
 </body>
