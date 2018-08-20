@@ -24,14 +24,18 @@
 			    <tr>            
 			        <th>Info nodo</th>		         
 			        <th>Stato nodo</th>		
+			        <th>Avviso per fault di nodo</th>		
+			        
 			    </tr>
 			</thead>
 			<tbody> 
 				
-				<%for (Nodo nodi : listaNodi) { %>
+				<%for (Nodo nodo : listaNodi) { %>
 					<tr>			
-			    		<td><p align = center><%=  nodi.getInfonodo()%></td>      	
-						<td><p align = center><%=  nodi.getStatonodo()%></td> 
+			    		<td><p align = center><%=  nodo.getInfonodo()%></td>      	
+						<td><p align = center><%=  nodo.getStatonodo()%></td> 
+						<td align = center><a href="mailto:m.caponera@contrader.it?cc=marta.caponera@tiscali.it&subject=nodo%20<%=  nodo.getIdnodo()%>%20in%20fault&body=nodo%20in%20fault">Scrivi una MAIL</a></td> 
+						
 					</tr>
 				<%}%>            
 				

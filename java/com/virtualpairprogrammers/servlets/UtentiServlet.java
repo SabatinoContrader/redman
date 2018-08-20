@@ -50,7 +50,8 @@ public class UtentiServlet extends HttpServlet {
 				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);
 				break;
 			case "GestioneUtentiNetworkManager":
-				
+				visualizzaListaUtenti();
+				getServletContext().getRequestDispatcher("/networkManager/usersManagementNetworkManager.jsp").forward(this.request, this.response);
 				break;
 			case "Annulla":
 				getServletContext().getRequestDispatcher("/admin/usersManagementAdmin.jsp").forward(this.request, this.response);

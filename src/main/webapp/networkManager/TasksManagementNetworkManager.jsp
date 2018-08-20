@@ -73,10 +73,11 @@
 					
 			     
 					<td>
-				       <p align = center><a href="TasksServlet?mode=SegnalaFaultTask">Segnala Fault</a>							
+				       <p align = center><a href="mailto:m.caponera@contrader.it?cc=marta.caponera@tiscali.it&subject=task%20in%20fault&body=task%20<%=  tasks.getIdtask()%>%20associato%20al%20nodo%20<%=  tasks.getIdnodo()%>%20in%20fault">Segnala Fault con Mail</a>							
 					</td>
 			       
 					<td align = center>
+					    
 						<a href="TasksServlet?mode=SospendiTask">Sospendi</a>
 					</td >
 					  

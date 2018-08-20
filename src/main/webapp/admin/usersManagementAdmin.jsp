@@ -26,7 +26,7 @@
 					<th>Id Utente</th>
 					<th>Username</th>
 					<th>Ruolo</th>
-					<th>Elimina</th>
+					
 	
 				</tr>
 				</thead>
@@ -45,11 +45,7 @@
 						<p align=center><%=  utente.getRuolo()%>
 					</td>
 		
-					<td><a
-						href="UtentiServlet?mode=CancellaProfiloAdmin&username=<%=utente.getUsername()%>">
-							<img src="./icon/delete_user.png" alt="Delete"
-							style="width: 40px; height: 40px;" class="center">
-					</a></td>
+					
 					
 				</tr>
 				<%
