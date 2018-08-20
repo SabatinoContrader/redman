@@ -43,6 +43,14 @@
 					<th>
 						Stato task
 					</th>
+					<th>
+					</th>
+					<th>
+	
+					</th>
+					<th>
+					Assegna task
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -73,17 +81,17 @@
 					
 			     
 					<td>
-				       <p align = center><a href="mailto:m.caponera@contrader.it?cc=marta.caponera@tiscali.it&subject=task%20in%20fault&body=task%20<%=  tasks.getIdtask()%>%20associato%20al%20nodo%20<%=  tasks.getIdnodo()%>%20in%20fault">Segnala Fault con Mail</a>							
+				       <p align = center><a href="mailto:martarella.caponera@gmail.com?cc=marta.caponera@tiscali.it&subject=task%20in%20fault&body=task%20<%=  tasks.getIdtask()%>%20associato%20al%20nodo%20<%=  tasks.getIdnodo()%>%20in%20fault">Segnala Fault con Mail</a>							
 					</td>
 			       
 					<td align = center>
-					    
-						<a href="TasksServlet?mode=SospendiTask">Sospendi</a>
+					    <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round">sospendi</span>
+                        </label>
+						<%-- <a href="TasksServlet?mode=SospendiTask">Sospendi</a>--%>
 					</td >
 					  
-					<td align = center>
-						<a href="TasksServlet?mode=Associa=<%=  tasks.getIdnodo()%>"> Associa</a>
-					</td>
                               
 					<td>
 

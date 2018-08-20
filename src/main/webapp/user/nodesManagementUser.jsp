@@ -34,7 +34,7 @@
 					<tr>			
 			    		<td><p align = center><%=  nodo.getInfonodo()%></td>      	
 						<td><p align = center><%=  nodo.getStatonodo()%></td> 
-						<td align = center><a href="mailto:m.caponera@contrader.it?cc=marta.caponera@tiscali.it&subject=nodo%20<%=  nodo.getIdnodo()%>%20in%20fault&body=nodo%20in%20fault">Scrivi una MAIL</a></td> 
+						<td align = center><a href="mailto:martarella.caponera@gmail.com?cc=marta.caponera@tiscali.it&subject=nodo%20<%=  nodo.getIdnodo()%>%20in%20fault&body=nodo%20in%20fault">Scrivi una MAIL</a></td> 
 						
 					</tr>
 				<%}%>            
