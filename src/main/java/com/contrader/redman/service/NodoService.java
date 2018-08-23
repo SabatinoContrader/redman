@@ -28,3 +28,4 @@ public class NodoService {
         return (List<Nodo>) nodoRepository.findAll();
     }
 }
+

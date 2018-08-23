@@ -1,6 +1,7 @@
 package com.contrader.redman.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
@@ -46,9 +47,6 @@ public class Nodo {
         this.gruppi_idgruppo = gruppi_idgruppo;
     }
 
-    public Nodo() {
-    }
-
     public int getIdnodo() {
         return idnodo;
     }
@@ -57,19 +55,19 @@ public class Nodo {
         this.idnodo = idnodo;
     }
 
-    public int getIdresponsabile() {
+    public Integer getIdresponsabile() {
         return idresponsabile;
     }
 
-    public void setIdresponsabile(int idresponsabile) {
+    public void setIdresponsabile(Integer idresponsabile) {
         this.idresponsabile = idresponsabile;
     }
 
-    public int getIdutentesemplice() {
+    public Integer getIdutentesemplice() {
         return idutentesemplice;
     }
 
-    public void setIdutentesemplice(int idutentesemplice) {
+    public void setIdutentesemplice(Integer idutentesemplice) {
         this.idutentesemplice = idutentesemplice;
     }
 
