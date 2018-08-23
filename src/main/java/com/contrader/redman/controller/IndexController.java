@@ -3,6 +3,7 @@ package com.contrader.redman.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.contrader.redman.service.NodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +14,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.contrader.redman.model.User;
 import com.contrader.redman.service.UserService;
 
+import java.util.ArrayList;
+
 @Controller
 public class IndexController {
-	
+
     private UserService userService;
+    private NodoService nodoService;
     
     @Autowired
-    public IndexController(UserService userService) {
+    public IndexController(UserService userService,NodoService nodoService) {
 		this.userService = userService;
+		this.nodoService=nodoService;
 	}
 
 	@GetMapping(value="/")
@@ -41,6 +46,7 @@ public class IndexController {
     		session.setAttribute("nomeUtente", u.getUsername());
     
             if(ruolo.equalsIgnoreCase("amministratore")){
+                getGraphInfoAdmin(model);
                 return "/admin/MenùAdmin";
             }else if(ruolo.equalsIgnoreCase("responsabile di rete")){
                 return "/networkManager/MenùNM";
@@ -51,6 +57,26 @@ public class IndexController {
 
         model.addAttribute("login","error");
         return "index";
+    }
+
+
+    private void getGraphInfoAdmin(Model model){
+        ArrayList<Integer> totali =new ArrayList<>();
+        totali.add(0,userService.getNumPersonForRuolo("responsabile di rete"));
+        totali.add(1,nodoService.findAll().size());
+        model.addAttribute("totali",totali);
+
+        ArrayList<Integer> noAssoc =new ArrayList<>();
+        noAssoc.add(0,nodoService.findAllResponsabili().size());
+        noAssoc.add(1,nodoService.getNotAssocNodes().size());
+        model.addAttribute("noAssoc",noAssoc);
+
+
+
+        
+      /* model.addAttribute("Totalnumtotali",userService.getNumPersonForRuolo("responsabile di rete"));
+       model.addAttribute("NumtotaliWithNode",nodoService.findAllResponsabili());*/
+
     }
     
 }

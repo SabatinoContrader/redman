@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ChartJS - Bar</title>
+
+    <link href="css/default.css" rel="stylesheet">
+    <!-- javascript -->
+    <script src="../../static/js/jquery-3.3.1.slim.min.js" th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+    <script src="../../static/js/Chart.min.js" th:src="@{/js/Chart.min.js}"></script>
+</head>
+<body>
+<div th:fragment="bar">
+    <div class="chart-container" style="display:block; margin: 0 auto; height:40vh; width:80vw">
+        <canvas id="bar-chartcanvas"></canvas>
+
+        <script th:inline="javascript">
+            var ctx = $("#bar-chartcanvas");
+
+            var totali = /*[[${totali}]]*/ 'default';
+            var noAssoc = /*[[${noAssoc}]]*/ 'default';
+            var data = {
+                labels : ["Responsabili", "Nodi"],
+                datasets : [
+                    {
+                        label : "Totali",
+                        data : totali,
+                        backgroundColor : [
+                            "rgba(10, 20, 30, 0.3)",
+                            "rgba(10, 20, 30, 0.3)",
+                        ],
+                        borderColor : [
+                            "rgba(10, 20, 30, 1)",
+                            "rgba(10, 20, 30, 1)",
+                        ],
+                        borderWidth : 1
+                    },
+                    {
+                        label : "Non associati",
+                        data : noAssoc,
+                        backgroundColor : [
+                            "rgba(50, 150, 250, 0.3)",
+                            "rgba(50, 150, 250, 0.3)",
+                            "rgba(50, 150, 250, 0.3)",
+                            "rgba(50, 150, 250, 0.3)",
+                            "rgba(50, 150, 250, 0.3)"
+                        ],
+                        borderColor : [
+                            "rgba(50, 150, 250, 1)",
+                            "rgba(50, 150, 250, 1)",
+                            "rgba(50, 150, 250, 1)",
+                            "rgba(50, 150, 250, 1)",
+                            "rgba(50, 150, 250, 1)"
+                        ],
+                        borderWidth : 1
+                    }
+                ]
+            };
+
+            var options = {
+                title : {
+                    display : true,
+                    position : "top",
+                    text : "",
+                    fontSize : 18,
+                    fontColor : "#111"
+                },
+                legend : {
+                    display : true,
+                    position : "bottom"
+                },
+                scales : {
+                    pointLabels :{
+                        fontStyle: "bold",
+                    },
+                    yAxes : [{
+                        ticks : {
+                            min : 0
+                        }
+                    }],
+                    xAxes: [{
+                        barPercentage: 0.6
+                    }]
+                }
+            };
+
+            var chart = new Chart( ctx, {
+                type : "bar",
+                data : data,
+                options : options
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>
