@@ -22,11 +22,8 @@
 <body>
 	<div th:replace="/admin/headerAdmin :: header"> </div>
 
-    <div th:replace="/admin/multiBar :: bar"> </div>
-
-
     <div th:if="${mode=='null'}">
-
+        <div th:replace="/admin/multiBar :: bar"> </div>
 	</div>
 	
 	<div th:if="${mode=='listaUtenti'}">

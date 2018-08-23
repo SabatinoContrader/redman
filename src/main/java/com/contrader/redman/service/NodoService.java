@@ -20,8 +20,8 @@ public class NodoService {
         return nodoRepository.findDistinctResp();
     }
 
-    public List<Integer> getNotAssocNodes() {
-        return nodoRepository.getNotAssocNodes();
+    public List<Integer> getNumAssocNodes() {
+        return nodoRepository.getNumAssocNodes();
     }
 
     public List<Nodo> findAll() {

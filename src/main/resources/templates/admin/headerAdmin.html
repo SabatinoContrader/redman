@@ -13,7 +13,7 @@
 <body>
 <div th:fragment="header">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#"><strong>Amministratore</strong></a>
+        <a class="navbar-brand" href="/home"><strong>Amministratore</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -39,10 +39,10 @@
             <ul class="navbar-nav navbar-right justify-content-end">
                 <li class="nav-item dropdown align-content-lg-end">
                     <a style="width: 100%" class="nav-link dropdown-toggle" id="dropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        <img th:src="@{/icon/userProfile.png}" src="../../static/icon/userProfile.png" th:hspace="10" th:text="'Benvenuto, '+${session.nomeUtente}"></a>
+                        <img th:src="@{/icon/userProfile.png}" src="../../static/icon/userProfile.png" th:hspace="10" th:text="'Benvenuto, '+${session.user.username}"></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown">
                         <a class="dropdown-item" href="#"><img th:src="@{/icon/editProfile.png}" src="../../static/icon/editProfile.png"> Gestione Profilo</a>
-                        <a class="dropdown-item" href="/"><img th:src="@{/icon/exit.png}" src="../../static/icon/exit.png"> Logout</a>
+                        <a class="dropdown-item" href="/login"><img th:src="@{/icon/exit.png}" src="../../static/icon/exit.png"> Logout</a>
                     </div>
                 </li>
 

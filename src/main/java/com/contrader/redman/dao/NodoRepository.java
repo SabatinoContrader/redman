@@ -12,13 +12,12 @@ import java.util.List;
 @Repository
 @Transactional
 public interface NodoRepository extends CrudRepository<Nodo, Long> {
-    //List<Nodo> findDistinctByIdresponsabile(List<Nodo>nodoList);
-    //List<Nodo> getDistinctByIdresponsabile();
+
     @Modifying
     @Query("select distinct n.idresponsabile from nodi n where n.idresponsabile is not null")
     List<Integer> findDistinctResp();
 
     @Modifying
     @Query("select n.idnodo from nodi n where n.idresponsabile is NULL")
-    List<Integer> getNotAssocNodes();
+    List<Integer> getNumAssocNodes();
 }
