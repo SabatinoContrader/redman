@@ -47,6 +47,9 @@ public class Nodo {
         this.gruppi_idgruppo = gruppi_idgruppo;
     }
 
+    public Nodo() {
+    }
+
     public int getIdnodo() {
         return idnodo;
     }
