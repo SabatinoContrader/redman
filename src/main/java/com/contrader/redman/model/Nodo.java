@@ -13,9 +13,9 @@ public class Nodo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int idnodo;
 
-    Integer idresponsabile;
+    String idresponsabile;
 
-    Integer idutentesemplice;
+    String idutentesemplice;
 
     @NotNull
     String infonodo;
@@ -32,14 +32,14 @@ public class Nodo {
         this.gruppi_idgruppo = gruppi_idgruppo;
     }
 
-    public Nodo(int idresponsabile, @NotNull String infonodo, @NotNull String statonodo, @NotNull int gruppi_idgruppo) {
+    public Nodo(String idresponsabile, @NotNull String infonodo, @NotNull String statonodo, @NotNull int gruppi_idgruppo) {
         this.idresponsabile = idresponsabile;
         this.infonodo = infonodo;
         this.statonodo = statonodo;
         this.gruppi_idgruppo = gruppi_idgruppo;
     }
 
-    public Nodo(int idresponsabile, int idutentesemplice, @NotNull String infonodo, @NotNull String statonodo, @NotNull int gruppi_idgruppo) {
+    public Nodo(String idresponsabile, String idutentesemplice, @NotNull String infonodo, @NotNull String statonodo, @NotNull int gruppi_idgruppo) {
         this.idresponsabile = idresponsabile;
         this.idutentesemplice = idutentesemplice;
         this.infonodo = infonodo;
@@ -58,19 +58,19 @@ public class Nodo {
         this.idnodo = idnodo;
     }
 
-    public Integer getIdresponsabile() {
+    public String getIdresponsabile() {
         return idresponsabile;
     }
 
-    public void setIdresponsabile(Integer idresponsabile) {
+    public void setIdresponsabile(String idresponsabile) {
         this.idresponsabile = idresponsabile;
     }
 
-    public Integer getIdutentesemplice() {
+    public String getIdutentesemplice() {
         return idutentesemplice;
     }
 
-    public void setIdutentesemplice(Integer idutentesemplice) {
+    public void setIdutentesemplice(String idutentesemplice) {
         this.idutentesemplice = idutentesemplice;
     }
 

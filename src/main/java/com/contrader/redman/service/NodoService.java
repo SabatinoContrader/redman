@@ -2,6 +2,8 @@ package com.contrader.redman.service;
 
 import com.contrader.redman.dao.NodoRepository;
 import com.contrader.redman.model.Nodo;
+import com.contrader.redman.model.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,10 @@ public class NodoService {
     public NodoService(NodoRepository nodoRepository) {
         this.nodoRepository = nodoRepository;
     }
-
+//    public Nodo findByIdnodo(int idnodo) {
+//        return nodoRepository.findByIdnodo(idnodo);
+//    }
+    
     public List<Integer> findAllResponsabili() {
         return nodoRepository.findDistinctResp();
     }
@@ -26,6 +31,10 @@ public class NodoService {
 
     public List<Nodo> findAll() {
         return (List<Nodo>) nodoRepository.findAll();
+    }
+    
+    public void save(Nodo nodo) {
+        nodoRepository.save(nodo);
     }
 }
 

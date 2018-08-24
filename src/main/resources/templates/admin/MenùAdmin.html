@@ -34,7 +34,13 @@
 		<div th:insert="/admin/creaUtente :: creaUtente" >...</div>
 	</div>
 
-
+	<div th:if="${mode=='listaNodi'}">
+		<div th:insert="/admin/listaNodi :: listaN" >...</div>
+	</div>
+	
+	<div th:if="${mode=='creaNodo'}">
+		<div th:insert="/admin/creaNodo :: creaNodo" >...</div>
+	</div>
 
 
 
