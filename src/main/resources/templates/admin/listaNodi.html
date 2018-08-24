@@ -1,10 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<title>Lista nodi</title>
 
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="../../static/css/bootstrap.css"
+	type="text/css" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css"
+	type="text/css" th:href="@{/css/bootstrap.min.css}" />
+
+<link rel="stylesheet" href="../../static/css/table.css" type="text/css"
+	th:href="@{/css/table.css}" />
+
+</head>
+
+<body>
+	<div th:fragment="listaN">
+		<section class="content-area">
+			<div class="table-area">
+				<table class="responsive-table table">
+					<thead>
+						<tr>
+							<th>Id nodo</th>
+							<th>Id responsabile</th>
+							<th>Id utente semplice</th>
+							<th>Info nodo</th>
+							<th>Stato nodo</th>
+							<th>Gruppi id gruppo</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<th:block th:each="nodo : ${nodes}">
+							<tr>
+							   <td th:text="${nodo.idnodo}">...</td>
+							   <td th:text="${nodo.idresponsabile}">...</td>
+							    <td th:text="${nodo.idutentesemplice}">...</td>
+							    <td th:text="${nodo.infonodo}">...</td>
+							   <td th:text="${nodo.statonodo}">...</td>
+							    <td th:text="${nodo.gruppi_idgruppo}">...</td>
+							</tr>
+						</th:block>
+					   
+					</tbody>
+				</table>
+			</div>
+		</section>
+	</div>
+
+
+
+
+
+
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+	<script src="../../static/js/jquery-3.3.1.slim.min.js"
+		th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+	<script src="../../static/js/popper.min.js"
+		th:src="@{/js/popper.min.js}"></script>
+	<script src="../../static/js/bootstrap.min.js"
+		th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>
