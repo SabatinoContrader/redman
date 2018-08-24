@@ -5,34 +5,29 @@ import com.contrader.redman.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
 public class UserManagementAdminController {
     private UserService userService;
-    //private Charts charts;
 
     @Autowired
-    public UserManagementAdminController(UserService userService/*, Charts charts*/) {
+    public UserManagementAdminController(UserService userService) {
         this.userService = userService;
-        //this.charts = charts;
     }
 
-
-   /* public UserManagementAdminController(UserService userService) {
-        this.userService = userService;
-    }*/
-
-    @RequestMapping("listaUtenti")
+    @RequestMapping("/listaUtenti")
     public String GetListaUtenti(Model model) {
-
         model.addAttribute("users", userService.findAll());
         model.addAttribute("mode", "listaUtenti");
         return "/admin/MenùAdmin";
+    }
+
+    @RequestMapping(value = "delete/{idUser}", method = RequestMethod.GET)
+    public String deleteUser(@PathVariable int idUser) {
+        userService.deleteUser(idUser);
+        return "redirect:/admin/home";
     }
 
     @GetMapping("/registraUtente")
@@ -44,12 +39,9 @@ public class UserManagementAdminController {
     }
 
     @PostMapping("/registraUtente")
-    public String creaUtente(@ModelAttribute("user") User user, Model model) {
+    public String creaUtente(@ModelAttribute("user") User user) {
         userService.save(user);
-        /*model.addAttribute("mode", "null");
-        charts.getGraphInfoAdmin(model);
-        return "redirect:/home";*/
-        return "redirect:home";
+        return "redirect:/admin/home";
     }
 
 }
