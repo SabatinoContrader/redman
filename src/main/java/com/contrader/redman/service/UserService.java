@@ -33,7 +33,7 @@ public class UserService {
         return userDao.countByRuolo(ruolo);
     }
 
-    public List<User> findAllByRuolo(String ruolo){
-        return userDao.findAllByRuolo(ruolo);
+    public void deleteUser(int idUser){
+        userDao.deleteByIdutente(idUser);
     }
 }

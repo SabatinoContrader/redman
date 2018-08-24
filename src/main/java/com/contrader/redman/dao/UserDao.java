@@ -13,4 +13,5 @@ public interface UserDao extends CrudRepository<User, Long> {
     User findByUsernameAndPassword(String username,String password);
     int countByRuolo(String ruolo);
     List<User> findAllByRuolo(String ruolo);
+    void deleteByIdutente(int idutente);
 }
