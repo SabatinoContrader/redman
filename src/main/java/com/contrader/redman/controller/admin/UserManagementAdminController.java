@@ -1,6 +1,5 @@
-package com.contrader.redman.controller;
+package com.contrader.redman.controller.admin;
 
-import com.contrader.redman.model.Charts;
 import com.contrader.redman.model.User;
 import com.contrader.redman.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class UserManagementAdminController {
     private UserService userService;
-    private Charts charts;
+    //private Charts charts;
 
     @Autowired
-    public UserManagementAdminController(UserService userService, Charts charts) {
+    public UserManagementAdminController(UserService userService/*, Charts charts*/) {
         this.userService = userService;
-        this.charts = charts;
+        //this.charts = charts;
     }
 
 
@@ -47,9 +46,10 @@ public class UserManagementAdminController {
     @PostMapping("/registraUtente")
     public String creaUtente(@ModelAttribute("user") User user, Model model) {
         userService.save(user);
-        model.addAttribute("mode", "null");
+        /*model.addAttribute("mode", "null");
         charts.getGraphInfoAdmin(model);
-        return "/admin/MenùAdmin";
+        return "redirect:/home";*/
+        return "redirect:home";
     }
 
 }

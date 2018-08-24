@@ -15,7 +15,7 @@
 </head>
 
 <body class="text-center">
-    <form class="form-signin" th:action="@{/home}" th:object="${user}" method="POST">
+    <form class="form-signin" th:action="@{/}" th:object="${user}" method="POST">
         <img class="mb-4" src="../static/icon/user.png" th:src="@{/icon/user.png}" alt="" width="72" height="72">
 
         <div th:if="${login=='error'}">
