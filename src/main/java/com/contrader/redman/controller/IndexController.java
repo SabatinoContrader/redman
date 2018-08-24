@@ -43,9 +43,11 @@ public class IndexController {
                     session.setAttribute("user", u);
                     return "redirect:admin/home";
                 case "responsabile di rete":
-                    break;
+                	session.setAttribute("user", u);
+                    return "redirect:networkManager/home";
                 case "utente semplice":
-                    break;
+                	session.setAttribute("user", u);
+                    return "redirect:user/home";
             }
 
            /* if (ruolo.equalsIgnoreCase("amministratore")) {
