@@ -30,15 +30,14 @@ public class HomeAdminController {
 
     private void getGraphInfoAdmin(Model model) {
         ArrayList<Integer> totali = new ArrayList<>();
-        int numResp = userService.getNumPersonForRuolo("responsabile di rete");
+        int numResp = userService.getNumPersonForRuolo("Responsabile di rete");
         totali.add(0, numResp);
         totali.add(1, nodoService.findAll().size());
         model.addAttribute("totali", totali);
 
         ArrayList<Integer> noAssoc = new ArrayList<>();
-        noAssoc.add(0, numResp - nodoService.findAllResponsabili().size());
-        noAssoc.add(1, nodoService.getNumAssocNodes().size());
+        noAssoc.add(0, numResp - nodoService.findAllResponsabiliAssoc().size());
+        noAssoc.add(1, nodoService.getNumNotAssocNodes());
         model.addAttribute("noAssoc", noAssoc);
-
     }
 }

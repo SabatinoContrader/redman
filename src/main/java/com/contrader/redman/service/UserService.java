@@ -1,6 +1,6 @@
 package com.contrader.redman.service;
 
-import com.contrader.redman.dao.UserDao;
+import com.contrader.redman.dao.UserRepository;
 import com.contrader.redman.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,30 +10,34 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private UserDao userDao;
+    private UserRepository userRepository;
 
     @Autowired
-    public UserService(UserDao userDao) {
-        this.userDao = userDao;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public User findByUsernameAndPassword(String username, String password) {
-        return userDao.findByUsernameAndPassword(username, password);
+        return userRepository.findByUsernameAndPassword(username, password);
     }
 
     public Iterable<User> findAll() {
-        return userDao.findAll();
+        return userRepository.findAll();
     }
 
     public void save(User user) {
-        userDao.save(user);
+        userRepository.save(user);
     }
 
     public int getNumPersonForRuolo(String ruolo) {
-        return userDao.countByRuolo(ruolo);
+        return userRepository.countByRuolo(ruolo);
     }
 
     public void deleteUser(int idUser){
-        userDao.deleteByIdutente(idUser);
+        userRepository.deleteByIdutente(idUser);
+    }
+
+    public List<String> FindDistinctRuoli(){
+        return userRepository.FindDistinctRuoli();
     }
 }

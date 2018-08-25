@@ -3,7 +3,7 @@ package com.contrader.redman.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@Entity (name = "utenti")
 @Table(name = "utenti")
 public class User {
 

@@ -14,18 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class NodesManagementAdminController {
     private NodoService nodoService;
-    //private Charts charts;
 
     @Autowired
-    public NodesManagementAdminController(NodoService nodoService/*, Charts charts*/) {
+    public NodesManagementAdminController(NodoService nodoService) {
         this.nodoService = nodoService;
-        //this.charts = charts;
+
     }
-
-
-   /* public NodesManagementAdminController(NodoService nodoService) {
-        this.nodoService = nodoService;
-    }*/
 
     @RequestMapping("/listaNodi")
     public String GetListaNodi(Model model) {
@@ -46,9 +40,6 @@ public class NodesManagementAdminController {
     @PostMapping("/aggiungiNodo")
     public String creaNodo(@ModelAttribute("nodo") Nodo nodo, Model model) {
         nodoService.save(nodo);
-        /*model.addAttribute("mode", "null");
-        charts.getGraphInfoAdmin(model);
-        return "redirect:/home";*/
         return "redirect:home";
     }
 

@@ -14,14 +14,11 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class IndexController {
-
     private UserService userService;
 
-
     @Autowired
-    public IndexController(UserService userService/*, Charts charts*/) {
+    public IndexController(UserService userService) {
         this.userService = userService;
-        //this.charts = charts;
     }
 
     @GetMapping(value = "/")
@@ -33,59 +30,25 @@ public class IndexController {
     }
 
     @PostMapping(value = "/")
-    public String CheckUser(@ModelAttribute("user") User user, Model model,HttpSession session) {
+    public String CheckUser(@ModelAttribute("user") User user, Model model, HttpSession session) {
         User u = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         if (u != null) {
             String ruolo = u.getRuolo();
 
             switch (ruolo) {
-                case "amministratore":
+                case "Amministratore":
                     session.setAttribute("user", u);
                     return "redirect:admin/home";
-                case "responsabile di rete":
-                	session.setAttribute("user", u);
+                case "Responsabile di rete":
+                    session.setAttribute("user", u);
                     return "redirect:networkManager/home";
-                case "utente semplice":
-                	session.setAttribute("user", u);
+                case "Utente semplice":
+                    session.setAttribute("user", u);
                     return "redirect:user/home";
             }
-
-           /* if (ruolo.equalsIgnoreCase("amministratore")) {
-                model.addAttribute("mode", "null");
-                charts.getGraphInfoAdmin(model);
-                return "/admin/MenùAdmin";
-            } else if (ruolo.equalsIgnoreCase("responsabile di rete")) {
-                return "/networkManager/MenùNM";
-            } else if (ruolo.equalsIgnoreCase("utente semplice")) {
-                return "/user/MenùUser";
-            } else {
-                model.addAttribute("login", "error");
-                return "index";
-            }*/
         }
-/*        if (u != null) {
-            session.setAttribute("user", u);
-            return callView(u.getRuolo(), model);
-        } else if (session.getAttribute("user") != null) {
-            user = (User) session.getAttribute("user");
-            return callView(user.getRuolo(), model);
-        } else {
-            model.addAttribute("login", "error");
-            return "index";
-        }*/
+
         model.addAttribute("login", "error");
         return "index";
     }
-
-    /*private String callView(String ruolo, Model model) {
-        if (ruolo.equalsIgnoreCase("amministratore")) {
-            model.addAttribute("mode", "null");
-            charts.getGraphInfoAdmin(model);
-            return "/admin/MenùAdmin";
-        } else if (ruolo.equalsIgnoreCase("responsabile di rete")) {
-            return "/networkManager/MenùNM";
-        } else if (ruolo.equalsIgnoreCase("utente semplice")) {
-            return "/user/MenùUser";
-        } else return null;
-    }*/
 }

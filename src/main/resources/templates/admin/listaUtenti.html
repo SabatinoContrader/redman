@@ -23,20 +23,22 @@
 
                 <thead>
                     <tr>
-                        <th >Id utente</th>
-                        <th >Username</th>
-                        <th >Ruolo</th>
-                        <th >Delete option</th>
+                    <tr>
+                        <th style="width: 10%">Id utente</th>
+                        <th style="width: 40%">Username</th>
+                        <th style="width: 40%">Ruolo</th>
+                        <th style="width: 10%"></th>
+                    </tr>
                     </tr>
                 </thead>
 
                 <tbody>
                     <th:block th:each="user : ${users}">
                         <tr >
-                            <td th:text="${user.idutente}">...</td>
-                            <td  th:text="${user.username}">...</td>
-                            <td  th:text="${user.ruolo}">...</td>
-                            <td ><a th:href="@{'delete/' + ${user.idutente}}"><img th:src="@{/icon/delete.png}" src="../../static/icon/delete.png"></a></td>
+                            <td style="width: 10%" th:text="${user.idutente}">...</td>
+                            <td style="width: 40%" th:text="${user.username}">...</td>
+                            <td style="width: 40%" th:text="${user.ruolo}">...</td>
+                            <td style="width: 10%" ><a th:href="@{'delete/' + ${user.idutente}}"><img th:src="@{/icon/delete.png}" src="../../static/icon/delete.png"></a></td>
                         </tr>
                     </th:block>
                 </tbody>

@@ -10,11 +10,8 @@ body {
 
 table.responsive-table {
     display: table;
-    /* required for table-layout to be used (not normally necessary; included for completeness) */
-    table-layout: fixed;
-    /* this keeps your columns with fixed with exactly the right width */
+   /* table-layout: fixed;*/
     width: 100%;
-    /* table must have width set for fixed layout to work as expected */
     height: 100%;
 }
 
@@ -27,7 +24,7 @@ table.responsive-table thead {
     height: 50px;
     line-height: 3em;
     background: #eee;
-    table-layout: fixed;
+    /*table-layout: fixed;*/
     display: table;
 }
 
@@ -42,7 +39,4 @@ table.responsive-table td {
 table.responsive-table tr > td,
 table.responsive-table th {
     text-align: left;
-}
- td, th{
-    width: 25%;
 }

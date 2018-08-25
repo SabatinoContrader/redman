@@ -34,6 +34,7 @@ public class UserManagementAdminController {
     public String getViewUtente(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("mode", "creaUtente");
+        model.addAttribute("ruoli", userService.FindDistinctRuoli());
         return "/admin/MenùAdmin";
 
     }
