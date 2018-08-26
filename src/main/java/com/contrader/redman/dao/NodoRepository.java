@@ -19,6 +19,8 @@ public interface NodoRepository extends CrudRepository<Nodo, Long> {
 
     List<Nodo> findByIdresponsabileIsNull();
 
+    void deleteByIdnodo(int idNodo);
+
     /*@Modifying
     @Query("select n from nodi n inner join utenti u on u.idutente=n.idresponsabile")
     List<Nodo> findAll();*/

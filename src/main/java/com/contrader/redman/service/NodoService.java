@@ -31,5 +31,9 @@ public class NodoService {
     public void save(Nodo nodo) {
         nodoRepository.save(nodo);
     }
+
+    public void deleteNode(int idNodo) {
+        nodoRepository.deleteByIdnodo(idNodo);
+    }
 }
 

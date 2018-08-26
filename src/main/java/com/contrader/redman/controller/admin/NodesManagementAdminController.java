@@ -6,10 +6,7 @@ import com.contrader.redman.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +24,7 @@ public class NodesManagementAdminController {
     }
 
     @RequestMapping("/listaNodi")
-    public String GetListaNodi(Model model) throws CloneNotSupportedException {
+    public String GetListaNodi(Model model){
         List<Nodo> listaNodi = new ArrayList<>();
 
         for (Nodo nodo : nodoService.findAll()) {
@@ -49,22 +46,43 @@ public class NodesManagementAdminController {
             listaNodi.add(newNodo);
         }
         model.addAttribute("nodes", listaNodi);
+        model.addAttribute("nodo", new Nodo());
         model.addAttribute("mode", "listaNodi");
         return "/admin/MenùAdmin";
     }
 
-    @GetMapping("/aggiungiNodo")
+    /*@GetMapping("/aggiungiNodo")
     public String getViewNodo(Model model) {
         model.addAttribute("nodo", new Nodo());
         model.addAttribute("mode", "creaNodo");
         return "/admin/MenùAdmin";
 
-    }
+    }*/
 
     @PostMapping("/aggiungiNodo")
     public String creaNodo(@ModelAttribute("nodo") Nodo nodo, Model model) {
+
+        if(nodo.getIdresponsabile().isEmpty()){
+            nodo.setIdresponsabile(null);
+        }else{
+            Integer idResp = userService.getIdByUsername(nodo.getIdresponsabile());
+            nodo.setIdresponsabile(idResp.toString());
+        }
+
+        if (nodo.getIdutentesemplice().isEmpty()) {
+            nodo.setIdutentesemplice(null);
+        }else{
+           Integer idUser = userService.getIdByUsername(nodo.getIdutentesemplice());
+           nodo.setIdutentesemplice(idUser.toString());
+        }
         nodoService.save(nodo);
-        return "redirect:home";
+        return "redirect:/admin/listaNodi";
+    }
+
+    @RequestMapping(value = "deleteNode/{idNodo}", method = RequestMethod.GET)
+    public String deleteUser(@PathVariable int idNodo) {
+        nodoService.deleteNode(idNodo);
+        return "redirect:/admin/listaNodi";
     }
 
 }

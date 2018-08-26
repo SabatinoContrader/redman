@@ -15,6 +15,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
     List<String> FindDistinctRuoli();
 
     User findByUsernameAndPassword(String username, String password);
+    User findByUsername(String username);
 
     int countByRuolo(String ruolo);
 

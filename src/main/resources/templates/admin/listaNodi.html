@@ -19,27 +19,46 @@
 <div th:fragment="listaN">
     <section class="content-area">
         <div class="table-area">
-            <table class="responsive-table table">
+            <table id="myTable" class="responsive-table table">
                 <thead>
                 <tr>
                     <th style="width: 10%">Id nodo</th>
                     <th style="width: 15%">Responsabile</th>
                     <th style="width: 15%">Utente associato</th>
-                    <th style="width: 40%">Info nodo</th>
+                    <th style="width: 33%">Info nodo</th>
                     <th style="width: 10%">Stato nodo</th>
                     <th style="width: 10%">Id gruppo</th>
+                    <th style="width: 7%"><a onclick="addNode()" th:onclick="'javascript:addNode()'">
+                        <img id="addRow" th:src="@{/icon/add.png}" src="../../static/icon/add.png"></a>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
+                <form class="form-signin" th:action="@{/admin/aggiungiNodo}" th:object="${nodo}" method="POST">
+                    <tr id="addNode"> <!--id="addNode" style="display: none"-->
+                        <td style="width: 10%"></td>
+                        <td style="width: 15%"><input name="responsabile" th:field="*{idresponsabile}" class="form-control" type="text" style="width: 100%"/></td>
+                        <td style="width: 15%"><input name="utenteAssoc" th:field="*{idutentesemplice}" class="form-control" type="text"  style="width: 100%"/></td>
+                        <td style="width: 33%"><input name="infoNodo" th:field="*{infonodo}" class="form-control" type="text" style="width: 100%"/></td>
+                        <td style="width: 10%"><input name="statoNodo" th:field="*{statonodo}" class="form-control" type="text" style="width: 100%"/></td>
+                        <td style="width: 10%"><input name="idGruppo" th:field="*{gruppi_idgruppo}" class="form-control" type="number" style="width: 100%"/></td>
+                        <td style="width: 7%"> <input type="image" th:src="@{/icon/success.png}" src="../../static/icon/success.png" alt="Submit Form"/></td>
+                    </form>
+                </tr>
 
                 <th:block th:each="nodo : ${nodes}">
                     <tr>
                         <td style="width: 10%" th:text="${nodo.idnodo}">...</td>
                         <td style="width: 15%" th:text="${nodo.idresponsabile}">...</td>
                         <td style="width: 15%" th:text="${nodo.idutentesemplice}">...</td>
-                        <td style="width: 40%" th:text="${nodo.infonodo}">...</td>
+                        <td style="width: 33%" th:text="${nodo.infonodo}">...</td>
                         <td style="width: 10%" th:text="${nodo.statonodo}">...</td>
                         <td style="width: 10%" th:text="${nodo.gruppi_idgruppo}">...</td>
+                        <td style="width: 7%">
+                            <a th:href="@{'deleteNode/' + ${nodo.idnodo}}"><img th:src="@{/icon/delete.png}" src="../../static/icon/delete.png"></a>
+                            <a href="#"><img th:src="@{/icon/edit.png}" src="../../static/icon/edit.png" align="right"></a>
+                        </td>
+
                     </tr>
                 </th:block>
 
@@ -59,5 +78,35 @@
         th:src="@{/js/popper.min.js}"></script>
 <script src="../../static/js/bootstrap.min.js"
         th:src="@{/js/bootstrap.min.js}"></script>
+
+
+<!--<script>
+    function myFunction() {
+        var table = document.getElementById("myTable");
+        var row = table.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = "NEW CELL1";
+        cell2.innerHTML = "NEW CELL2";
+    }
+</script>-->
+
+<script th:inline="javascript">
+    function addNode() {
+        document.getElementById('addNode').style.display = 'none';
+    }
+
+    /*   document.getElementById("addRow").addEventListener("click", addNode);
+       function addNode(){
+           document.getElementById('addNode').style.display='';
+       }*/
+
+    /*   $(function(){
+           $("#addRow").onclick(function(){
+               document.getElementById('addNode').style.display='';
+           });
+       });*/
+</script>
+
 </body>
 </html>

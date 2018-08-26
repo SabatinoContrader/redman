@@ -29,6 +29,10 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public Integer getIdByUsername(String username){
+        return userRepository.findByUsername(username).getIdutente();
+    }
+
     public int getNumPersonForRuolo(String ruolo) {
         return userRepository.countByRuolo(ruolo);
     }

@@ -24,7 +24,7 @@ public class UserManagementAdminController {
         return "/admin/MenùAdmin";
     }
 
-    @RequestMapping(value = "delete/{idUser}", method = RequestMethod.GET)
+    @RequestMapping(value = "deleteUser/{idUser}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable int idUser) {
         userService.deleteUser(idUser);
         return "redirect:/admin/home";
