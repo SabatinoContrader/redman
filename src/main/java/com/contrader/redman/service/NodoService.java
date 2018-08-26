@@ -25,7 +25,7 @@ public class NodoService {
     }
 
     public List<Nodo> findAll() {
-        return nodoRepository.findAll();
+        return (List<Nodo>) nodoRepository.findAll();
     }
 
     public void save(Nodo nodo) {

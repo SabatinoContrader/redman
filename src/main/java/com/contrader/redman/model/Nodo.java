@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity (name = "nodi")
 @Table(name = "nodi")
-public class Nodo {
+public class Nodo implements Cloneable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +58,7 @@ public class Nodo {
         this.idnodo = idnodo;
     }
 
+/*    @Column(name = "ID_RESPONSABILE")*/
     public String getIdresponsabile() {
         return idresponsabile;
     }
@@ -96,5 +97,20 @@ public class Nodo {
 
     public void setGruppi_idgruppo(int gruppi_idgruppo) {
         this.gruppi_idgruppo = gruppi_idgruppo;
+    }
+
+/*    @JoinTable(name = "USER",joinColumns = @JoinColumn(name = "ID_RESPONSABILE"),inverseJoinColumns =@JoinColumn(name = "ID_UTENTE"))
+    @ManyToOne(fetch = FetchType.LAZY)
+    *//*  @JoinColumn(name = "idutente")*//*
+    private User user;*/
+
+    @Override
+    public Nodo clone(){
+        try {
+            return (Nodo) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

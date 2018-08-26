@@ -2,11 +2,12 @@ package com.contrader.redman.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity (name = "utenti")
+@Entity(name = "utenti")
 @Table(name = "utenti")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idutente;
@@ -34,9 +35,13 @@ public class User {
     public User() {
     }
 
+/*    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_UTENTE")*/
     public int getIdutente() {
         return idutente;
     }
+
     public void setIdutente(int idutente) {
         this.idutente = idutente;
     }
@@ -44,6 +49,7 @@ public class User {
     public String getRuolo() {
         return ruolo;
     }
+
     public void setRuolo(String ruolo) {
         this.ruolo = ruolo;
     }
@@ -51,6 +57,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getUsername() {
         return username;
     }
@@ -59,7 +66,14 @@ public class User {
         this.password = password;
 
     }
+
     public String getPassword() {
         return password;
     }
+
+/*    @OneToMany
+    @JoinTable(name = "Nodi_list",joinColumns = @JoinColumn(name = "ID_UTENTE"),inverseJoinColumns =@JoinColumn(name = "ID_RESPONSABILE"))
+    private List<Nodo> nodi;*/
 }
+
+

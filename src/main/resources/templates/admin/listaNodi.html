@@ -22,24 +22,24 @@
             <table class="responsive-table table">
                 <thead>
                 <tr>
-                    <th>Id nodo</th>
-                    <th>Id responsabile</th>
-                    <th>Id utente semplice</th>
-                    <th>Info nodo</th>
-                    <th>Stato nodo</th>
-                    <th>Gruppi id gruppo</th>
+                    <th style="width: 10%">Id nodo</th>
+                    <th style="width: 15%">Responsabile</th>
+                    <th style="width: 15%">Utente associato</th>
+                    <th style="width: 40%">Info nodo</th>
+                    <th style="width: 10%">Stato nodo</th>
+                    <th style="width: 10%">Id gruppo</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <th:block th:each="nodo : ${nodes}">
                     <tr>
-                        <td th:text="${nodo.idnodo}">...</td>
-                        <td th:text="${nodo.idresponsabile}">...</td>
-                        <td th:text="${nodo.idutentesemplice}">...</td>
-                        <td th:text="${nodo.infonodo}">...</td>
-                        <td th:text="${nodo.statonodo}">...</td>
-                        <td th:text="${nodo.gruppi_idgruppo}">...</td>
+                        <td style="width: 10%" th:text="${nodo.idnodo}">...</td>
+                        <td style="width: 15%" th:text="${nodo.idresponsabile}">...</td>
+                        <td style="width: 15%" th:text="${nodo.idutentesemplice}">...</td>
+                        <td style="width: 40%" th:text="${nodo.infonodo}">...</td>
+                        <td style="width: 10%" th:text="${nodo.statonodo}">...</td>
+                        <td style="width: 10%" th:text="${nodo.gruppi_idgruppo}">...</td>
                     </tr>
                 </th:block>
 

@@ -12,11 +12,16 @@ import java.util.List;
 @Repository
 @Transactional
 public interface NodoRepository extends CrudRepository<Nodo, Long> {
+
     @Modifying
     @Query("select distinct n.idresponsabile from nodi n where n.idresponsabile is not null")
     List<Integer> findDistinctResp();
 
     List<Nodo> findByIdresponsabileIsNull();
-    List<Nodo> findAll();
 
+    /*@Modifying
+    @Query("select n from nodi n inner join utenti u on u.idutente=n.idresponsabile")
+    List<Nodo> findAll();*/
+
+    //String findUsernameById
 }

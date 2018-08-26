@@ -40,4 +40,8 @@ public class UserService {
     public List<String> FindDistinctRuoli(){
         return userRepository.FindDistinctRuoli();
     }
+
+    public String findByIdutente(int idutente){
+        return userRepository.findByIdutente(idutente).getUsername();
+    }
 }
