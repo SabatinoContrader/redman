@@ -13,7 +13,23 @@
 </head>
 	
 <body>
-<div th:replace="/networkManager/headerNM :: header"> </div>
+	<div th:replace="/networkManager/headerNM :: header"> </div>
+
+	<div th:if="${mode=='null'}">
+        <div th:replace="/networkManager/multiBar :: bar"> </div>
+	</div>
+	
+	<div th:if="${mode=='listaUtenti'}">
+		<div th:insert="/networkManager/listaUtenti :: lista" >...</div>
+	</div>
+	
+	<div th:if="${mode=='listaNodi'}">
+		<div th:insert="/networkManager/listaNodi :: listaN" >...</div>
+	</div>
+	
+	<div th:if="${mode=='listaTasks'}">
+		<div th:insert="/networkManager/listaTasks :: listaT" >...</div>
+	</div>
 
 
 <!-- Optional JavaScript -->
