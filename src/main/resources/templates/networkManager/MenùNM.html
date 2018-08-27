@@ -15,9 +15,9 @@
 <body>
 	<div th:replace="/networkManager/headerNM :: header"> </div>
 
-	<div th:if="${mode=='null'}">
+	 <div th:if="${mode=='null'}">
         <div th:replace="/networkManager/multiBar :: bar"> </div>
-	</div>
+	</div> 
 	
 	<div th:if="${mode=='listaUtenti'}">
 		<div th:insert="/networkManager/listaUtenti :: lista" >...</div>
@@ -30,7 +30,7 @@
 	<div th:if="${mode=='listaTasks'}">
 		<div th:insert="/networkManager/listaTasks :: listaT" >...</div>
 	</div>
-
+ 
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

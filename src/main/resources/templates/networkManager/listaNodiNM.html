@@ -1,10 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="ISO-8859-1">
+    <title>Lista nodi</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../../static/css/bootstrap.css"
+          type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css"
+          type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" href="../../static/css/table.css" type="text/css"
+          th:href="@{/css/table.css}"/>
+
 </head>
+
 <body>
+<div th:fragment="listaN">
+    <section class="content-area">
+        <div class="table-area">
+            <table id="myTable" class="responsive-table table">
+                <thead>
+                <tr>
+                    <th style="width: 10%">Id nodo</th>
+                    <th style="width: 15%">Responsabile</th>
+                    <th style="width: 15%">Utente associato</th>
+                    <th style="width: 33%">Info nodo</th>
+                    <th style="width: 10%">Stato nodo</th>
+                    <th style="width: 10%">Id gruppo</th>
+                    <th style="width: 7%">
+                        <script th:inline="javascript">
+                            function aggiungiNodo() {
+                                document.getElementById('addNode').style.display = '';
+                            }
+                        </script>
+
+                        <a onclick="aggiungiNodo()" th:onclick="'javascript:aggiungiNodo()'">
+                        <img id="addRow" th:src="@{/icon/add.png}" src="../../static/icon/add.png"></a>
+                    </th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <form class="form-signin" th:action="@{/admin/aggiungiNodo}" th:object="${nodo}" method="POST">
+                    <tr id="addNode" style="display: none">
+                        <td style="width: 10%"></td>
+                        <td style="width: 15%"><input name="responsabile" th:field="*{idresponsabile}" class="form-control" type="text" style="width: 100%"/></td>
+                        <td style="width: 15%"><input name="utenteAssoc" th:field="*{idutentesemplice}" class="form-control" type="text"  style="width: 100%"/></td>
+                        <td style="width: 33%"><input name="infoNodo" th:field="*{infonodo}" class="form-control" type="text" style="width: 100%" required/></td>
+                        <td style="width: 10%"><input name="statoNodo" th:field="*{statonodo}" class="form-control" type="text" style="width: 100%" required/></td>
+                        <td style="width: 10%"><input name="idGruppo" th:field="*{gruppi_idgruppo}" class="form-control" type="number" style="width: 100%" required/></td>
+                        <td style="width: 7%"> <input type="image" th:src="@{/icon/success.png}" src="../../static/icon/success.png" alt="Submit Form"/></td>
+                    </form>
+                </tr>
+
+                <th:block th:each="nodo : ${nodes}">
+                    <tr>
+                        <td style="width: 10%" th:text="${nodo.idnodo}">...</td>
+                        <td style="width: 15%" th:text="${nodo.idresponsabile}">...</td>
+                        <td style="width: 15%" th:text="${nodo.idutentesemplice}">...</td>
+                        <td style="width: 33%" th:text="${nodo.infonodo}">...</td>
+                        <td style="width: 10%" th:text="${nodo.statonodo}">...</td>
+                        <td style="width: 10%" th:text="${nodo.gruppi_idgruppo}">...</td>
+                        <td style="width: 7%">
+                            <a th:href="@{'deleteNode/' + ${nodo.idnodo}}"><img th:src="@{/icon/delete.png}" src="../../static/icon/delete.png"></a>
+                            <a href="#"><img th:src="@{/icon/edit.png}" src="../../static/icon/edit.png" align="right"></a>
+                        </td>
+
+                    </tr>
+                </th:block>
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<script src="../../static/js/jquery-3.3.1.slim.min.js"
+        th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+<script src="../../static/js/popper.min.js"
+        th:src="@{/js/popper.min.js}"></script>
+<script src="../../static/js/bootstrap.min.js"
+        th:src="@{/js/bootstrap.min.js}"></script>
+
 
 </body>
+
+<script>
+    function modificaNodo(utente) {
+        var message = /*[[${message}]]*/ 'default';
+    }
+</script>
+
 </html>

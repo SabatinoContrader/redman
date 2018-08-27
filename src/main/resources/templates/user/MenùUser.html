@@ -15,13 +15,13 @@
 <body>
 	<div th:replace="/user/headerUser :: header"> </div>
 
-	<div th:if="${mode=='null'}">
+	 <div th:if="${mode=='null'}">
         <div th:replace="/user/multiBar :: bar"> </div>
 	</div>
 	
 	<div th:if="${mode=='listaNodi'}">
 		<div th:insert="/user/listaNodi :: listaN" >...</div>
-	</div>
+	</div> 
 
 
 <!-- Optional JavaScript -->
