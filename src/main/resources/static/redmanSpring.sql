@@ -153,14 +153,20 @@ CREATE TABLE `nodi` (
   `infonodo` varchar(45) NOT NULL,
   `statonodo` varchar(45) NOT NULL,
   `gruppi_idgruppo` int(11) NOT NULL,
+  `utenti` int(11) DEFAULT NULL,
+  `user_idutente` int(11) DEFAULT NULL,
   PRIMARY KEY (`idnodo`),
   KEY `fk_nodi_gruppi1_idx` (`gruppi_idgruppo`),
   KEY `idutente_idx` (`idresponsabile`,`idutentesemplice`),
   KEY `idutentesemplice` (`idutentesemplice`),
+  KEY `FKew8m4p95rq92uiemj7egghbuq` (`utenti`),
+  KEY `FKovpwuk92akwftbad6sjcsgdkb` (`user_idutente`),
+  CONSTRAINT `FKew8m4p95rq92uiemj7egghbuq` FOREIGN KEY (`utenti`) REFERENCES `utenti` (`idutente`),
+  CONSTRAINT `FKovpwuk92akwftbad6sjcsgdkb` FOREIGN KEY (`user_idutente`) REFERENCES `utenti` (`idutente`),
   CONSTRAINT `fk_nodi_gruppi1` FOREIGN KEY (`gruppi_idgruppo`) REFERENCES `gruppi` (`idgruppo`),
   CONSTRAINT `nodi_ibfk_1` FOREIGN KEY (`idresponsabile`) REFERENCES `utenti` (`idutente`),
   CONSTRAINT `nodi_ibfk_2` FOREIGN KEY (`idutentesemplice`) REFERENCES `utenti` (`idutente`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,8 +175,32 @@ CREATE TABLE `nodi` (
 
 LOCK TABLES `nodi` WRITE;
 /*!40000 ALTER TABLE `nodi` DISABLE KEYS */;
-INSERT INTO `nodi` VALUES (1,2,3,'Cpu = 1ghz; Ram = 1GB; Hdd = 4gb;','ON',1),(2,2,3,'Cpu = 1ghz; Ram = 1GB; Hdd = 4gb;','ON',2),(3,2,4,'Cpu = 1ghz; Ram = 1GB; Hdd = 4gb;','ON',3),(4,2,4,'Cpu = 2ghz; Ram = 2GB; Hdd = 8gb;','ON',4),(5,8,5,'Cpu = 1ghz; Ram = 2GB; Hdd = 8gb;','OFF',5),(8,9,7,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','OFF',3),(9,8,4,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',1),(10,8,4,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',2),(11,9,5,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',3),(12,9,6,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',4),(13,9,7,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',5),(14,2,5,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',1),(15,2,4,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',2),(16,2,7,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',3),(17,2,3,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',4),(18,2,3,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',5),(19,2,4,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',1),(20,2,6,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',2),(21,NULL,NULL,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','OFF',3),(22,NULL,NULL,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','OFF',4),(23,NULL,NULL,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','OFF',5),(24,NULL,NULL,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','OFF',1);
+INSERT INTO `nodi` VALUES (1,2,3,'Cpu = 1ghz; Ram = 1GB; Hdd = 4gb;','ON',1,NULL,NULL),(2,2,3,'Cpu = 1ghz; Ram = 1GB; Hdd = 4gb;','ON',2,NULL,NULL),(3,2,4,'Cpu = 1ghz; Ram = 1GB; Hdd = 4gb;','ON',3,NULL,NULL),(4,2,4,'Cpu = 2ghz; Ram = 2GB; Hdd = 8gb;','ON',4,NULL,NULL),(5,8,5,'Cpu = 1ghz; Ram = 2GB; Hdd = 8gb;','OFF',5,NULL,NULL),(8,9,7,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','OFF',3,NULL,NULL),(9,8,4,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',1,NULL,NULL),(10,8,4,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',2,NULL,NULL),(11,9,5,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',3,NULL,NULL),(12,9,6,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',4,NULL,NULL),(13,9,7,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',5,NULL,NULL),(14,2,5,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',1,NULL,NULL),(15,2,4,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',2,NULL,NULL),(16,2,7,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',3,NULL,NULL),(17,2,3,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',4,NULL,NULL),(18,2,3,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',5,NULL,NULL),(19,2,4,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',1,NULL,NULL),(20,2,6,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','ON',2,NULL,NULL),(21,NULL,NULL,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','OFF',3,NULL,NULL),(22,NULL,NULL,'Cpu = 3ghz; Ram = 3GB; Hdd = 16gb;','OFF',4,NULL,NULL),(25,2,3,'Cpu = 1ghz; Ram = 1GB; Hdd = 4gb;','ON',1,NULL,NULL),(26,NULL,NULL,'Cpu = 1ghz; Ram = 1GB; Hdd = 4gb;','OFF',1,NULL,NULL),(27,8,4,'Cpu = 1ghz; Ram = 1GB; Hdd = 400gb;','STANDBY',4,NULL,NULL),(28,NULL,NULL,'Cpu = 1ghz; Ram = 1GB; Hdd = 256gb;','OFF',3,NULL,NULL),(31,NULL,NULL,'Cpu = 1ghz; Ram = 1GB; Hdd = 8gb;','ON',2,NULL,NULL);
 /*!40000 ALTER TABLE `nodi` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `nodi_list`
+--
+
+DROP TABLE IF EXISTS `nodi_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `nodi_list` (
+  `id_nodo` int(11) NOT NULL,
+  `nodi_idnodo` int(11) NOT NULL,
+  UNIQUE KEY `UK_onu4lnomejaq3m06a4qwlt168` (`nodi_idnodo`),
+  KEY `FKbkjbl73eyts7n01fpmmiwyabt` (`id_nodo`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `nodi_list`
+--
+
+LOCK TABLES `nodi_list` WRITE;
+/*!40000 ALTER TABLE `nodi_list` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nodi_list` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -205,6 +235,30 @@ INSERT INTO `tasks` VALUES (1,1,2,'TASK1','EXE'),(2,1,2,'TASK2','EXE'),(3,4,2,'T
 UNLOCK TABLES;
 
 --
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `user` (
+  `id_utente` int(11) DEFAULT NULL,
+  `id_responsabile` int(11) NOT NULL,
+  PRIMARY KEY (`id_responsabile`),
+  KEY `FK17blgnyxyjqbg2xt2m8bcy2px` (`id_utente`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `utenti`
 --
 
@@ -218,7 +272,7 @@ CREATE TABLE `utenti` (
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`idutente`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,7 +281,7 @@ CREATE TABLE `utenti` (
 
 LOCK TABLES `utenti` WRITE;
 /*!40000 ALTER TABLE `utenti` DISABLE KEYS */;
-INSERT INTO `utenti` VALUES (1,'amministratore','admin','admin'),(2,'responsabile di rete','responsabile','responsabile'),(3,'utente semplice','user','user'),(4,'utente semplice','user1','user1'),(5,'utente semplice','user2','user2'),(6,'utente semplice','user3','user3'),(7,'utente semplice','user4','user4'),(8,'responsabile di rete','responsabile1','responsabile1'),(9,'responsabile di rete','responsabile2','responsabile2'),(10,'responsabile di rete','responsabile3','responsabile3'),(11,'responsabile di rete','responsabile4','responsabile4'),(12,'responsabile di rete','responsabile5','responsabile5'),(13,'utente semplice','user5','user5'),(14,'utente semplice','user6','user6'),(15,'utente semplice','user7','user7');
+INSERT INTO `utenti` VALUES (1,'Amministratore','admin','admin'),(2,'Responsabile di rete','responsabile','responsabile'),(3,'Utente semplice','user','user'),(4,'Utente semplice','user1','user1'),(5,'Utente semplice','user2','user2'),(6,'Utente semplice','user3','user3'),(7,'Utente semplice','user4','user4'),(8,'Responsabile di rete','responsabile1','responsabile1'),(9,'Responsabile di rete','responsabile2','responsabile2'),(10,'Responsabile di rete','responsabile3','responsabile3'),(11,'Responsabile di rete','responsabile4','responsabile4'),(12,'Responsabile di rete','responsabile5','responsabile5'),(13,'Utente semplice','user5','user5'),(14,'Utente semplice','user6','user6'),(15,'Utente semplice','user7','user7'),(29,'Responsabile di rete','responsabile6','responsabile6'),(31,'Responsabile di rete','igdiugia','isgusd');
 /*!40000 ALTER TABLE `utenti` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -240,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-23 14:29:19
+-- Dump completed on 2018-08-27 12:45:14
